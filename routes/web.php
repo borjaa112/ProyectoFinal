@@ -36,3 +36,7 @@ Route::get("/cuenta", function(){
 })->name('cuenta');
 
 
+
+Route::get("/test", function(){
+    return view("cliente.index");
+});
