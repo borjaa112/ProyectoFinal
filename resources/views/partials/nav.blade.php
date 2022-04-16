@@ -1,14 +1,46 @@
-<nav>
-    <a href="/">Inicio</a>
+<!doctype html>
+<html lang=" str_replace('_', '-', app()->getLocale()) ">
+<head>
+    <meta charset="utf-8">
 
-    @auth
-    <a href=" {{ route('cuenta')}}">Mi cuenta</a>
-    @endauth
-    @guest
-    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+    <title>Mi cuenta</title>
 
-    @if (Route::has('registro'))
-        <a href="{{ route('registro') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-    @endif
-    @endguest
-</nav>
+
+    <script src=" {{asset('js/app.js')}} " defer></script>
+
+
+    <link href=" {{asset('css/app.css')}} " rel="stylesheet" defer>
+</head>
+
+<body>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+</body>
+</html>
