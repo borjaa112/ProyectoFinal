@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('cliente.index');
 });
 
 Route::get('/registro', [LoginController::class, 'registroForm'])->name('registro');
@@ -38,5 +38,6 @@ Route::get("/cuenta", function(){
 
 
 Route::get("/test", function(){
-    return view("cliente.index");
+    return Auth::user();
+
 });
