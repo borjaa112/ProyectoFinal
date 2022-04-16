@@ -17,11 +17,26 @@ class LoginController extends Controller
     }
 
     public function registro(RegistroRequest $request){
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
+        //registro para hotel
+        if($request->typeUser === "hotel"){
+            $user = User::create([
+                'nombre' => $request->nombre,
+                'email' => $request->email,
+                'descripcion' => $request->descripcion,
+                'password' => Hash::make($request->password),
+                'tipo' => 1
+            ]);
+        }
+        //registro para cliente
+        if($request->typeUser === "cliente"){
+            $user = User::create([
+                'nombre' => $request->nombre,
+                'apellidos' => $request->apellidos,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'tipo' => 0
+            ]);
+        }
 
         Auth::login($user);
 

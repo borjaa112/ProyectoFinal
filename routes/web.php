@@ -31,7 +31,8 @@ Route::get("/home", function(){
     return redirect('/');
 });
 Route::get("/cuenta", function(){
+    return view("partials.nav");
     return Auth::user();
-});
+})->name('cuenta');
 
 

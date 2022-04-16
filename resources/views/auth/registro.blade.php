@@ -1,8 +1,20 @@
 <form action="{{ route('registro') }}" method="POST">
     @csrf
     <div>
-        <label for="name">Nombre de usuario</label>
-        <input type="text" name="name" id="name">
+        <input type="radio" id="cliente" name="typeUser" value="cliente">
+        <label for="cliente">Cliente</label>
+
+        <input type="radio" id="hotel" name="typeUser" value="hotel">
+        <label for="hotel">Hotel</label>
+    </div>
+    <div>
+        <label for="nombre">Nombre</label>
+        <input type="text" name="nombre" id="nombre">
+    </div>
+
+    <div>
+        <label for="apellidos">Apellidos</label>
+        <input type="text" name="apellidos" id="apellidos">
     </div>
 
     <div>
@@ -18,6 +30,11 @@
     <div>
         <label for="password_confirmation">Vuelve a introducir la contraseña</label>
         <input type="password_confirmation" id="password_confirmation" name="password">
+    </div>
+
+    <div>
+        <label for="descripcion">descripcion</label>
+        <textarea id="descripcion" name="descripcion"></textarea>
     </div>
 
     <input type="submit" name="enviar" value="Enviar">
