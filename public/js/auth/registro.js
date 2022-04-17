@@ -19,11 +19,14 @@ function clienteFields(event) {
     if (event.target.checked === true) {
         for (let descripcion of descripcionAll) {
             descripcion.hidden = true;
+            descripcion.required = false;
         }
 
         for(let apellidos of apellidosAll){
             if(apellidos.hidden){
                 apellidos.hidden = false;
+                apellidos.required = true;
+
             }
         }
     }
@@ -34,12 +37,15 @@ function hotelFields(event) {
         for (let descripcion of descripcionAll) {
             if (descripcion.hidden) {
                 descripcion.hidden = false;
+                descripcion.required = true;
             }
         }
 
         for (let apellidos of apellidosAll) {
             if (!apellidos.hidden) {
                 apellidos.hidden = true;
+                apellidos.required = false;
+
             }
         }
 
