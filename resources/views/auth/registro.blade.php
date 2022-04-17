@@ -55,7 +55,7 @@
 
                         <label for="password_confirmation">Vuelve a introducir la contraseña</label>
                         <div class="input-group">
-                            <input type="password" id="password_confirmation" name="password" class="form-control">
+                            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
                         </div>
 
                         <label for="descripcion" class="descripcion">Descripción del hotel</label>

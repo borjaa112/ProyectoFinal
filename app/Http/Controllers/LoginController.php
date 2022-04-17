@@ -54,9 +54,9 @@ class LoginController extends Controller
         ]);
         if(Auth::attempt($credenciales)){
 
-            return redirect('cuenta');
+            return redirect(route('inicio'));
         }else{
-            return "error";
+            return "error credenciales errorneas";
         }
     }
 

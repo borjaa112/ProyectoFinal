@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,9 +17,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('cliente.index');
-})->name('inicio');
+Route::get("/", [IndexController::class, 'index'])->name("inicio");
 
 Route::get('/registro', [LoginController::class, 'registroForm'])->name('registro');
 Route::post('/registro', [LoginController::class, 'registro']);
