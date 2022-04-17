@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('cliente.index');
-});
+})->name('inicio');
 
 Route::get('/registro', [LoginController::class, 'registroForm'])->name('registro');
 Route::post('/registro', [LoginController::class, 'registro']);
@@ -31,8 +31,7 @@ Route::get("/home", function(){
     return redirect('/');
 });
 Route::get("/cuenta", function(){
-    return view("partials.nav");
-    return Auth::user();
+
 })->name('cuenta');
 
 
