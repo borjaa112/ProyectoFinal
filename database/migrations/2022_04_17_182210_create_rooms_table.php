@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('hotel_id')->references('id')->on('users');
+            $table->foreignId('user_id')->constrained();
+            $table->double('precio_noche');
             $table->integer('camas');
+            $table->string('pension');
             $table->timestamps();
-            $table->integer('pension');
         });
     }
 

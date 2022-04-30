@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,11 +31,10 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->midd
 Route::get("/home", function(){
     return redirect('/');
 });
-Route::get("/cuenta", function(){
 
-})->name('cuenta');
+Route::resource("/cuenta", AccountController::class);
 
-
+Route::resource('/crearhabitacion', RoomController::class);
 
 Route::get("/test", function(){
     return Auth::user();
