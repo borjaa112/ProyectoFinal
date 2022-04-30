@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegistroRequest;
 use App\Models\User;
+use App\Models\Hotel;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -19,10 +20,11 @@ class LoginController extends Controller
     public function registro(RegistroRequest $request){
         //registro para hotel
         if($request->typeUser === "hotel"){
-            $user = User::create([
+            $user = Hotel::create([
                 'nombre' => $request->nombre,
                 'email' => $request->email,
                 'descripcion' => $request->descripcion,
+                'cif' => "222",
                 'password' => Hash::make($request->password),
                 'tipo' => 1
             ]);
