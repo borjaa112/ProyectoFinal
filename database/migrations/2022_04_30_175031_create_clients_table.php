@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string("email");
             $table->string("nif");
             $table->string("apellidos");
-            $table->string("profile_path");
+            $table->string("profile_path")->nullable();
             $table->timestamps();
         });
     }

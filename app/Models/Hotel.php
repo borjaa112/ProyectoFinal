@@ -11,8 +11,8 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Hotel extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
+    use Notifiable;
+    protected $guard = "hotel";
     protected $fillable = [
         'nombre',
         'email',
@@ -36,8 +36,8 @@ class Hotel extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    // protected $casts = [
+    //     'email_verified_at' => 'datetime',
+    // ];
 
 }

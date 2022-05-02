@@ -6,7 +6,7 @@
 @section('contenido')
         <div class="container">
 
-            <h1>Agencia Hotelera</h1>
+            <h1>Agencia Hotessslera</h1>
 
             <div class="form-group row border border-primary">
                 <div class="col">

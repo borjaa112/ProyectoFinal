@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegistroRequest;
 use App\Models\User;
+use App\Models\Client;
 use App\Models\Hotel;
 
 use Illuminate\Support\Facades\Auth;
@@ -26,22 +27,21 @@ class LoginController extends Controller
                 'descripcion' => $request->descripcion,
                 'cif' => "222",
                 'password' => Hash::make($request->password),
-                'tipo' => 1
             ]);
         }
         //registro para cliente
         if($request->typeUser === "cliente"){
-            $user = User::create([
+            $user = Client::create([
                 'nombre' => $request->nombre,
                 'apellidos' => $request->apellidos,
+                'nif' => "222",
+                'tipo' => "1",
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'tipo' => 0
             ]);
         }
 
         Auth::login($user);
-
         return redirect('cuenta');
     }
 
@@ -54,16 +54,22 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-        if(Auth::attempt($credenciales)){
+        // if(Auth::attempt($credenciales)){
 
+        //     return redirect(route('inicio'));
+        // }
+        if(Auth::guard('hotel')->attempt($credenciales)){
+            // return Auth::user();
+            // return dd(Auth::guard('hotel')->user());
             return redirect(route('inicio'));
-        }else{
+        }
+        else{
             return "error credenciales errorneas";
         }
     }
 
     public function logout(Request $request){
-        Auth::guard('web')->logout();
+        Auth::guard('hotel')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
