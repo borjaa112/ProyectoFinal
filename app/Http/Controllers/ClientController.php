@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Room;
+
+use App\Models\Client;
 use Illuminate\Http\Request;
 
-class RoomController extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,6 @@ class RoomController extends Controller
     public function index()
     {
         //
-        return view("hotel.habitacion.agregar");
     }
 
     /**
@@ -37,22 +36,15 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         //
-        $room = new Room();
-        $room -> hotel_id = Auth::guard('hotel')->user()->id;
-        $room -> precio_noche = $request->get('precio-noche');
-        $room -> camas = $request->get('camas');
-        $room -> pension = $request->get('pension');
-        $room -> save();
-        //return response()->json(200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Room  $room
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function show(Room $room)
+    public function show(Client $client)
     {
         //
     }
@@ -60,10 +52,10 @@ class RoomController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Room  $room
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function edit(Room $room)
+    public function edit(Client $client)
     {
         //
     }
@@ -72,10 +64,10 @@ class RoomController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Room  $room
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Room $room)
+    public function update(Request $request, Client $client)
     {
         //
     }
@@ -83,10 +75,10 @@ class RoomController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Room  $room
+     * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Room $room)
+    public function destroy(Client $client)
     {
         //
     }

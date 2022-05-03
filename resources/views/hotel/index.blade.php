@@ -34,8 +34,19 @@
             </div>
             <div class="row border border-secondary mt-5">
                 <div class="col">
-                    <p>Ultimos hoteles añadidos</p>
-                    {{$hoteles}}
+                    <p>Ultimas habitaciones añadidas</p>
+
+                    @foreach ($habitaciones as $habitacion)
+                    <div class="border border-primary">
+                        Hotel: {{$habitacion->hotel->nombre}}
+                        <br>
+                        Precio por noche: {{$habitacion->precio_noche}}€
+                        <br>
+                        Camas: {{$habitacion->camas}}
+                    </div>
+
+                    <br><br>
+                    @endforeach
                 </div>
             </div>
         </div>
