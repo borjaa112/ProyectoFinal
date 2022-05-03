@@ -16,7 +16,9 @@ class AccountController extends Controller
     {
         //
         // return Auth::user();
-        return view("cuenta.perfil");
+        if(Auth::guard("hotel")->check()){
+            return view("hotel.cuenta.perfil");
+        }
     }
 
     /**

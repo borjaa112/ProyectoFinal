@@ -10,8 +10,9 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Client extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use Notifiable;
 
+    protected $guard = "client";
     protected $fillable = [
         'nombre',
         'apellidos',
@@ -36,7 +37,7 @@ class Client extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    // protected $casts = [
+    //     'email_verified_at' => 'datetime',
+    // ];
 }

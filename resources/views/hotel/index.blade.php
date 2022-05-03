@@ -6,7 +6,7 @@
 @section('contenido')
         <div class="container">
 
-            <h1>Agencia Hotessslera</h1>
+            <h1>Agencia Hotelera</h1>
 
             <div class="form-group row border border-primary">
                 <div class="col">
@@ -34,8 +34,19 @@
             </div>
             <div class="row border border-secondary mt-5">
                 <div class="col">
-                    <p>Ultimos hoteles añadidos</p>
-                    {{$hoteles}}
+                    <p>Ultimas habitaciones añadidas</p>
+
+                    @foreach ($habitaciones as $habitacion)
+                    <div class="border border-primary">
+                        Hotel: {{$habitacion->hotel->nombre}}
+                        <br>
+                        Precio por noche: {{$habitacion->precio_noche}}€
+                        <br>
+                        Camas: {{$habitacion->camas}}
+                    </div>
+
+                    <br><br>
+                    @endforeach
                 </div>
             </div>
         </div>

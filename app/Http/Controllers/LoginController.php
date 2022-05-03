@@ -35,7 +35,6 @@ class LoginController extends Controller
                 'nombre' => $request->nombre,
                 'apellidos' => $request->apellidos,
                 'nif' => "222",
-                'tipo' => "1",
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
@@ -63,15 +62,21 @@ class LoginController extends Controller
             // return dd(Auth::guard('hotel')->user());
             return redirect(route('inicio'));
         }
+        else if(Auth::guard('client')->attempt($credenciales)){
+            return redirect(route('inicio'));
+        }
         else{
             return "error credenciales errorneas";
         }
     }
 
     public function logout(Request $request){
+
         Auth::guard('hotel')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+
         return redirect('/');
     }
 }

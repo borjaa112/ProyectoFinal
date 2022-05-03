@@ -26,7 +26,8 @@ Route::post('/registro', [LoginController::class, 'registro']);
 
 Route::get('/login', [LoginController::class, 'loginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth:hotel');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+// Route::middleware(["auth:hotel", "auth:client"])->post("/logout", [LoginController::class, "logout"])->name("logout");
 
 Route::get("/home", function(){
     return redirect('/');

@@ -38,7 +38,7 @@ class RoomController extends Controller
     {
         //
         $room = new Room();
-        $room -> user_id = Auth::user()->id;
+        $room -> hotel_id = Auth::guard('hotel')->user()->id;
         $room -> precio_noche = $request->get('precio-noche');
         $room -> camas = $request->get('camas');
         $room -> pension = $request->get('pension');
