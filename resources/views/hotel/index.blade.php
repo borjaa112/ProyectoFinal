@@ -40,6 +40,7 @@
                     <div class="border border-primary">
                         Hotel: {{$habitacion->hotel->nombre}}
                         <br>
+                        {{-- {{dd($habitacion)}} --}}
                         Precio por noche: {{$habitacion->precio_noche}}€
                         <br>
                         Camas: {{$habitacion->camas}}

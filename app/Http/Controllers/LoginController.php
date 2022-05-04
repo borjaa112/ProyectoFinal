@@ -28,6 +28,8 @@ class LoginController extends Controller
                 'cif' => "222",
                 'password' => Hash::make($request->password),
             ]);
+            Auth::guard("hotel")->login($user);
+
         }
         //registro para cliente
         if($request->typeUser === "cliente"){
@@ -38,10 +40,12 @@ class LoginController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
+            Auth::guard("client")->login($user);
+
         }
 
-        Auth::login($user);
-        return redirect('cuenta');
+
+        return redirect('/');
     }
 
     public function loginForm(){

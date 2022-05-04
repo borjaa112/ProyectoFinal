@@ -1,23 +1,21 @@
-@extends("hotel.plantilla")
+@extends("cliente.plantilla")
 @section('contenido')
     <div class="container">
         <h2 class="text-center">Modifique sus datos</h2>
         <div class="d-flex justify-content-center">
-            <form method="POST" action="{{route("cuenta.update", Auth::guard("hotel")->user()->id)}}">
-                @method("put")
-                @csrf
+            <form>
                 <div class="mb-3">
                     <label for="nombre">Nombre</label>
-                    <input id="nombre" name="nombre" class="form-control" value="{{ Auth::guard('hotel')->user()->nombre }}">
+                    <input id="nombre" name="nombre" class="form-control" value="{{ Auth::guard("client")->user()->nombre }}">
                 </div>
                 <div class="mb-3">
-                    <label for="descripcion">Descripcion</label>
-                    <textarea id="descripcion" name="descripcion" class="form-control">{{Auth::guard('hotel')->user()->descripcion }}</textarea>
+                    <label for="apellidos">Apellidos</label>
+                    <input id="apellidos" name="apellidos" class="form-control" value="{{ Auth::guard("client")->user()->apellidos }}">
                 </div>
 
                 <div class="mb-3">
                     <label for="email">email</label>
-                    <input id="email" name="email" class="form-control" value="{{ Auth::guard('hotel')->user()->email }}">
+                    <input id="email" name="email" class="form-control" value="{{ Auth::guard("client")->user()->email }}">
                 </div>
 
                 <div class="mb-3">

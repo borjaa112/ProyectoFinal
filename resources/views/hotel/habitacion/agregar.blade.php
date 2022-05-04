@@ -14,7 +14,8 @@
 
                     <div class="col-6">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="precio-noche" aria-label="Amount (to the nearest dollar)">
+                            <input type="text" class="form-control" name="precio-noche"
+                                aria-label="Amount (to the nearest dollar)">
                             <span class="input-group-text">€</span>
                         </div>
                     </div>
@@ -42,16 +43,22 @@
             </div>
             <div class="row d-flex justify-content-center">
                 <div class="col-2">
-                    <label for="camas" class="col-form-label">Tipo de pensión</label>
+                    <label for="servicios" class="col-form-label">Selecciona los servicios</label>
                 </div>
                 <div class="col-6">
-                    <select name="pension" class="form-select">
-                        <option value="SA">Solo alojamiento</option>
-                        <option value="AD">Alojamiento y desayuno</option>
-                        <option value="MP">Pensión completa</option>
-                        <option value="PC">Pension completa</option>
-                        <option value="TD">Todo incluido</option>
-                    </select>
+                    <select class="form-select" name="servicios[]" multiple aria-label="multiple select">
+                        <option disabled>Selecciona opciones</option>
+
+                        @foreach ($servicios as $servicio)
+                            <option value="{{$servicio->servicio}}">{{$servicio->servicio}}</option>
+                        @endforeach
+                        {{-- <option value="TV en la habitacion">TV en la habitacion</option>
+                        <option value="Aire acondicionado">Aire acondicionado</option>
+                        <option value="Secador">Secador</option>
+                        <option value="Minibar">Minibar</option>
+                        <option value="Terraza">Terraza</option>
+                        <option value="Baño privado">Baño privado</option> --}}
+                      </select>
                 </div>
             </div>
             <div class="row d-flex justify-content-center">
