@@ -21,6 +21,12 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="current_password">contraseña actual</label>
+                    <input id="current_password" name="current_password" class="form-control" type="password"
+                        placeholder="******************">
+                </div>
+
+                <div class="mb-3">
                     <label for="password">contraseña</label>
                     <input id="password" name="password" class="form-control" type="password"
                         placeholder="******************">
