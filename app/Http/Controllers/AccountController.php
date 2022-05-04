@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use App\Models\Hotel;
+use Illuminate\Cache\RedisTaggedCache;
 
 class AccountController extends Controller
 {
@@ -18,6 +20,9 @@ class AccountController extends Controller
         // return Auth::user();
         if(Auth::guard("hotel")->check()){
             return view("hotel.cuenta.perfil");
+        }
+        if(Auth::guard("client")->check()){
+            return view("cliente.cuenta.perfil");
         }
     }
 
@@ -62,6 +67,7 @@ class AccountController extends Controller
     public function edit($id)
     {
         //
+
     }
 
     /**
@@ -74,6 +80,15 @@ class AccountController extends Controller
     public function update(Request $request, $id)
     {
         //
+        if(Auth::guard("hotel")->check()){
+            $hotel = Hotel::findOrfail($id);
+            $hotel -> nombre = $request->nombre;
+            $hotel -> descripcion = $request->descripcion;
+            $hotel -> email = $request->email;
+
+            $hotel->save();
+        }
+        return redirect(route("cuenta.index"))->with("success", "nanan");
     }
 
     /**

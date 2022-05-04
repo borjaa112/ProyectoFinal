@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,3 +42,5 @@ Route::get("/test", function(){
     return Auth::user();
 
 });
+
+Route::resource("/fill", ServiceController::class);
