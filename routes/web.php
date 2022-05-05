@@ -44,3 +44,5 @@ Route::get("/test", function(){
 });
 
 Route::resource("/fill", ServiceController::class);
+Route::resource("/habitacion", RoomController::class);
+

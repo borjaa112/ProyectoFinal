@@ -50,7 +50,8 @@
                         <option disabled>Selecciona opciones</option>
 
                         @foreach ($servicios as $servicio)
-                            <option value="{{$servicio->servicio}}">{{$servicio->servicio}}</option>
+
+                            <option value="{{$servicio->id}}">{{$servicio->servicio}}</option>
                         @endforeach
                         {{-- <option value="TV en la habitacion">TV en la habitacion</option>
                         <option value="Aire acondicionado">Aire acondicionado</option>
