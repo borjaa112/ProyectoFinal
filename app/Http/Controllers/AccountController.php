@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
 use App\Models\Hotel;
@@ -86,9 +87,25 @@ class AccountController extends Controller
             $hotel -> descripcion = $request->descripcion;
             $hotel -> email = $request->email;
 
+            if(!(Hash::check($request->current_password, Auth::guard("hotel")->user()->password))){
+                toast('La contraseña actual no es correcta','error');
+                return redirect(route("cuenta.index"));
+            }
+            if(strcmp($request->current_password, $request->password) == 0){
+                // Current password and new password same
+                toast('La contraseña nueva es la misma que la actual','error');
+                return redirect(route("cuenta.index"));
+
+            }
+            if(!strcmp($request->password, $request->password_confirm) == 0){
+                toast('Las contraseñas no coinciden','error');
+                return redirect(route("cuenta.index"));
+            }
+
             $hotel->save();
         }
-        return redirect(route("cuenta.index"))->with("success", "nanan");
+        toast('Datos actualizados correctamente','success');
+        return redirect(route("cuenta.index"));
     }
 
     /**

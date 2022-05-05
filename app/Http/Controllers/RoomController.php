@@ -1,8 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Controllers\Room_service as ControllersRoom_service;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Room;
+use App\Models\Room_service;
+use App\Models\Room_services;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
@@ -46,10 +50,7 @@ class RoomController extends Controller
         $room -> save();
 
         foreach ($request->input('servicios') as $servicio){
-            $service = new Service();
-            $service -> room_id = $room -> id;
-            $service -> servicio = $servicio;
-            $service -> save();
+            $room->services()->attach($servicio);
         }
 
         //return response()->json(200);
@@ -64,6 +65,8 @@ class RoomController extends Controller
     public function show(Room $room)
     {
         //
+        return $room;
+        return view("hotel.habitacion.index", compact("room"));
     }
 
     /**
