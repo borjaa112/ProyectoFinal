@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ImagesRoom extends Model
+class Images_room extends Model
 {
     use HasFactory;
     public function room(){

@@ -57,7 +57,7 @@ class RoomController extends Controller
             // return dd($imagen);
             $path = Storage::putFile("room_images", $imagen);
 
-            $imagen = new ImagesRoom();
+            $imagen = new Images_room();
             $imagen -> room_id = $room -> id;
             $imagen -> img_path = $path;
             $imagen->save();

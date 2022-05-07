@@ -1,4 +1,4 @@
 @extends("hotel.plantilla")
 @section("contenido")
-{{$room}}
+{{$room->images_rooms}}
 @endsection

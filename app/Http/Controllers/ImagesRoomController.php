@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ImagesRoom;
+use App\Models\Images_room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -46,7 +46,7 @@ class ImagesRoomController extends Controller
      * @param  \App\Models\Images_room  $images_room
      * @return \Illuminate\Http\Response
      */
-    public function show(ImagesRoom $images_room)
+    public function show(Images_room $images_room)
     {
         //
     }
@@ -57,7 +57,7 @@ class ImagesRoomController extends Controller
      * @param  \App\Models\Images_room  $images_room
      * @return \Illuminate\Http\Response
      */
-    public function edit(ImagesRoom $images_room)
+    public function edit(Images_room $images_room)
     {
         //
     }
@@ -69,7 +69,7 @@ class ImagesRoomController extends Controller
      * @param  \App\Models\Images_room  $images_room
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ImagesRoom $images_room)
+    public function update(Request $request, Images_room $images_room)
     {
         //
     }
@@ -80,7 +80,7 @@ class ImagesRoomController extends Controller
      * @param  \App\Models\Images_room  $images_room
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ImagesRoom $images_room)
+    public function destroy(Images_room $images_room)
     {
         //
     }

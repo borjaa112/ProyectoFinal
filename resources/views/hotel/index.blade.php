@@ -44,13 +44,15 @@
                         Precio por noche: {{ $habitacion->precio_noche }}€
                         <br>
                         Camas: {{ $habitacion->camas }}
+                        <br>
+                        @foreach ($habitacion->services as $servicio)
+                            Servicios: {{ $servicio->servicio }}
+                        @endforeach
                         <a href="{{ route('habitacion.show', $habitacion) }}">Enlace</a>
                     </div>
 
                     <br><br>
-                    @foreach ($habitacion->services as $servicio)
-                        {{ $servicio->servicio }}
-                    @endforeach
+
                 @endforeach
 
 
