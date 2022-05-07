@@ -48,8 +48,8 @@
                     </div>
 
                     <br><br>
-                    @foreach ($habitacion->services as $service)
-                        {{ $service }}
+                    @foreach ($habitacion->services as $servicio)
+                        {{ $servicio->servicio }}
                     @endforeach
                 @endforeach
 

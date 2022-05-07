@@ -3,7 +3,7 @@
     <div class="container">
         <h2 class="text-center">Añadir habitación</h2>
 
-        <form action="{{ route('crearhabitacion.store') }}" method="POST">
+        <form action="{{ route('habitacion.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
             <div class="row d-flex justify-content-center">
@@ -28,8 +28,8 @@
                 </div>
                 <div class="col-6">
                     <div class="input-group mb-3">
-                        <input type="file" class="form-control" id="imagenes" aria-describedby="inputGroupFileAddon03"
-                            aria-label="Upload">
+                        <input type="file" class="form-control" id="imagenes" name="imagenes[]" aria-describedby="inputGroupFileAddon03"
+                            aria-label="Upload" multiple>
                     </div>
                 </div>
             </div>

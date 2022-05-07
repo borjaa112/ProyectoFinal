@@ -18,7 +18,8 @@ class Hotel extends Authenticatable
         'email',
         'descripcion',
         'cif',
-        'password'
+        'password',
+        'img_path'
     ];
 
     /**

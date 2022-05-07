@@ -14,7 +14,7 @@
     @include('sweetalert::alert')
     @include('partials.hotel.nav')
     @yield('contenido')
-    @include('partials.footer')
+    {{-- @include('partials.footer') --}}
 </body>
 </html>
 

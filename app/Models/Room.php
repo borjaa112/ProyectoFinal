@@ -15,4 +15,8 @@ class Room extends Model
     public function services(){
         return $this->belongsToMany(Service::class);
     }
+
+    public function images_rooms(){
+        return $this->hasMany(Images_room::class);
+    }
 }

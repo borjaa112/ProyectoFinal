@@ -13,16 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('hotels', function (Blueprint $table) {
+        Schema::create('images_rooms', function (Blueprint $table) {
             $table->id();
-            $table->string("nombre");
-            $table->string("password");
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string("descripcion");
-            $table->string("cif");
-            $table->string("img_path")->nullable();
-            $table->rememberToken();
+            $table->foreignId("room_id")->constrained();
+            $table->string("img_path");
             $table->timestamps();
         });
     }
@@ -34,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hotels');
+        Schema::dropIfExists('images_rooms');
     }
 };

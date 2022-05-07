@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Room_service as ControllersRoom_service;
+use App\Models\Images_room;
+use App\Models\ImagesRoom;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Room;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Room_service;
 use App\Models\Room_services;
 use App\Models\Service;
@@ -20,8 +23,6 @@ class RoomController extends Controller
     public function index()
     {
         //
-        $servicios = Service::all();
-        return view("hotel.habitacion.agregar", compact("servicios"));
     }
 
     /**
@@ -32,6 +33,8 @@ class RoomController extends Controller
     public function create()
     {
         //
+        $servicios = Service::all();
+        return view("hotel.habitacion.agregar", compact("servicios"));
     }
 
     /**
@@ -49,6 +52,17 @@ class RoomController extends Controller
         $room -> camas = $request->get('camas');
         $room -> save();
 
+        $ruta = $request->file("imagenes");
+        foreach ($ruta as $imagen){
+            // return dd($imagen);
+            $path = Storage::putFile("room_images", $imagen);
+
+            $imagen = new ImagesRoom();
+            $imagen -> room_id = $room -> id;
+            $imagen -> img_path = $path;
+            $imagen->save();
+        }
+
         foreach ($request->input('servicios') as $servicio){
             $room->services()->attach($servicio);
         }
@@ -65,7 +79,6 @@ class RoomController extends Controller
     public function show(Room $room)
     {
         //
-        return $room;
         return view("hotel.habitacion.index", compact("room"));
     }
 

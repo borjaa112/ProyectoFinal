@@ -16,7 +16,7 @@
                         <a class="nav-link" aria-current="page" href="#">Administrar reservas</a>
                       </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{route('crearhabitacion.index')}}">Añadir habitación</a>
+                        <a class="nav-link" aria-current="page" href="{{route('habitacion.create')}}">Añadir habitación</a>
                       </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

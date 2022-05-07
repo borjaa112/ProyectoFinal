@@ -27,6 +27,7 @@ class LoginController extends Controller
                 'descripcion' => $request->descripcion,
                 'cif' => "222",
                 'password' => Hash::make($request->password),
+                'img_path' => "imgs/profile_imgs/hotel-default.png"
             ]);
             Auth::guard("hotel")->login($user);
 

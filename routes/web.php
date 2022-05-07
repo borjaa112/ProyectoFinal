@@ -36,7 +36,8 @@ Route::get("/home", function(){
 
 Route::resource("/cuenta", AccountController::class);
 
-Route::resource('/crearhabitacion', RoomController::class);
+
+Route::resource("/habitacion", RoomController::class)->parameters(['habitacion' => 'room']);
 
 Route::get("/test", function(){
     return Auth::user();
