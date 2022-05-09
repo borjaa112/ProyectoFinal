@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\HotelDirectionController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ServiceController;
+use App\Models\Hotel_direction;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,7 +37,7 @@ Route::get("/home", function(){
 });
 
 Route::resource("/cuenta", AccountController::class);
-
+Route::resource("/direccion", HotelDirectionController::class);
 
 Route::resource("/habitacion", RoomController::class)->parameters(['habitacion' => 'room']);
 

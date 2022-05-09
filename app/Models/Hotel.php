@@ -44,4 +44,8 @@ class Hotel extends Authenticatable
     public function rooms(){
         return $this->hasMany(Room::class);
     }
+
+    public function hotel_directions(){
+        return $this->hasMany(Hotel_direction::class);
+    }
 }
