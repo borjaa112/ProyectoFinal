@@ -30,6 +30,7 @@ class LoginController extends Controller
                 'img_path' => "imgs/profile_imgs/hotel-default.png"
             ]);
             Auth::guard("hotel")->login($user);
+            return redirect(route("direccion.create"));
 
         }
         //registro para cliente

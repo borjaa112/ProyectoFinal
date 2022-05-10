@@ -16,7 +16,8 @@ class HotelDirectionController extends Controller
     public function index()
     {
         //
-        return view("hotel.cuenta.direccion");
+        $direcciones = Hotel_direction::where("hotel_id", Auth::guard("hotel")->user()->id)->get();
+        return $direcciones;
     }
 
     /**
@@ -27,6 +28,8 @@ class HotelDirectionController extends Controller
     public function create()
     {
         //
+        return view("hotel.cuenta.direccion.create");
+
     }
 
     /**

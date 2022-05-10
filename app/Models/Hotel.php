@@ -46,6 +46,6 @@ class Hotel extends Authenticatable
     }
 
     public function hotel_directions(){
-        return $this->hasMany(Hotel_direction::class);
+        return $this->hasOne(Hotel_direction::class);
     }
 }

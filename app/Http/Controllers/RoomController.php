@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Room_service as ControllersRoom_service;
 use App\Models\Images_room;
+use App\Models\Hotel;
+use App\Models\Hotel_direction;
 use App\Models\ImagesRoom;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Room;
@@ -12,6 +14,8 @@ use App\Models\Room_service;
 use App\Models\Room_services;
 use App\Models\Service;
 use Illuminate\Http\Request;
+
+use function PHPUnit\Framework\isNull;
 
 class RoomController extends Controller
 {
@@ -33,6 +37,11 @@ class RoomController extends Controller
     public function create()
     {
         //
+        $direccion = Hotel_direction::where("hotel_id", Auth::guard("hotel")->user()->id)->first();
+        if(is_null($direccion)){
+            toast("Antes de crear una habitación es necesario que establezca su dirección", "error");
+            return redirect(route("direccion.create"));
+        }
         $servicios = Service::all();
         return view("hotel.habitacion.agregar", compact("servicios"));
     }
@@ -114,5 +123,10 @@ class RoomController extends Controller
     public function destroy(Room $room)
     {
         //
+    }
+
+    public function buscar(Request $request){
+        $habitaciones = Hotel::with("hotel_directions", "rooms")->whereRelation("hotel_directions", "ciudad", $request->get("input_ciudad"))->get();
+        return view("cliente.busqueda.index", compact("habitaciones"));
     }
 }

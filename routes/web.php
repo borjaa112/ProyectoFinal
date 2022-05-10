@@ -39,6 +39,7 @@ Route::get("/home", function(){
 Route::resource("/cuenta", AccountController::class);
 Route::resource("/direccion", HotelDirectionController::class);
 
+Route::get("/search", [RoomController::class, "buscar"])->name("buscar");
 Route::resource("/habitacion", RoomController::class)->parameters(['habitacion' => 'room']);
 
 Route::get("/test", function(){
@@ -47,5 +48,4 @@ Route::get("/test", function(){
 });
 
 Route::resource("/fill", ServiceController::class);
-Route::resource("/habitacion", RoomController::class);
 
