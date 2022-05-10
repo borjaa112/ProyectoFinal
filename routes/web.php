@@ -37,10 +37,10 @@ Route::get("/home", function(){
 });
 
 Route::resource("/cuenta", AccountController::class);
-Route::resource("/direccion", HotelDirectionController::class);
+Route::resource("/direccion", HotelDirectionController::class)->parameters(["direccion" => "hotel_direction"]);
 
 Route::get("/search", [RoomController::class, "buscar"])->name("buscar");
-Route::resource("/habitacion", RoomController::class)->parameters(['habitacion' => 'room']);
+Route::resource("/habitacion", RoomController::class)->parameters(['habitacion' => 'room'])->middleware("auth:hotel");
 
 Route::get("/test", function(){
     return Auth::user();

@@ -16,8 +16,8 @@ class HotelDirectionController extends Controller
     public function index()
     {
         //
-        $direcciones = Hotel_direction::where("hotel_id", Auth::guard("hotel")->user()->id)->get();
-        return $direcciones;
+        $direccion = Hotel_direction::where("hotel_id", Auth::guard("hotel")->user()->id)->get();
+        return view("hotel.cuenta.direccion.index", compact("direccion"));
     }
 
     /**
@@ -75,6 +75,7 @@ class HotelDirectionController extends Controller
     public function edit(Hotel_direction $hotel_direction)
     {
         //
+        return $hotel_direction;
     }
 
     /**
