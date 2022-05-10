@@ -75,7 +75,7 @@ class HotelDirectionController extends Controller
     public function edit(Hotel_direction $hotel_direction)
     {
         //
-        return $hotel_direction;
+        return view("hotel.cuenta.direccion.edit", compact("hotel_direction"));
     }
 
     /**
@@ -88,6 +88,15 @@ class HotelDirectionController extends Controller
     public function update(Request $request, Hotel_direction $hotel_direction)
     {
         //
+        $hotel_direction -> calle = $request->get("calle");
+        $hotel_direction -> patio = $request->get("patio");
+        $hotel_direction -> puerta = $request->get("puerta");
+        $hotel_direction -> cod_postal = $request->get("cod_postal");
+        $hotel_direction -> provincia = $request->get("provincia");
+        $hotel_direction -> ciudad = $request->get("ciudad");
+        $hotel_direction->save();
+
+
     }
 
     /**
