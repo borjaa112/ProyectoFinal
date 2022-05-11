@@ -1,4 +1,4 @@
-@extends("hotel.plantilla")
+@extends("cliente.plantilla")
 @section('contenido')
     <div class="container">
         @foreach ($hoteles as $hotel)
