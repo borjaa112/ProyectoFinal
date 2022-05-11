@@ -16,6 +16,11 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="dni">DNI/NIF</label>
+                    <input id="dni" name="dni" class="form-control" value="{{ Auth::guard("client")->user()->nif }}">
+                </div>
+
+                <div class="mb-3">
                     <label for="email">email</label>
                     <input id="email" name="email" class="form-control" value="{{ Auth::guard("client")->user()->email }}">
                 </div>

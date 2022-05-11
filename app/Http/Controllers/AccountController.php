@@ -128,7 +128,7 @@ class AccountController extends Controller
 
             $client -> nombre = $request->get("nombre");
             $client -> email = $request->get("email");
-            $client -> nif = "ss";
+            $client -> nif = $request->get("dni");
             $client -> apellidos = $request->get("apellidos");
 
             $client->save();
