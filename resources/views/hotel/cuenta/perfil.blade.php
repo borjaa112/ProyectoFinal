@@ -53,4 +53,35 @@
                 </div>
             </form>
         </div>
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Eliminar cuenta
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">¿Seguro que desea eliminar su cuenta?
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Esta acción es irreversible y puede conllevar perdidas de reservas si todavía están activas
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <form method="POST" action="{{route("cuenta.destroy", Auth::guard('hotel')->user()->id)}}">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">Sí, eliminar cuenta</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     @endsection
