@@ -146,5 +146,9 @@ class AccountController extends Controller
     public function destroy($id)
     {
         //
+        if(Auth::guard("client")->check()){
+            $client = Client::find($id);
+            $client->delete();
+        }
     }
 }

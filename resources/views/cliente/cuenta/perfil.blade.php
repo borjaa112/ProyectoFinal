@@ -3,26 +3,29 @@
     <div class="container">
         <h2 class="text-center">Modifique sus datos</h2>
         <div class="d-flex justify-content-center">
-            <form method="post" action="{{route("cuenta.update", Auth::guard("client")->user())}}">
+            <form method="post" action="{{ route('cuenta.update', Auth::guard('client')->user()) }}">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
                     <label for="nombre">Nombre</label>
-                    <input id="nombre" name="nombre" class="form-control" value="{{ Auth::guard("client")->user()->nombre }}">
+                    <input id="nombre" name="nombre" class="form-control"
+                        value="{{ Auth::guard('client')->user()->nombre }}">
                 </div>
                 <div class="mb-3">
                     <label for="apellidos">Apellidos</label>
-                    <input id="apellidos" name="apellidos" class="form-control" value="{{ Auth::guard("client")->user()->apellidos }}">
+                    <input id="apellidos" name="apellidos" class="form-control"
+                        value="{{ Auth::guard('client')->user()->apellidos }}">
                 </div>
 
                 <div class="mb-3">
                     <label for="dni">DNI/NIF</label>
-                    <input id="dni" name="dni" class="form-control" value="{{ Auth::guard("client")->user()->nif }}">
+                    <input id="dni" name="dni" class="form-control" value="{{ Auth::guard('client')->user()->nif }}">
                 </div>
 
                 <div class="mb-3">
                     <label for="email">email</label>
-                    <input id="email" name="email" class="form-control" value="{{ Auth::guard("client")->user()->email }}">
+                    <input id="email" name="email" class="form-control"
+                        value="{{ Auth::guard('client')->user()->email }}">
                 </div>
 
                 <div class="mb-3">
@@ -45,5 +48,36 @@
                     <button class="btn btn-primary">Guardar</button>
                 </div>
             </form>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Eliminar cuenta
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">¿Seguro que desea eliminar su cuenta?
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Esta acción es irreversible y puede conllevar perdidas de reservas si todavía están activas
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <form method="POST" action="{{route("cuenta.destroy", Auth::guard('client')->user()->id)}}">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">Sí, eliminar cuenta</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     @endsection

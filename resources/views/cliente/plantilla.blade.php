@@ -13,7 +13,7 @@
 <body>
     @include('partials.nav')
     @yield('contenido')
-    @include('partials.footer')
+    {{-- @include('partials.footer') --}}
 </body>
 </html>
 
