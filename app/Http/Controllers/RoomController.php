@@ -88,6 +88,7 @@ class RoomController extends Controller
     public function show(Room $room)
     {
         //
+
         return view("hotel.habitacion.index", compact("room"));
     }
 

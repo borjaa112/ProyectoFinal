@@ -1,4 +1,4 @@
-@extends("hotel.plantilla")
+@extends(Auth::guard("hotel")->check() ? 'hotel.plantilla' : 'cliente.plantilla')
 @section('head')
     <link rel="stylesheet" href="{{ asset('css/hotel/habitacion/index.css') }}">
 @endsection
