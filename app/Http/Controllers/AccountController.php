@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Hotel;
+use App\Models\Client;
+
 use Illuminate\Cache\RedisTaggedCache;
 use Illuminate\Support\Str;
 
@@ -120,6 +122,16 @@ class AccountController extends Controller
             }
 
             $hotel->save();
+        }
+        if(Auth::guard("client")->check()){
+            $client = Client::findOrfail($id);
+
+            $client -> nombre = $request->get("nombre");
+            $client -> email = $request->get("email");
+            $client -> nif = "ss";
+            $client -> apellidos = $request->get("apellidos");
+
+            $client->save();
         }
         toast('Datos actualizados correctamente','success');
         return redirect(route("cuenta.index"));

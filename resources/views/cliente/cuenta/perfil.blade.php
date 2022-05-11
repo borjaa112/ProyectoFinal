@@ -3,7 +3,9 @@
     <div class="container">
         <h2 class="text-center">Modifique sus datos</h2>
         <div class="d-flex justify-content-center">
-            <form>
+            <form method="post" action="{{route("cuenta.update", Auth::guard("client")->user())}}">
+                @csrf
+                @method('PUT')
                 <div class="mb-3">
                     <label for="nombre">Nombre</label>
                     <input id="nombre" name="nombre" class="form-control" value="{{ Auth::guard("client")->user()->nombre }}">
