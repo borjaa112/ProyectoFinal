@@ -3,10 +3,12 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\HotelDirectionController;
+use App\Http\Controllers\HotelImageController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ServiceController;
 use App\Models\Hotel_direction;
+use App\Models\Hotel_image;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,6 +45,7 @@ Route::get("/search", [RoomController::class, "buscar"])->name("buscar");
 Route::resource("/habitacion", RoomController::class)->only(["create", "store", "edit"])->parameters(['habitacion' => 'room'])->middleware("auth:hotel");
 Route::resource("/habitacion", RoomController::class)->only(["index", "show", "buscar"])->parameters(['habitacion' => 'room']);
 
+Route::resource("/instalaciones", HotelImageController::class);
 Route::get("/test", function(){
     return Auth::user();
 
