@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Hotel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class HotelController extends Controller
 {
@@ -15,6 +17,8 @@ class HotelController extends Controller
     public function index()
     {
         //
+        $hotel = Hotel::findOrFail(Auth::guard("hotel")->user()->id)->with("rooms")->get();
+        return $hotel;
     }
 
     /**

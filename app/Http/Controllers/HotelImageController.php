@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Hotel_image;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use PHPUnit\Runner\Hook;
 
 class HotelImageController extends Controller
 {
@@ -18,19 +17,9 @@ class HotelImageController extends Controller
     public function index()
     {
         //
-        $hotel = Hotel::findOrFail(Auth::guard("hotel")->user()->id)->get();
-
-        foreach ($hotel->hotel_images() as $image) {
-            return $image;
-        }
+        $hotel = Hotel::findOrFail(Auth::guard("hotel")->user()->id)->with("hotel_images")->get();
         return $hotel;
-        $hotel = Hotel::with("hotel_direction")->get();
 
-        foreach ($hotel->hotel_directions as $image) {
-            return $image;
-        }
-        return $hotel;
-        return view("hotel.imagenes.create");
     }
 
     /**
@@ -41,6 +30,10 @@ class HotelImageController extends Controller
     public function create()
     {
         //
+        $hotel_image = new Hotel_image();
+        $hotel_image -> hotel_id = Auth::guard("hotel")->user()->id;
+        $hotel_image -> img_path = "jasjasdajksda.png";
+        $hotel_image->save();
     }
 
     /**

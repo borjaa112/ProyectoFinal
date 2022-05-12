@@ -50,6 +50,6 @@ class Hotel extends Authenticatable
     }
 
     public function hotel_images(){
-        return $this->hasMany(hotel_images::class);
+        return $this->hasMany(Hotel_image::class);
     }
 }
