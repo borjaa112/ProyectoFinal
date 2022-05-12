@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Hotel_image;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Hotel;
 use Illuminate\Http\Request;
 
@@ -18,8 +19,7 @@ class HotelImageController extends Controller
     {
         //
         $hotel = Hotel::findOrFail(Auth::guard("hotel")->user()->id)->with("hotel_images")->get();
-        return $hotel;
-
+        return view("hotel.imagenes.create", compact("hotel"));
     }
 
     /**
@@ -30,10 +30,6 @@ class HotelImageController extends Controller
     public function create()
     {
         //
-        $hotel_image = new Hotel_image();
-        $hotel_image -> hotel_id = Auth::guard("hotel")->user()->id;
-        $hotel_image -> img_path = "jasjasdajksda.png";
-        $hotel_image->save();
     }
 
     /**
@@ -45,6 +41,18 @@ class HotelImageController extends Controller
     public function store(Request $request)
     {
         //
+
+        $ruta = $request->file("imagenes");
+        foreach ($ruta as $imagen) {
+            $hotel_image = new Hotel_image();
+
+            $path = Storage::putFile("room_images", $imagen);
+
+            $hotel_image->hotel_id = Auth::guard("hotel")->user()->id;
+            $hotel_image->img_path = $path;
+            $hotel_image->save();
+            return $hotel_image;
+        }
     }
 
     /**
