@@ -19,6 +19,19 @@
             @endforeach
         </div>
         <hr>
+        <div class="h1 text-center">
+            Imágenes de las instalaciones
+        </div>
+        <div class="row text-center text-lg-start">
+            @foreach ($hotel->hotel_images as $hotel_image)
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="d-block mb-4 h-100">
+                    <img class="img-fluid img-thumbnail" src="/imgs/{{$hotel_image->img_path}}">
+                </div>
+            </div>
+            @endforeach
+        </div>
+        <hr>
         <div class="h1 text-center">Contactar con {{ $hotel->nombre }}</div>
         <div class="h4 text-center">
             <div><i class="bi bi-envelope pe-2"></i><a href="mailto:{{ $hotel->email }}">{{ $hotel->email }}</a></div>
@@ -26,7 +39,7 @@
                 {{ $hotel->hotel_directions->patio }} Puerta {{ $hotel->hotel_directions->puerta }} Ciudad:
                 {{ $hotel->hotel_directions->ciudad }}</div>
             <iframe scrolling="no" marginheight="0" marginwidth="0" id="gmap_canvas"
-                src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q={{ $hotel->hotel_directions->calle }}%20%{{ $hotel->hotel_directions->puerta }}%20%{{ $hotel->hotel_directions->ciudad }}+(qq)&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=es&amp;q={{ str_replace('', '%20%', $hotel->hotel_directions->calle )}}%20%{{ $hotel->hotel_directions->puerta }}%20%{{ str_replace(' ', '%20%', $hotel->hotel_directions->ciudad) }}+(qq)&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
                 width="520" height="400" frameborder="0"></iframe>
         </div>
     </div>
