@@ -127,7 +127,7 @@ class RoomController extends Controller
     }
 
     public function buscar(Request $request){
-        $hoteles = Hotel::with("rooms")->whereRelation("hotel_directions", "ciudad", $request->get("input_ciudad"))->get();
+        $hoteles = Hotel::whereRelation("hotel_directions", "ciudad", $request->get("input_ciudad"))->get();
         return view("cliente.busqueda.index", compact("hoteles"));
     }
 }

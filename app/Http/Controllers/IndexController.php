@@ -9,7 +9,7 @@ class IndexController extends Controller
 {
     //
     public function index(){
-        $habitaciones = Room::all();
+        $habitaciones = Room::latest()->take(10)->get();
 
         // return dd($hoteles);
         // return dd(Auth::guard('hotel')->check());

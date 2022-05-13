@@ -5,7 +5,13 @@
             @foreach ($hotel->rooms as $habitacion)
                 <div class="row border border-2 mb-3">
                     <div class="col-auto">
-                        <img style="height: 200px; width: 200px" src="/imgs/{{ $habitacion->images_rooms[0]->img_path }}">
+                        @forelse ($habitacion->images_rooms as $image_room)
+                            @if ($loop->first)
+                                <img style="height: 200px; width: 200px" src="/imgs/{{ $image_room->img_path }}">
+                            @endif
+                        @empty
+                            <img style="height: 200px; width: 200px" src="{{ asset('imgs/room_images/not-found.png') }}">
+                        @endforelse
                     </div>
                     <div class="col-auto">
                         Hotel: {{ $hotel->nombre }}
