@@ -10,28 +10,27 @@
                 <button type="submit" class="btn btn-info">Subir imgs</button>
             </div>
         </form>
-
         <hr>
-        <div class="h1 text-center">{{ count($hotel[0]->hotel_images) }} imágenes añadidas:</div>
+        <div class="h1 text-center">{{ count($hotel->hotel_images) }} imágenes añadidas:</div>
         <div class="row text-center text-lg-start">
-            @foreach ($hotel as $hotel_images)
-                @foreach ($hotel_images->hotel_images as $image)
-                    <div class="col-lg-3 col-md-4 col-6">
 
-                        <form method="post" action="{{ route('instalaciones.destroy', $image) }}">
-                            @csrf
-                            @method('delete')
-                            <div class="d-block mb-4 h-100">
-                                <div class="d-flex justify-content-end">
-                                    <button class="btn btn-danger" type="submit" title="Eliminar"
-                                        style="position:absolute;"><i class="bi bi-trash"></i></button>
-                                </div>
-                                <img class="img-fluid img-thumbnail" src="/imgs/{{ $image->img_path }}">
+            @foreach ($hotel->hotel_images as $image)
+                <div class="col-lg-3 col-md-4 col-6">
+
+                    <form method="post" action="{{ route('instalaciones.destroy', $image) }}">
+                        @csrf
+                        @method('delete')
+                        <div class="d-block mb-4 h-100">
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-danger" type="submit" title="Eliminar" style="position:absolute;"><i
+                                        class="bi bi-trash"></i></button>
                             </div>
-                        </form>
-                    </div>
-                @endforeach
+                            <img class="img-fluid img-thumbnail" src="/imgs/{{ $image->img_path }}">
+                        </div>
+                    </form>
+                </div>
             @endforeach
+
         </div>
     </div>
 @endsection

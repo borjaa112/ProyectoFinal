@@ -10,7 +10,7 @@
                 <div class="card" style="width: 18rem;">
                     @forelse ($room->images_rooms as $room_img)
                         @if ($loop->first)
-                            <img src="/imgs/{{ $room->images_rooms[0]->img_path }}" class="card-img-top" alt="...">
+                            <a href="{{route("habitacion.show", $room)}}"><img src="/imgs/{{ $room->images_rooms[0]->img_path }}" class="card-img-top" alt="..."></a>
                         @endif
                         @empty
                         <img src="{{asset("imgs/room_images/not-found.png")}}" class="card-img-top" alt="...">

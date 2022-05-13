@@ -18,7 +18,7 @@ class HotelImageController extends Controller
     public function index()
     {
         //
-        $hotel = Hotel::findOrFail(Auth::guard("hotel")->user()->id)->with("hotel_images")->get();
+        $hotel = Hotel::findOrFail(Auth::guard("hotel")->user()->id);
         return view("hotel.imagenes.create", compact("hotel"));
     }
 
