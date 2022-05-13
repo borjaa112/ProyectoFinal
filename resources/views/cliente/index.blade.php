@@ -1,6 +1,7 @@
 @extends('cliente.plantilla')
-@section('css')
+@section('head')
     <link href="{{ asset('css/inicio/cliente.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/hotel/test.js') }}" defer></script>
 @endsection
 @section('contenido')
         <div class="container">
@@ -8,14 +9,14 @@
             <h1>Agencia Hotelera</h1>
 
             <div class="form-group row border border-primary">
-                <form method="post" action="{{ route('buscar') }}">
+                <form method="get" action="{{ route('buscar') }}">
                     @csrf
                     @method('get')
                     <div class="col">
                         <label for="input_ciudad" class="col-6">Introduce ciudad</label>
                     </div>
                     <div class="col autocomplete">
-                        <input type="text" id="input_ciudad" name="input_ciudad" class="m-1 form-control">
+                        <input type="text" id="input_ciudad" name="input_ciudad" class="m-1 form-control" autocomplete="off">
                     </div>
                     <div class="col">
                         <label for="fecha_entrada">Introduce fecha de entrada</label>
