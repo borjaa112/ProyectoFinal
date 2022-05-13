@@ -1,6 +1,14 @@
 @extends('hotel.plantilla')
 @section('contenido')
     <div class="container">
+        @if ($errors->any())
+            Para continuar debe de solucionar los siguientes problemas:
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
         <h2 class="text-center">Añadir habitación</h2>
 
         <form action="{{ route('habitacion.store') }}" method="POST" enctype="multipart/form-data">
@@ -28,8 +36,8 @@
                 </div>
                 <div class="col-6">
                     <div class="input-group mb-3">
-                        <input type="file" class="form-control" id="imagenes" name="imagenes[]" aria-describedby="inputGroupFileAddon03"
-                            aria-label="Upload" multiple>
+                        <input type="file" class="form-control" id="imagenes" name="imagenes[]"
+                            aria-describedby="inputGroupFileAddon03" aria-label="Upload" multiple>
                     </div>
                 </div>
             </div>
@@ -50,8 +58,7 @@
                         <option disabled>Selecciona opciones</option>
 
                         @foreach ($servicios as $servicio)
-
-                            <option value="{{$servicio->id}}">{{$servicio->servicio}}</option>
+                            <option value="{{ $servicio->id }}">{{ $servicio->servicio }}</option>
                         @endforeach
                         {{-- <option value="TV en la habitacion">TV en la habitacion</option>
                         <option value="Aire acondicionado">Aire acondicionado</option>
@@ -59,7 +66,7 @@
                         <option value="Minibar">Minibar</option>
                         <option value="Terraza">Terraza</option>
                         <option value="Baño privado">Baño privado</option> --}}
-                      </select>
+                    </select>
                 </div>
             </div>
             <div class="row d-flex justify-content-center">

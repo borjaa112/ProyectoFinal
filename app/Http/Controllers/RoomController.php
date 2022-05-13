@@ -7,6 +7,7 @@ use App\Models\Images_room;
 use App\Models\Hotel;
 use App\Models\Hotel_direction;
 use App\Models\ImagesRoom;
+use App\Http\Requests\createRoomRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Room;
 use Illuminate\Support\Facades\Storage;
@@ -52,7 +53,7 @@ class RoomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(createRoomRequest $request)
     {
         //
         $room = new Room();
