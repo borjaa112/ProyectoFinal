@@ -51,8 +51,9 @@ class HotelImageController extends Controller
             $hotel_image->hotel_id = Auth::guard("hotel")->user()->id;
             $hotel_image->img_path = $path;
             $hotel_image->save();
-            return $hotel_image;
         }
+        return redirect(route("instalaciones.index"));
+
     }
 
     /**
@@ -98,5 +99,8 @@ class HotelImageController extends Controller
     public function destroy(Hotel_image $hotel_image)
     {
         //
+        $hotel_image->delete();
+        return redirect(route("instalaciones.index"));
+
     }
 }

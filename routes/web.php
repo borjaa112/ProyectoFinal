@@ -48,7 +48,7 @@ Route::resource("/habitacion", RoomController::class)->only(["index", "show", "b
 
 
 Route::resource("/hotel", HotelController::class);
-Route::resource("/instalaciones", HotelImageController::class);
+Route::resource("/instalaciones", HotelImageController::class)->parameters(["instalaciones" => "hotel_image"])->middleware("auth:hotel");
 Route::get("/test", function(){
     return Auth::user();
 
