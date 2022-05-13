@@ -48,6 +48,6 @@
             </div>
         </div>
         <div class="d-flex justify-content-center">
-            <button type="button" class="btn btn-info btn-lg col-6 mt-4">Reservar</button>
+            <a href="{{route("hotel.show", $room->hotel)}}"<button type="button" class="btn btn-info btn-lg col-6 mt-4">Ver información del hotel</button></a>
         </div>
     @endsection
