@@ -82,6 +82,9 @@ class RoomController extends Controller
             $room->services()->attach($servicio);
         }
 
+        toast("Habitación creada con éxito", "success");
+        return redirect(route("habitacion.show", $room));
+
         //return response()->json(200);
     }
 
