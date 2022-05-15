@@ -9,48 +9,50 @@
 
         <h1>Agencia Hotelera</h1>
         @if ($errors->any())
-            Para continuar debe de solucionar los siguientes problemas:
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+            <div class="alert alert-warning">
+                Para continuar debe de solucionar los siguientes problemas:
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
-        <div class="form-group row border border-primary">
-            <form method="get" action="{{ route('buscar') }}">
-                @csrf
-                @method('get')
-                <div class="col">
-                    <label for="input_ciudad" class="col-6">Introduce ciudad</label>
-                </div>
-                <div class="col autocomplete">
-                    <input type="text" id="input_ciudad" name="input_ciudad" class="m-1 form-control" autocomplete="off">
-                </div>
-                <div class="col">
-                    <label for="fecha_entrada">Introduce fecha de entrada</label>
-                </div>
-                <div class="col">
-                    <input type="date" name="fecha_entrada" class="m-1 form-control" id="fecha_entrada">
-                </div>
-                <div class="col">
-                    <label for="fecha_salida">Introduce numero de noches</label>
-                </div>
-                <div class="col">
-                    <input type="number" name="fecha_salida" class="m-1 form-control" id="fecha_salida">
-                </div>
-                <div class="col">
-                    <button type="submit" class="m-1 btn btn-info"><i class="bi bi-search"></i></button>
-                </div>
-            </form>
+        <div>
+            <div class="form-group pe-3 ps-3 pt-2 pb-2 border rounded-2 element-white">
+                <form method="get" action="{{ route('buscar') }}">
+                    @csrf
+                    @method('get')
+                    <div class="col">
+                        <label for="input_ciudad" class="col-6">Introduce ciudad</label>
+                    </div>
+                    <div class="col autocomplete">
+                        <input type="text" id="input_ciudad" name="input_ciudad" class="m-1 form-control" autocomplete="off">
+                    </div>
+                    <div class="col">
+                        <label for="fecha_entrada">Introduce fecha de entrada</label>
+                    </div>
+                    <div class="col">
+                        <input type="date" name="fecha_entrada" class="m-1 form-control" id="fecha_entrada">
+                    </div>
+                    <div class="col">
+                        <label for="fecha_salida">Introduce numero de noches</label>
+                    </div>
+                    <div class="col">
+                        <input type="number" name="fecha_salida" class="m-1 form-control" id="fecha_salida">
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="m-1 btn btn-info"><i class="bi bi-search"></i></button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="row border border-secondary mt-5">
-            <div class="col">
-                <p>Ultimas habitaciones añadidas</p>
-
+        <div>
+            <div class="col-12">
+                <p class="h2 mt-5">Últimas habitaciones añadidas</p>
                 @foreach ($habitaciones as $habitacion)
-                    <div class="border border-primary">
-                        Hotel: {{ $habitacion->hotel->nombre }}
-                        <br>
+                    <div class="mt-4 mb-4 p-2 col border rounded-2 element-white">
+                        {{ $habitacion->hotel->nombre }}
                         {{-- {{dd($habitacion)}} --}}
                         Precio por noche: {{ $habitacion->precio_noche }}€
                         <br>
@@ -61,11 +63,7 @@
                         @endforeach
                         <a href="{{ route('habitacion.show', $habitacion) }}">Enlace</a>
                     </div>
-
-                    <br><br>
                 @endforeach
-
-
             </div>
         </div>
     </div>

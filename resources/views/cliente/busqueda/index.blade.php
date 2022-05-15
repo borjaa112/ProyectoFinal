@@ -13,7 +13,7 @@
                 @endforeach
             </ul>
         @endif
-        <div class="form-group row border border-primary">
+        <div class="form-group row border rounded-2 element-white mt-2 mb-2">
             <form method="get" action="{{ route('buscar') }}">
                 @csrf
                 @method('get')
