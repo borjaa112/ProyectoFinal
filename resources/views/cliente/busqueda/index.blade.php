@@ -1,11 +1,19 @@
-@extends("cliente.plantilla")
+@extends('cliente.plantilla')
 @section('head')
     <script src="{{ asset('js/hotel/test.js') }}" defer></script>
     <link rel="stylesheet" href="{{ asset('css/inicio/cliente.css') }}">
 @endsection
 @section('contenido')
     <div class="container">
-        <div class="form-group row border border-primary">
+        @if ($errors->any())
+            Para continuar debe de solucionar los siguientes problemas:
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+        <div class="form-group row border rounded-2 element-white mt-2 mb-2">
             <form method="get" action="{{ route('buscar') }}">
                 @csrf
                 @method('get')
@@ -28,7 +36,7 @@
                         <label for="fecha_salida">Introduce fecha de salida</label>
                     </div>
                     <div class="col">
-                        <input type="date" name="fecha_salida" class="m-1 form-control" id="fecha_salida"
+                        <input type="number" name="fecha_salida" class="m-1 form-control" id="fecha_salida"
                             value="{{ $request->get('fecha_salida') }}">
                     </div>
                     <div class="col">
@@ -39,28 +47,36 @@
         </div>
         @foreach ($hoteles as $hotel)
             @foreach ($hotel->rooms as $habitacion)
-                <div class="row border border-2 mb-3">
+                <div class="d-flex align-items-center row border border-2 mb-3">
                     <div class="col-auto">
                         @forelse ($habitacion->images_rooms as $image_room)
                             @if ($loop->first)
-                                <img style="height: 200px; width: 200px" src="/imgs/{{ $image_room->img_path }}">
+                                <img style="height: 200px; width: 300px" src="/imgs/{{ $image_room->img_path }}">
                             @endif
                         @empty
-                            <img style="height: 200px; width: 200px" src="{{ asset('imgs/room_images/not-found.png') }}">
+                            <img style="height: 200px; width: 300px" src="{{ asset('imgs/room_images/not-found.png') }}">
                         @endforelse
                     </div>
-                    <div class="col-8 align-items-center">
+                    <div class="col-7 align-items-center">
                         <div class="row">
-                            Hotel: {{ $hotel->nombre }}
+                            <div class="h1">{{ $hotel->nombre }}</div>
                         </div>
                         <div class="row">
-                            Camas Disponibles: {{ $habitacion->camas }}
+                            <div class="h5"><strong>Camas Disponibles:</strong> {{ $habitacion->camas }}
+                            </div>
                         </div>
-                        <div class="row h3 justify-content-end">
-                            Precio: {{ $habitacion->precio_noche }}€
+
+                    </div>
+                    <div class="col-2">
+                        <div class="row h3 text-center justify-content-center">
+                            Precio Total: {{ $habitacion->precio_noche * $request->get('fecha_salida') }}€
+
+                        </div>
+                        <div class="row justify-content-end">
+                            <a class="btn btn-info" href="{{ route('habitacion.show', $habitacion) }}">Ver detalles</a>
+                            <p class="text-center">*Precio por noche: {{ $habitacion->precio_noche }}€</p>
                         </div>
                     </div>
-                    <a class="btn btn-info" href="{{ route('habitacion.show', $habitacion) }}">Ver detalles</a>
                 </div>
             @endforeach
         @endforeach

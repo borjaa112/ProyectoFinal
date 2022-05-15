@@ -7,6 +7,8 @@ use App\Models\Images_room;
 use App\Models\Hotel;
 use App\Models\Hotel_direction;
 use App\Models\ImagesRoom;
+use App\Http\Requests\createRoomRequest;
+use App\Http\Requests\searchRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Room;
 use Illuminate\Support\Facades\Storage;
@@ -52,7 +54,7 @@ class RoomController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(createRoomRequest $request)
     {
         //
         $room = new Room();
@@ -62,6 +64,10 @@ class RoomController extends Controller
         $room -> save();
 
         $ruta = $request->file("imagenes");
+        // $request->validate([
+        //     'imagenes' => 'required',
+        //     'imagenes.*' => 'mimes:jpeg,jpg,png,gif|max:2048'
+        //   ]);
         foreach ($ruta as $imagen){
             // return dd($imagen);
             $path = Storage::putFile("room_images", $imagen);
@@ -75,6 +81,9 @@ class RoomController extends Controller
         foreach ($request->input('servicios') as $servicio){
             $room->services()->attach($servicio);
         }
+
+        toast("Habitación creada con éxito", "success");
+        return redirect(route("habitacion.show", $room));
 
         //return response()->json(200);
     }
@@ -126,7 +135,7 @@ class RoomController extends Controller
         //
     }
 
-    public function buscar(Request $request){
+    public function buscar(searchRequest $request){
         $hoteles = Hotel::whereRelation("hotel_directions", "ciudad", $request->get("input_ciudad"))->get();
         return view("cliente.busqueda.index", compact("hoteles", "request"));
     }
