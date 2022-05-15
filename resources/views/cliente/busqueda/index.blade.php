@@ -6,12 +6,14 @@
 @section('contenido')
     <div class="container">
         @if ($errors->any())
-            Para continuar debe de solucionar los siguientes problemas:
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+            <div class="alert alert-warning">
+                Para continuar debe de solucionar los siguientes problemas:
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
         <div class="form-group row border rounded-2 element-white mt-2 mb-2">
             <form method="get" action="{{ route('buscar') }}">
@@ -45,36 +47,36 @@
                 </div>
             </form>
         </div>
+
         @foreach ($hoteles as $hotel)
             @foreach ($hotel->rooms as $habitacion)
-                <div class="d-flex align-items-center row border border-2 mb-3">
-                    <div class="col-auto">
-                        @forelse ($habitacion->images_rooms as $image_room)
-                            @if ($loop->first)
-                                <img style="height: 200px; width: 300px" src="/imgs/{{ $image_room->img_path }}">
-                            @endif
-                        @empty
-                            <img style="height: 200px; width: 300px" src="{{ asset('imgs/room_images/not-found.png') }}">
-                        @endforelse
-                    </div>
-                    <div class="col-7 align-items-center">
-                        <div class="row">
-                            <div class="h1">{{ $hotel->nombre }}</div>
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            @forelse ($habitacion->images_rooms as $image_room)
+                                @if ($loop->first)
+                                    <img class="img-fluid rounded-start" src="/imgs/{{ $image_room->img_path }}">
+                                @endif
+                            @empty
+                                <img style="height: 200px; width: 300px"
+                                    src="{{ asset('imgs/room_images/not-found.png') }}">
+                            @endforelse
                         </div>
-                        <div class="row">
-                            <div class="h5"><strong>Camas Disponibles:</strong> {{ $habitacion->camas }}
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $hotel->nombre }}</h5>
+                                <div class="h5"><strong>Camas Disponibles:</strong> {{ $habitacion->camas }}</div>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
+                                    </p>
+                                    <p class="text-end h4">Precio Total:
+                                        {{ $habitacion->precio_noche * $request->get('fecha_salida') }}€
+                                    </p>
+                                    <div class="d-flex justify-content-end">
+                                    <a class="btn btn-info" href="{{ route('habitacion.show', $habitacion) }}">Ver
+                                        detalles</a></div>
+                                    <p class="text-end">*Precio por noche: {{ $habitacion->precio_noche }}€</p>
+
                             </div>
-                        </div>
-
-                    </div>
-                    <div class="col-2">
-                        <div class="row h3 text-center justify-content-center">
-                            Precio Total: {{ $habitacion->precio_noche * $request->get('fecha_salida') }}€
-
-                        </div>
-                        <div class="row justify-content-end">
-                            <a class="btn btn-info" href="{{ route('habitacion.show', $habitacion) }}">Ver detalles</a>
-                            <p class="text-center">*Precio por noche: {{ $habitacion->precio_noche }}€</p>
                         </div>
                     </div>
                 </div>

@@ -2,12 +2,14 @@
 @section('contenido')
     <div class="container">
         @if ($errors->any())
-            Para continuar debe de solucionar los siguientes problemas:
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+            <div class="alert alert-warning">
+                Para continuar debe de solucionar los siguientes problemas:
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
         <h2 class="text-center">Añadir habitación</h2>
 
