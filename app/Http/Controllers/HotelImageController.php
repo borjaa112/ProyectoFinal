@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\instalacionesRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Hotel_image;
 use Illuminate\Support\Facades\Storage;
@@ -38,7 +39,7 @@ class HotelImageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(instalacionesRequest $request)
     {
         //
 

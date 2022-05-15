@@ -1,7 +1,17 @@
-@extends("hotel.plantilla")
+@extends('hotel.plantilla')
 @section('contenido')
     <div class="container">
         <div class="h1 text-center">Añadir fotos de las instalaciones</div>
+        @if ($errors->any())
+            <div class="alert alert-warning">
+                Para continuar debe de solucionar los siguientes problemas:
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form method="post" action="{{ route('instalaciones.store') }}" enctype="multipart/form-data">
             @csrf
             @method('post')
