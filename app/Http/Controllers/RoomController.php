@@ -64,6 +64,10 @@ class RoomController extends Controller
         $room -> save();
 
         $ruta = $request->file("imagenes");
+        // $request->validate([
+        //     'imagenes' => 'required',
+        //     'imagenes.*' => 'mimes:jpeg,jpg,png,gif|max:2048'
+        //   ]);
         foreach ($ruta as $imagen){
             // return dd($imagen);
             $path = Storage::putFile("room_images", $imagen);
