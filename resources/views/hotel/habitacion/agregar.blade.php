@@ -37,7 +37,7 @@
                 <div class="col-6">
                     <div class="input-group mb-3">
                         <input type="file" class="form-control" id="imagenes" name="imagenes[]"
-                            aria-describedby="inputGroupFileAddon03" aria-label="Upload" multiple>
+                            aria-describedby="inputGroupFileAddon03" aria-label="Upload" accept="image/*" multiple>
                     </div>
                 </div>
             </div>

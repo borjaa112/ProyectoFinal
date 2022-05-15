@@ -1,6 +1,11 @@
 @extends('cliente.plantilla')
 @section('contenido')
     <div class="container-fluid">
+        @if (session('error'))
+            <div class="alert alert-success">
+                {{ session('error') }}
+            </div>
+        @endif
         <div class="bg-image row"
             style="background-image:linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ asset('imgs/inicio/fondo.jpg') }}'); height: 90vh">
             <div class="d-flex align-items-center justify-content-center">

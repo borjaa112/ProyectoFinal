@@ -26,7 +26,7 @@ class createRoomRequest extends FormRequest
         return [
             //
             'precio-noche' => 'required|numeric',
-            'imagenes' => 'required|image',
+            'imagenes' => ['imagenes' => 'image'],
             'camas' => 'required|numeric',
             // 'servicios' => 'required',
         ];
@@ -38,7 +38,7 @@ class createRoomRequest extends FormRequest
         'precio-noche.required' => 'El precio por noche es un campo obligario',
         'precio-noche.numeric' => 'El precio por noche debe de ser un número',
         'imagenes.required' => 'Debes adjuntar como mínimo una imagen de la habitación',
-        'images.image' => 'La imagen de la habitación debe de ser una imagen',
+        'imagenes.image' => 'La imagen de la habitación debe de ser una imagen',
         'camas.required' => 'El campo de camas es obligatorio',
         'camas.numeric' => 'El campo del número de camas debe de ser numerico'
         ];

@@ -8,7 +8,14 @@
     <div class="container">
 
         <h1>Agencia Hotelera</h1>
-
+        @if ($errors->any())
+            Para continuar debe de solucionar los siguientes problemas:
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
         <div class="form-group row border border-primary">
             <form method="get" action="{{ route('buscar') }}">
                 @csrf
@@ -26,10 +33,10 @@
                     <input type="date" name="fecha_entrada" class="m-1 form-control" id="fecha_entrada">
                 </div>
                 <div class="col">
-                    <label for="fecha_salida">Introduce fecha de salida</label>
+                    <label for="fecha_salida">Introduce numero de noches</label>
                 </div>
                 <div class="col">
-                    <input type="date" name="fecha_salida" class="m-1 form-control" id="fecha_salida">
+                    <input type="number" name="fecha_salida" class="m-1 form-control" id="fecha_salida">
                 </div>
                 <div class="col">
                     <button type="submit" class="m-1 btn btn-info"><i class="bi bi-search"></i></button>

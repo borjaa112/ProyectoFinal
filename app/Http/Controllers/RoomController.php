@@ -8,6 +8,7 @@ use App\Models\Hotel;
 use App\Models\Hotel_direction;
 use App\Models\ImagesRoom;
 use App\Http\Requests\createRoomRequest;
+use App\Http\Requests\searchRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Room;
 use Illuminate\Support\Facades\Storage;
@@ -127,7 +128,7 @@ class RoomController extends Controller
         //
     }
 
-    public function buscar(Request $request){
+    public function buscar(searchRequest $request){
         $hoteles = Hotel::whereRelation("hotel_directions", "ciudad", $request->get("input_ciudad"))->get();
         return view("cliente.busqueda.index", compact("hoteles", "request"));
     }
