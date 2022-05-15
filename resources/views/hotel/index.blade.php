@@ -12,8 +12,14 @@
             <p class="h2 mt-5">Últimas habitaciones añadidas</p>
             @foreach ($habitaciones as $habitacion)
                 <div class="mt-4 mb-4 p-2 col border rounded-2 element-white">
+                    @foreach ($habitacion->images_rooms as $image_room)
+                        @if ($loop->first)
+                            <img class="img-fluid img-thumbnail" src="/imgs/{{ $image_room->img_path }}">
+                        @endif
+                    @endforeach
                     {{ $habitacion->hotel->nombre }}
                     {{-- {{dd($habitacion)}} --}}
+
                     Precio por noche: {{ $habitacion->precio_noche }}€
                     <br>
                     Camas: {{ $habitacion->camas }}
@@ -25,7 +31,7 @@
                 </div>
             @endforeach
         </div>
-        </div>
+    </div>
     </div>
     </div>
 @endsection
