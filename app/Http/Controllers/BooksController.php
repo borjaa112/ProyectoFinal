@@ -48,7 +48,7 @@ class BooksController extends Controller
     {
         //
         $client = Client::findOrFail(Auth::guard("client")->user()->id);
-        $client->rooms()->attach($request->get("room_id"), ["precio" => $request->get("precio_form"), "tipo_pension" => $request->get("pension_form"), "fecha" => $request->get("fecha_form"), "noches" => $request->get("noches_form")]);
+        $client->rooms()->attach($request->get("room_id"), ["precio" => $request->get("precio_form"), "tipo_pension" => $request->get("pension_form"), "fecha" => $request->get("fecha_form"), "num_noches" => $request->get("noches_form")]);
     }
 
     /**
