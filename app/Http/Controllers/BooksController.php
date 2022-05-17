@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Room;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
@@ -45,6 +47,8 @@ class BooksController extends Controller
     public function store(Request $request)
     {
         //
+        $client = Client::findOrFail(Auth::guard("client")->user()->id);
+        $client->rooms()->attach($request->get("room_id"), ["precio" => $request->get("precio_form"), "tipo_pension" => $request->get("pension_form"), "fecha" => $request->get("fecha_form"), "noches" => $request->get("noches_form")]);
     }
 
     /**
