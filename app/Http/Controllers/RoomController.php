@@ -140,6 +140,12 @@ class RoomController extends Controller
 
     public function buscar(searchRequest $request){
         $hoteles = Hotel::whereRelation("hotel_directions", "ciudad", $request->get("input_ciudad"))->get();
+        // $habitaciones = Room::get();
+        // foreach ($habitaciones as $habitacion) {
+        //     foreach($habitacion->clients as $pvot){
+        //         return $pvot->pivot;
+        //     }
+        // }
         return view("cliente.busqueda.index", compact("hoteles", "request"));
     }
 }
