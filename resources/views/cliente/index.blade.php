@@ -57,8 +57,8 @@
                             <div class="col-md-4">
                                 @foreach ($habitacion->images_rooms as $image_room)
                                     @if ($loop->first)
-                                        <img src="/imgs/{{ $image_room->img_path }}" class="img-fluid rounded-start"
-                                            alt="...">
+                                        <a href="{{route("habitacion.show", $habitacion)}}"><img src="/imgs/{{ $image_room->img_path }}" class="img-fluid rounded-start"
+                                            alt="..."></a>
                                     @endif
                                 @endforeach
                             </div>

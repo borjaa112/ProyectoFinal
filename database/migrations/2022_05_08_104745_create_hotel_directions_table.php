@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId("hotel_id")->constrained();
             $table->string("calle");
-            $table->string("patio");
+            $table->string("patio")->nullable();
             $table->string("puerta");
             $table->integer("cod_postal");
             $table->string("pais");

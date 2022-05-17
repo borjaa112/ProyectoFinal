@@ -66,16 +66,22 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $hotel->nombre }}</h5>
                                 <div class="h5"><strong>Camas Disponibles:</strong> {{ $habitacion->camas }}</div>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
-                                    </p>
-                                    <p class="text-end h4">Precio Total:
-                                        {{ $habitacion->precio_noche * $request->get('fecha_salida') }}€
-                                    </p>
-                                    <div class="d-flex justify-content-end">
-                                    <a class="btn btn-info" href="{{ route('habitacion.show', $habitacion) }}">Ver
-                                        detalles</a></div>
-                                    <p class="text-end">*Precio por noche: {{ $habitacion->precio_noche }}€</p>
-
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
+                                </p>
+                                <p class="text-end h4">Precio Total:
+                                    {{ $habitacion->precio_noche * $request->get('fecha_salida') }}€
+                                </p>
+                                <div class="d-flex justify-content-end">
+                                <a class="btn btn-info" href="{{ route('habitacion.show', $habitacion) }}">Ver
+                                    detalles</a></div>
+                                <p class="text-end">*Precio por noche: {{ $habitacion->precio_noche }}€</p>
+                                <form action="{{route("reservar.create")}}" method="GET">
+                                    @csrf
+                                    <input type="hidden" name="habitacion" value="{{$habitacion->id}}">
+                                    <input type="hidden" name="fecha_salida" value="{{$request->fecha_salida}}">
+                                    <input type="hidden" name="fecha_entrada" value="{{$request->fecha_entrada}}">
+                                    <input type="submit" class="btn btn-info" value="Reservar">
+                                </form>
                             </div>
                         </div>
                     </div>

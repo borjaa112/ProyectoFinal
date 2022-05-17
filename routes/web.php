@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\BooksController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\HotelDirectionController;
 use App\Http\Controllers\HotelImageController;
@@ -48,11 +49,15 @@ Route::resource("/habitacion", RoomController::class)->only(["index", "show", "b
 
 
 Route::resource("/hotel", HotelController::class);
+
 Route::resource("/instalaciones", HotelImageController::class)->parameters(["instalaciones" => "hotel_image"])->middleware("auth:hotel");
 Route::get("/test", function(){
     return Auth::user();
 
 });
+
+Route::resource("/reservar", BooksController::class);
+
 
 Route::resource("/fill", ServiceController::class);
 

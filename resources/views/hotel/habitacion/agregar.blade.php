@@ -73,10 +73,26 @@
             </div>
             <div class="row d-flex justify-content-center">
                 <div class="col-2">
-                    <label for="descripcion" class="col-form-label">Descripción</label>
+                    <label for="MP" class="col-form-label">Precio Media pension</label>
                 </div>
                 <div class="col-6">
-                    <textarea name="descripcion" id="descripcion" class="w-100"></textarea>
+                    <input type="number" name="MP" id="MP" class="form-control">
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-2">
+                    <label for="PC" class="col-form-label">Precio Pension Completa</label>
+                </div>
+                <div class="col-6">
+                    <input type="number" name="PC" id="PC" class="form-control">
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-2">
+                    <label for="HD" class="col-form-label">Precio Alojamiento y Desayuno</label>
+                </div>
+                <div class="col-6">
+                    <input type="number" name="HD" id="HD" class="form-control">
                 </div>
             </div>
             <div class="row d-flex justify-content-evenly">
