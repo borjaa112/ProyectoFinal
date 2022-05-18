@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
-class pensionPriceController extends Controller
+class RoomApiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,7 +38,6 @@ class pensionPriceController extends Controller
     public function show(Room $room)
     {
         //
-        return response()->json([$room->precio_mp, $room->precio_pc, $room->precio_hd],200);
     }
 
     /**
@@ -62,5 +61,19 @@ class pensionPriceController extends Controller
     public function destroy(Room $room)
     {
         //
+    }
+
+    public function getPensiones(Room $room)
+    {
+        //
+        return response()->json([$room->precio_mp, $room->precio_pc, $room->precio_hd],200);
+    }
+
+    public function getServices(Room $room){
+        $servicios = [];
+        foreach($room->services as $service){
+            array_push($servicios,$service->pivot->service_id);
+        }
+        return response()->json($servicios, 200);
     }
 }

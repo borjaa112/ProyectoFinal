@@ -6,6 +6,7 @@ use App\Http\Controllers\BooksController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\HotelDirectionController;
 use App\Http\Controllers\HotelImageController;
+use App\Http\Controllers\ImagesRoomController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ServiceController;
@@ -44,7 +45,7 @@ Route::resource("/cuenta", AccountController::class);
 Route::resource("/direccion", HotelDirectionController::class)->parameters(["direccion" => "hotel_direction"]);
 
 Route::get("/search", [RoomController::class, "buscar"])->name("buscar");
-Route::resource("/habitacion", RoomController::class)->only(["create", "store", "edit"])->parameters(['habitacion' => 'room'])->middleware("auth:hotel");
+Route::resource("/habitacion", RoomController::class)->only(["create", "store", "edit", "update"])->parameters(['habitacion' => 'room'])->middleware("auth:hotel");
 Route::resource("/habitacion", RoomController::class)->only(["index", "show", "buscar"])->parameters(['habitacion' => 'room']);
 
 
@@ -56,7 +57,9 @@ Route::get("/test", function(){
 
 });
 
-Route::resource("/reservar", BooksController::class);
+Route::resource("/roomimage", ImagesRoomController::class)->parameters(["roomimage" => "images_room"]);
+
+Route::resource("/reservar", BooksController::class)->middleware("auth:client");
 
 
 Route::resource("/fill", ServiceController::class);

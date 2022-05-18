@@ -32,7 +32,7 @@
                         @method('delete')
                         <div class="d-block mb-4 h-100">
                             <div class="d-flex justify-content-end">
-                                <button class="btn btn-danger" type="submit" title="Eliminar" style="position:absolute;"><i
+                                <input class="btn btn-danger eliminar" type="submit" title="Eliminar"><i
                                         class="bi bi-trash"></i></button>
                             </div>
                             <img class="img-fluid img-thumbnail" src="/imgs/{{ $image->img_path }}">
