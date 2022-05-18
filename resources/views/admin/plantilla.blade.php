@@ -12,7 +12,7 @@
     @yield('head')
 </head>
 <body>
-    @include('partials.nav')
+    @include("partials.admin.nav")
     @yield('contenido')
     {{-- @include('partials.footer') --}}
 </body>

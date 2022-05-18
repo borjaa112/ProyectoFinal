@@ -46,14 +46,14 @@ class LoginController extends Controller
 
         }
 
-        if($request->typeUser === "admin"){
-            $admin = User::create([
-                'nombre' => $request->nombre,
-                'email' => $request->email,
-                'password' => Hash::make($request->password)
-            ]);
-            Auth::login($admin);
-        }
+        // if($request->typeUser === "admin"){
+        //     $admin = User::create([
+        //         'nombre' => $request->nombre,
+        //         'email' => $request->email,
+        //         'password' => Hash::make($request->password)
+        //     ]);
+        //     Auth::login($admin);
+        // }
 
 
         return redirect('/');
