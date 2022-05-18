@@ -67,10 +67,9 @@ Route::resource("/direccion-hotel", HotelDirectionController::class)->parameters
 Route::resource("/direccion-cliente", ClientDirectionController::class)->parameters(["direccion-cliente" => "client_direction"])->middleware("auth:client");
 
 
-
 Route::get("/search", [RoomController::class, "buscar"])->name("buscar");
-Route::resource("/habitacion", RoomController::class)->only(["create", "store", "edit", "update", "destroy"])->parameters(['habitacion' => 'room'])->middleware("auth:hotel");
 Route::resource("/habitacion", RoomController::class)->only(["index", "show", "buscar"])->parameters(['habitacion' => 'room']);
+Route::resource("/habitacion", RoomController::class)->only(["create", "store", "edit", "update", "destroy"])->parameters(['habitacion' => 'room'])->middleware(["auth:hotel,web"]);
 
 
 Route::resource("/hotel", HotelController::class);
@@ -88,3 +87,12 @@ Route::resource("/reservar", BooksController::class)->middleware("auth:client");
 
 Route::resource("/fill", ServiceController::class);
 
+// Route::group(["middleware" => ["auth:client"]], function(){
+//     Route::get("/middle", function(){
+//         return "hola";
+//     });
+// });
+
+// Route::get("/middle", function(){
+//     return "hola";
+// })->middleware("auth:client,hotel");

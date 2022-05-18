@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        @if (Auth::guard('hotel')->check())
+        @if (Auth::guard('hotel')->check() || Auth::guard("web")->check())
             <div class="row d-flex pt-2">
                 <div class="col d-flex justify-content-center">
                     <div class="col-2">

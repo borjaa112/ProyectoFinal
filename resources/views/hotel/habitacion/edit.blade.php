@@ -1,4 +1,4 @@
-@extends('hotel.plantilla')
+@extends(Auth::guard("hotel")->check() ? 'hotel.plantilla' : "admin.plantilla")
 @section("head")
 <script src="{{asset("js/hotel/habitacion/edit.js")}}" defer></script>
 @endsection
