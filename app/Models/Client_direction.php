@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Client_direction extends Model
 {
     use HasFactory;
+    public function client(){
+        return $this->hasOne(Client::class);
+    }
 }

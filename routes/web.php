@@ -48,7 +48,7 @@ Route::get("/direccion", function(){
     if(Auth::guard("hotel")->check()){
         return redirect(route("direccion-hotel.index"));
     }
-    if(Auth::guard("hotel")->check()){
+    if(Auth::guard("client")->check()){
         return redirect(route("direccion-cliente.index"));
     }
     else{

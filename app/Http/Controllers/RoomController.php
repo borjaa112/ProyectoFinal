@@ -42,7 +42,7 @@ class RoomController extends Controller
         $direccion = Hotel_direction::where("hotel_id", Auth::guard("hotel")->user()->id)->first();
         if (is_null($direccion)) {
             toast("Antes de crear una habitación es necesario que establezca su dirección", "error");
-            return redirect(route("direccion.create"));
+            return redirect(route("direccion-hotel.create"));
         }
         $servicios = Service::all();
         return view("hotel.habitacion.agregar", compact("servicios"));

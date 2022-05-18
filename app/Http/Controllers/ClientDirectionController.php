@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client_direction;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ClientDirectionController extends Controller
@@ -15,6 +16,13 @@ class ClientDirectionController extends Controller
     public function index()
     {
         //
+        $direccion = Client_direction::where("client_id", Auth::guard("client")->user()->id)->first();
+
+        if(is_null($direccion)){
+            return redirect(route("direccion-cliente.create"));
+        }
+
+        return view("cliente.direccion.index", compact("direccion"));
     }
 
     /**
@@ -25,6 +33,7 @@ class ClientDirectionController extends Controller
     public function create()
     {
         //
+        return view("cliente.direccion.create");
     }
 
     /**
@@ -36,6 +45,18 @@ class ClientDirectionController extends Controller
     public function store(Request $request)
     {
         //
+        $direccion = new Client_direction();
+        $direccion -> client_id = Auth::guard("client")->user()->id;
+        $direccion -> calle = $request->get("calle");
+        $direccion -> patio = $request->get("patio");
+        $direccion -> puerta = $request->get("puerta");
+        $direccion -> ciudad = $request->get("ciudad");
+        $direccion -> cod_postal = $request->get("cod_postal");
+        $direccion -> pais = "ES";
+        $direccion -> provincia = $request->get("provincia");
+        $direccion -> save();
+        toast("Direccion añadida correctamente", "success");
+        return redirect(route("direccion-cliente.index"));
     }
 
     /**
@@ -58,6 +79,7 @@ class ClientDirectionController extends Controller
     public function edit(Client_direction $client_direction)
     {
         //
+        return view("cliente.direccion.edit", compact("client_direction"));
     }
 
     /**
@@ -70,6 +92,14 @@ class ClientDirectionController extends Controller
     public function update(Request $request, Client_direction $client_direction)
     {
         //
+        $client_direction -> calle = $request->get("calle");
+        $client_direction -> patio = $request->get("patio");
+        $client_direction -> puerta = $request->get("puerta");
+        $client_direction -> cod_postal = $request->get("cod_postal");
+        $client_direction -> provincia = $request->get("provincia");
+        $client_direction -> ciudad = $request->get("ciudad");
+        $client_direction->save();
+        return back()->with("info", "Dirección actualizada con éxito");
     }
 
     /**

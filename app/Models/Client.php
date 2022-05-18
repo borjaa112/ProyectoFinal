@@ -44,4 +44,7 @@ class Client extends Authenticatable
     public function rooms(){
         return $this->belongsToMany(Room::class);
     }
+    public function client_direcion(){
+        return $this->belongsTo("client_direction");
+    }
 }

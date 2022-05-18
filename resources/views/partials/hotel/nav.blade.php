@@ -23,6 +23,8 @@
                             data-bs-toggle="dropdown" aria-expanded="false"> Mi cuenta </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{{ route("cuenta.index") }}">Mi perfil</a></li>
+                            <li><a class="dropdown-item" href="{{ route("direccion-hotel.index") }}">Dirección</a></li>
+
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
