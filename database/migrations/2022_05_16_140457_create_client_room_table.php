@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('client_room', function (Blueprint $table) {
-            $table->foreignId("room_id")->constrained();
+            $table->foreignId("room_id")->nullable()->constrained()->nullOnDelete();
             $table->foreignId("client_id")->constrained();
             $table->integer("id")->autoIncrement();
             $table->unique(['room_id', 'client_id', "id"], 'claves_ajenas');

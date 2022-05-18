@@ -48,10 +48,23 @@
             </div>
         </div>
         @if (Auth::guard('hotel')->check())
-            <div class="d-flex justify-content-center pt-2">
-                <a href="{{ route('habitacion.edit', $room) }}">
-                    <button type="button" class="btn btn-danger">Editar habitacion</button>
-                </a>
+            <div class="row d-flex pt-2">
+                <div class="col d-flex justify-content-center">
+                    <div class="col-2">
+                        <a href="{{ route('habitacion.edit', $room) }}">
+                            <button type="button" class="btn btn-info">Editar habitacion</button>
+                        </a>
+                    </div>
+                    <div class="col-auto">
+                        <form action="{{ route('habitacion.destroy', $room) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger">Eliminar habitación</button>
+                        </form>
+                    </div>
+
+                </div>
+
             </div>
         @endif
         <a href="{{ route('hotel.show', $room->hotel) }}">
