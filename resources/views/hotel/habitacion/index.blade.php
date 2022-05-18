@@ -1,4 +1,4 @@
-@extends(Auth::guard('hotel')->check() ? 'hotel.plantilla' : 'cliente.plantilla')
+@extends((Auth::guard('hotel')->check() ? 'hotel.plantilla' : Auth::guard('web')->check()) ? 'admin.plantilla' : 'cliente.plantilla')
 @section('head')
     <link rel="stylesheet" href="{{ asset('css/hotel/habitacion/index.css') }}">
 @endsection
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        @if (Auth::guard('hotel')->check() || Auth::guard("web")->check())
+        @if (Auth::guard('hotel')->check() || Auth::guard('web')->check())
             <div class="row d-flex pt-2">
                 <div class="col d-flex justify-content-center">
                     <div class="col-2">

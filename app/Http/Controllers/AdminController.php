@@ -36,4 +36,8 @@ class AdminController extends Controller
             return back()->with("error", "las credenciales introducidas no son correctas");
         }
     }
+
+    public function dashboard(){
+        return  view("admin.dashboard");
+    }
 }

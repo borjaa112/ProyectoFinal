@@ -96,3 +96,7 @@ Route::resource("/fill", ServiceController::class);
 // Route::get("/middle", function(){
 //     return "hola";
 // })->middleware("auth:client,hotel");
+
+Route::group(["middleware" => ["auth:web"]], function(){
+    Route::get("/admin/dashboard", [AdminController::class, "dashboard"])->name("dashboard");
+});

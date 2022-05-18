@@ -13,7 +13,7 @@
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Dashboard Admin</a>
+                        <a class="nav-link" aria-current="page" href="{{route("dashboard")}}">Dashboard Admin</a>
                       </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
