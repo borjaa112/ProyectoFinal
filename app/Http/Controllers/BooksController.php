@@ -35,6 +35,8 @@ class BooksController extends Controller
         $fecha_salida = $fecha_salida->addDays($noches);
         $fecha_salida = $fecha_salida->format("d-m-Y");
 
+        // $noches = $noches-1;
+
         return view("reservas.pago", compact("habitacion", "fecha_entrada", "fecha_salida", "noches"));
     }
 
@@ -48,7 +50,7 @@ class BooksController extends Controller
     {
         //
         $client = Client::findOrFail(Auth::guard("client")->user()->id);
-        $client->rooms()->attach($request->get("room_id"), ["precio" => $request->get("precio_form"), "tipo_pension" => $request->get("pension_form"), "fecha" => $request->get("fecha_form"), "num_noches" => $request->get("noches_form")]);
+        $client->rooms()->attach($request->get("room_id"), ["precio" => $request->get("precio_form"), "tipo_pension" => $request->get("pension_form"), "fecha_entrada" => $request->get("fecha_entrada_form"),"fecha_salida" => Carbon::parse($request->get("fecha_salida_form"))->format("Y/m/d"), "num_noches" => $request->get("noches_form")]);
     }
 
     /**

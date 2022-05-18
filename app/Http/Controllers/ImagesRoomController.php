@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Images_room;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -83,5 +84,8 @@ class ImagesRoomController extends Controller
     public function destroy(Images_room $images_room)
     {
         //
+        $images_room->delete();
+        toast("Imagen eliminada correctamente", "success");
+        return back();
     }
 }

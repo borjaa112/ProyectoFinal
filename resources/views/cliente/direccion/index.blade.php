@@ -1,4 +1,4 @@
-@extends("hotel.plantilla");
+@extends("cliente.plantilla")
 @section('contenido')
     <div class="container">
         <div class="card text-dark bg-light mb-3"">
@@ -19,14 +19,14 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td>{{$direccion[0]->calle}}</td>
-                        <td>{{$direccion[0]->patio}}</td>
-                        <td>{{$direccion[0]->puerta}}</td>
-                        <td>{{$direccion[0]->cod_postal}}</td>
-                        <td>{{$direccion[0]->provincia}}</td>
-                        <td>{{$direccion[0]->ciudad}}</td>
-                        <td>{{$direccion[0]->pais}}</td>
-                        <td><a href="{{route("direccion-hotel.edit", $direccion[0])}}"><i class="bi bi-pencil-square"></i></a></td>
+                        <td>{{$direccion->calle}}</td>
+                        <td>{{$direccion->patio}}</td>
+                        <td>{{$direccion->puerta}}</td>
+                        <td>{{$direccion->cod_postal}}</td>
+                        <td>{{$direccion->provincia}}</td>
+                        <td>{{$direccion->ciudad}}</td>
+                        <td>{{$direccion->pais}}</td>
+                        <td><a href="{{route("direccion-cliente.edit", $direccion)}}"><i class="bi bi-pencil-square"></i></a></td>
                       </tr>
                     </tbody>
                   </table>

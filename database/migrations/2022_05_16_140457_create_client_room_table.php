@@ -14,13 +14,14 @@ return new class extends Migration
     public function up()
     {
         Schema::create('client_room', function (Blueprint $table) {
-            $table->foreignId("room_id")->constrained();
+            $table->foreignId("room_id")->nullable()->constrained()->nullOnDelete();
             $table->foreignId("client_id")->constrained();
-            $table->unique(['room_id', 'client_id'], 'claves_ajenas');
             $table->integer("id")->autoIncrement();
+            $table->unique(['room_id', 'client_id', "id"], 'claves_ajenas');
             $table->double("precio");
             $table->string("tipo_pension");
-            $table->date("fecha");
+            $table->date("fecha_entrada");
+            $table->date("fecha_salida");
             $table->integer("num_noches");
         });
     }

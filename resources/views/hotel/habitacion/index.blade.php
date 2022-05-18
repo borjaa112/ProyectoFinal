@@ -1,4 +1,4 @@
-@extends(Auth::guard("hotel")->check() ? 'hotel.plantilla' : 'cliente.plantilla')
+@extends(Auth::guard('hotel')->check() ? 'hotel.plantilla' : 'cliente.plantilla')
 @section('head')
     <link rel="stylesheet" href="{{ asset('css/hotel/habitacion/index.css') }}">
 @endsection
@@ -47,6 +47,26 @@
                 </div>
             </div>
         </div>
+        @if (Auth::guard('hotel')->check() || Auth::guard("web")->check())
+            <div class="row d-flex pt-2">
+                <div class="col d-flex justify-content-center">
+                    <div class="col-2">
+                        <a href="{{ route('habitacion.edit', $room) }}">
+                            <button type="button" class="btn btn-info">Editar habitacion</button>
+                        </a>
+                    </div>
+                    <div class="col-auto">
+                        <form action="{{ route('habitacion.destroy', $room) }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger">Eliminar habitación</button>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        @endif
         <a href="{{ route('hotel.show', $room->hotel) }}">
             <div class="d-flex justify-content-center">
                 <button type="button" class="btn btn-info btn-lg col-6 mt-4">Ver información del hotel</button>

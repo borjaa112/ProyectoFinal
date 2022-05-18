@@ -1,9 +1,9 @@
-@extends("hotel.plantilla")
+@extends("cliente.plantilla")
 @section('contenido')
     <div class="container">
         <h2 class="text-center">Introduzca su direccion</h2>
         <div class="d-flex justify-content-center">
-            <form method="POST" class="col-6" action="{{route("direccion-hotel.store")}}">
+            <form method="POST" class="col-6" action="{{route("direccion-cliente.store")}}">
                 @method("POST")
                 @csrf
 

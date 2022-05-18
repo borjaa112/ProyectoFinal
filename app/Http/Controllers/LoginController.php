@@ -30,7 +30,7 @@ class LoginController extends Controller
                 'img_path' => "imgs/profile_imgs/hotel-default.png"
             ]);
             Auth::guard("hotel")->login($user);
-            return redirect(route("direccion.create"));
+            return redirect(route("direccion-hotel.create"));
 
         }
         //registro para cliente
@@ -45,6 +45,15 @@ class LoginController extends Controller
             Auth::guard("client")->login($user);
 
         }
+
+        // if($request->typeUser === "admin"){
+        //     $admin = User::create([
+        //         'nombre' => $request->nombre,
+        //         'email' => $request->email,
+        //         'password' => Hash::make($request->password)
+        //     ]);
+        //     Auth::login($admin);
+        // }
 
 
         return redirect('/');

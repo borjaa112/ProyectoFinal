@@ -4,7 +4,7 @@ sinPension.checked = true;
 
 let precio = document.body.querySelector("#precio");
 let precioOriginal = precio.textContent;
-let precio_form = document.body.querySelector("#precio_form");
+let precio_form = document.body.querySelector("#precio_form").value = precio.textContent;
 let pension_form = document.body.querySelector("#pension_form");
 let precioExtras = document.querySelector("#extras");
 let pensiones = document.body.querySelector(".pensiones");

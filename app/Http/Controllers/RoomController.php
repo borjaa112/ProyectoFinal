@@ -40,9 +40,9 @@ class RoomController extends Controller
     {
         //
         $direccion = Hotel_direction::where("hotel_id", Auth::guard("hotel")->user()->id)->first();
-        if(is_null($direccion)){
+        if (is_null($direccion)) {
             toast("Antes de crear una habitación es necesario que establezca su dirección", "error");
-            return redirect(route("direccion.create"));
+            return redirect(route("direccion-hotel.create"));
         }
         $servicios = Service::all();
         return view("hotel.habitacion.agregar", compact("servicios"));
@@ -58,30 +58,30 @@ class RoomController extends Controller
     {
         //
         $room = new Room();
-        $room -> hotel_id = Auth::guard('hotel')->user()->id;
-        $room -> precio_noche = $request->get('precio-noche');
-        $room -> precio_mp = $request->get("MP");
-        $room -> precio_pc = $request->get("PC");
-        $room -> precio_hd = $request->get("HD");
-        $room -> camas = $request->get('camas');
-        $room -> save();
+        $room->hotel_id = Auth::guard('hotel')->user()->id;
+        $room->precio_noche = $request->get('precio-noche');
+        $room->precio_mp = $request->get("MP");
+        $room->precio_pc = $request->get("PC");
+        $room->precio_hd = $request->get("HD");
+        $room->camas = $request->get('camas');
+        $room->save();
 
         $ruta = $request->file("imagenes");
         // $request->validate([
         //     'imagenes' => 'required',
         //     'imagenes.*' => 'mimes:jpeg,jpg,png,gif|max:2048'
         //   ]);
-        foreach ($ruta as $imagen){
+        foreach ($ruta as $imagen) {
             // return dd($imagen);
             $path = Storage::putFile("room_images", $imagen);
 
             $imagen = new Images_room();
-            $imagen -> room_id = $room -> id;
-            $imagen -> img_path = $path;
+            $imagen->room_id = $room->id;
+            $imagen->img_path = $path;
             $imagen->save();
         }
 
-        foreach ($request->input('servicios') as $servicio){
+        foreach ($request->input('servicios') as $servicio) {
             $room->services()->attach($servicio);
         }
 
@@ -113,6 +113,8 @@ class RoomController extends Controller
     public function edit(Room $room)
     {
         //
+        $servicios = Service::all();
+        return view("hotel.habitacion.edit", compact("room", "servicios"));
     }
 
     /**
@@ -125,6 +127,42 @@ class RoomController extends Controller
     public function update(Request $request, Room $room)
     {
         //
+        $room->precio_noche = $request->get("precio-noche");
+        $room->camas = $request->get("camas");
+
+        //esto borra todos los servicios
+        foreach (Service::get() as $servicio) {
+            $room->services()->detach($servicio);
+        }
+
+        //los vuelve a asignar
+        foreach ($request->input('servicios') as $servicio) {
+            $room->services()->attach($servicio);
+        }
+
+        $room->precio_mp = $request->get("MP");
+        $room->precio_pc = $request->get("PC");
+        $room->precio_hd = $request->get("HD");
+
+        $room->save();
+
+        //parte de la img
+
+
+        $ruta = $request->file("imagenes");
+        if ($ruta !== null) {
+            foreach ($ruta as $imagen) {
+                // return dd($imagen);
+                $path = Storage::putFile("room_images", $imagen);
+
+                $imagen = new Images_room();
+                $imagen->room_id = $room->id;
+                $imagen->img_path = $path;
+                $imagen->save();
+            }
+        }
+        return back();
+
     }
 
     /**
@@ -136,10 +174,19 @@ class RoomController extends Controller
     public function destroy(Room $room)
     {
         //
+        $room->delete();
+        return back();
     }
 
-    public function buscar(searchRequest $request){
+    public function buscar(searchRequest $request)
+    {
         $hoteles = Hotel::whereRelation("hotel_directions", "ciudad", $request->get("input_ciudad"))->get();
+        // $habitaciones = Room::get();
+        // foreach ($habitaciones as $habitacion) {
+        //     foreach($habitacion->clients as $pvot){
+        //         return $pvot->pivot;
+        //     }
+        // }
         return view("cliente.busqueda.index", compact("hoteles", "request"));
     }
 }

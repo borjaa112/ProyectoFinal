@@ -16,6 +16,9 @@ class IndexController extends Controller
             // return dd(Auth::guard("hotel")->user());
             return view("hotel.index", compact("habitaciones"));
         }
+        if(Auth::user()){
+            return view("admin.index", compact("habitaciones"));
+        }
         if(Auth::guard('client')->check() || !Auth::user()){
             return view("cliente.index", compact("habitaciones"));
         }

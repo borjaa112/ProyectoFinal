@@ -64,10 +64,11 @@
         <form action="{{route("reservar.store")}}" method="POST">
             @csrf
             <input name="room_id" value="{{ $habitacion->id }}" hidden>
-            <input type="date" name="fecha_form" value="{{$fecha_entrada}}" hidden>
+            <input type="date" name="fecha_entrada_form" value="{{$fecha_entrada}}" hidden>
+            <input type="text" name="fecha_salida_form" value="{{$fecha_salida}}" hidden>
             <input type="text" name="noches_form" value="{{$noches}}" hidden>
             <input name="precio_form" id="precio_form" hidden>
-            <input name="pension_form" id="pension_form" hidden>
+            <input name="pension_form" id="pension_form" value="SP" hidden>
             <button type="submit" class="btn btn-info">Pagar</button>
 
         </form>
