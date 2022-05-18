@@ -3,6 +3,7 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\ClientDirectionController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\HotelDirectionController;
 use App\Http\Controllers\HotelImageController;
@@ -42,7 +43,23 @@ Route::get("/home", function(){
 });
 
 Route::resource("/cuenta", AccountController::class);
-Route::resource("/direccion", HotelDirectionController::class)->parameters(["direccion" => "hotel_direction"]);
+
+Route::get("/direccion", function(){
+    if(Auth::guard("hotel")->check()){
+        return redirect(route("direccion-hotel.index"));
+    }
+    if(Auth::guard("hotel")->check()){
+        return redirect(route("direccion-cliente.index"));
+    }
+    else{
+        return redirect(route("inicio"));
+    }
+});
+
+Route::resource("/direccion-hotel", HotelDirectionController::class)->parameters(["direccion-hotel" => "hotel_direction"])->middleware("auth:hotel");
+Route::resource("/direccion-cliente", ClientDirectionController::class)->parameters(["direccion-cliente" => "client_direction"])->middleware("auth:client");
+
+
 
 Route::get("/search", [RoomController::class, "buscar"])->name("buscar");
 Route::resource("/habitacion", RoomController::class)->only(["create", "store", "edit", "update", "destroy"])->parameters(['habitacion' => 'room'])->middleware("auth:hotel");

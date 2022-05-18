@@ -26,7 +26,7 @@
                         <td>{{$direccion[0]->provincia}}</td>
                         <td>{{$direccion[0]->ciudad}}</td>
                         <td>{{$direccion[0]->pais}}</td>
-                        <td><a href="{{route("direccion.edit", $direccion[0])}}"><i class="bi bi-pencil-square"></i></a></td>
+                        <td><a href="{{route("direccion-hotel.edit", $direccion[0])}}"><i class="bi bi-pencil-square"></i></a></td>
                       </tr>
                     </tbody>
                   </table>
