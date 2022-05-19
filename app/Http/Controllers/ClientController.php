@@ -81,5 +81,8 @@ class ClientController extends Controller
     public function destroy(Client $client)
     {
         //
+        $client->delete();
+        toast('Usuario eliminado!','info');
+        return back();
     }
 }

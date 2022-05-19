@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -39,5 +40,22 @@ class AdminController extends Controller
 
     public function dashboard(){
         return  view("admin.dashboard");
+    }
+
+    public function administrar_usuarios(){
+        $clientes = Client::get();
+        return view("admin.usuarios.index", compact("clientes"));
+    }
+
+    public function administrar_hoteles(){
+
+    }
+
+    public function administrar_habitaciones(){
+
+    }
+
+    public function ver_reservas(){
+
     }
 }

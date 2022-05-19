@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientDirectionController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\HotelDirectionController;
@@ -97,6 +98,11 @@ Route::resource("/fill", ServiceController::class);
 //     return "hola";
 // })->middleware("auth:client,hotel");
 
+Route::resource("/cliente", ClientController::class)->only(("destroy"))->parameters(["cliente" => "client"]);
 Route::group(["middleware" => ["auth:web"]], function(){
     Route::get("/admin/dashboard", [AdminController::class, "dashboard"])->name("dashboard");
+    Route::get("/admin/usuarios", [AdminController::class, "administrar_usuarios"])->name("administrar_usuarios");
+    Route::get("/admin/hoteles", [AdminController::class, "administrar_hoteles"])->name("administrar_hoteles");
+    Route::get("/admin/habitaciones", [AdminController::class, "administrar_habitaciones"])->name("administrar_habitaciones");
+    Route::get("/admin/reservas", [AdminController::class, "ver_reservas"])->name("ver_reservas");
 });
