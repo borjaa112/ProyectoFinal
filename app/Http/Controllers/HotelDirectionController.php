@@ -52,7 +52,7 @@ class HotelDirectionController extends Controller
         $direccion -> provincia = $request->get("provincia");
         $direccion -> save();
         toast("Direccion añadida correctamente", "success");
-        return redirect(route("direccion.index"));
+        return redirect(route("direccion-hotel.index"));
     }
 
     /**

@@ -86,5 +86,8 @@ class HotelController extends Controller
     public function destroy(Hotel $hotel)
     {
         //
+        $hotel->delete();
+        toast("Hotel eliminado con éxito!", "info");
+        return back();
     }
 }

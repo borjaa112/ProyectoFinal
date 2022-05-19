@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('hotel_directions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("hotel_id")->constrained();
+            $table->foreignId("hotel_id")->constrained()->cascadeOnDelete();
             $table->string("calle");
             $table->string("patio")->nullable();
             $table->string("puerta");

@@ -9,6 +9,6 @@ class Hotel_direction extends Model
 {
     use HasFactory;
     public function hotel(){
-        return $this->belongsTo(Hotel::class);
+        return $this->hasMany(Hotel::class);
     }
 }

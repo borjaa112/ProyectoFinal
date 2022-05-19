@@ -99,6 +99,7 @@ Route::resource("/fill", ServiceController::class);
 // })->middleware("auth:client,hotel");
 
 Route::resource("/cliente", ClientController::class)->only(("destroy"))->parameters(["cliente" => "client"]);
+
 Route::group(["middleware" => ["auth:web"]], function(){
     Route::get("/admin/dashboard", [AdminController::class, "dashboard"])->name("dashboard");
     Route::get("/admin/usuarios", [AdminController::class, "administrar_usuarios"])->name("administrar_usuarios");
