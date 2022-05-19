@@ -21,6 +21,12 @@ use function PHPUnit\Framework\isNull;
 
 class RoomController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(["auth:hotel,web"], ["except" => [
+            "index", "show", "buscar"
+        ]]);
+    }
     /**
      * Display a listing of the resource.
      *

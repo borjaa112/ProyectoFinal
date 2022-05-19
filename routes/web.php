@@ -69,8 +69,9 @@ Route::resource("/direccion-cliente", ClientDirectionController::class)->paramet
 
 
 Route::get("/search", [RoomController::class, "buscar"])->name("buscar");
-Route::resource("/habitacion", RoomController::class)->only(["index", "show", "buscar"])->parameters(['habitacion' => 'room']);
-Route::resource("/habitacion", RoomController::class)->only(["create", "store", "edit", "update", "destroy"])->parameters(['habitacion' => 'room'])->middleware(["auth:hotel,web"]);
+// Route::resource("/habitacion", RoomController::class)->only(["index", "show", "buscar"])->parameters(['habitacion' => 'room']);
+// Route::resource("/habitacion", RoomController::class)->only(["create", "store", "edit", "update", "destroy"])->parameters(['habitacion' => 'room'])->middleware(["auth:hotel,web"]);
+Route::resource("/habitacion", RoomController::class)->parameters(['habitacion' => 'room']);
 
 
 Route::resource("/hotel", HotelController::class);
