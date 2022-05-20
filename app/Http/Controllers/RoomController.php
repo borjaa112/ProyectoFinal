@@ -195,25 +195,35 @@ class RoomController extends Controller
         $habitaciones = Room::get();
         $rooms = array();
         foreach ($habitaciones as $habitacion) {
+            $valida = count($habitacion->clients);
+
+            // return $habitacion->clients;
             if($habitacion->clients->isEmpty()){
                 $rooms[] = $habitacion;
                 continue;
             }
             foreach($habitacion->clients as $client_room){
-                $valida = true;
+                // return $habitacion->clients;
                 //$client_room->pivot->fecha_entrada
                 if($request->fecha_entrada >= $client_room->pivot->fecha_entrada && $fecha_salida < $client_room->pivot->fecha_salida){
-                    $valida = false;
+                    $valida -= 1;
                 }
                 if(Carbon::createFromFormat("Y-m-d", $client_room->pivot->fecha_entrada)->between(Carbon::createFromFormat("Y-m-d",$request->fecha_entrada), $fecha_salida)){
-                    $valida = false;
+                    // return $client_room->pivot->fecha_entrada." - - -".$request->fecha_entrada."---".$fecha_salida;
+                    $valida -= 1;
                 }
-                if($valida){
-                    $rooms[] = $habitacion;
-                }
+
+                // if($valida == count($habitacion->clients)){
+
+                //     $rooms[] = $habitacion;
+                // }
                 // return $client_room->pivot;
             }
             // return $rooms;
+            if($valida == count($habitacion->clients)){
+
+                $rooms[] = $habitacion;
+            }
         }
 
         // ------------------------------
