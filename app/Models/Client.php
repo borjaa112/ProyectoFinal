@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Room;
 use Laravel\Sanctum\HasApiTokens;
 
 class Client extends Authenticatable
@@ -41,10 +42,12 @@ class Client extends Authenticatable
     //     'email_verified_at' => 'datetime',
     // ];
 
-    public function rooms(){
-        return $this->belongsToMany(Room::class);
+    public function rooms()
+    {
+        return $this->belongsToMany(Room::class)->withPivot("id", "precio", "tipo_pension", "fecha_entrada", "fecha_salida", "num_noches");
     }
-    public function client_direcion(){
+    public function client_direcion()
+    {
         return $this->belongsTo("client_direction");
     }
 }
