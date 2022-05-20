@@ -18,14 +18,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($reservas as $reserva)
-                    @foreach ($reserva->rooms as $habitaciones_reservadas)
-                        {{$habitaciones_reservadas->pivot}}
+                @foreach ($clientes as $cliente)
+                    @foreach($cliente->rooms() as $habitacion)
+                        {{$cliente->nombre." ".$cliente->apellidos}}<br>
+                        {{$cliente->pivot}} 
                     @endforeach
-                    <th>
-
-                        <td>sw</td>
-                    </th>
                 @endforeach
             </tbody>
         </table>

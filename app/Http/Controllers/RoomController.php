@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Room_service;
 use App\Models\Room_services;
 use App\Models\Service;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\isNull;
@@ -186,13 +187,38 @@ class RoomController extends Controller
 
     public function buscar(searchRequest $request)
     {
-        $hoteles = Hotel::whereRelation("hotel_directions", "ciudad", $request->get("input_ciudad"))->get();
-        // $habitaciones = Room::get();
-        // foreach ($habitaciones as $habitacion) {
-        //     foreach($habitacion->clients as $pvot){
-        //         return $pvot->pivot;
-        //     }
-        // }
-        return view("cliente.busqueda.index", compact("hoteles", "request"));
+        // return $request;
+        $noches = $request->fecha_salida;
+        $fecha_salida = Carbon::createFromFormat('Y-m-d', $request->fecha_entrada);
+        $fecha_salida = $fecha_salida->addDays($noches);
+        // return $fecha_salida;
+        $habitaciones = Room::get();
+        $rooms = array();
+        foreach ($habitaciones as $habitacion) {
+            if($habitacion->clients->isEmpty()){
+                $rooms[] = $habitacion;
+                continue;
+            }
+            foreach($habitacion->clients as $client_room){
+                $valida = true;
+                //$client_room->pivot->fecha_entrada
+                if($request->fecha_entrada >= $client_room->pivot->fecha_entrada && $fecha_salida < $client_room->pivot->fecha_salida){
+                    $valida = false;
+                }
+                if(Carbon::createFromFormat("Y-m-d", $client_room->pivot->fecha_entrada)->between(Carbon::createFromFormat("Y-m-d",$request->fecha_entrada), $fecha_salida)){
+                    $valida = false;
+                }
+                if($valida){
+                    $rooms[] = $habitacion;
+                }
+                // return $client_room->pivot;
+            }
+            // return $rooms;
+        }
+
+        // ------------------------------
+        // $hoteles = Hotel::whereRelation("hotel_directions", "ciudad", $request->get("input_ciudad"))->get();
+        // return $hoteles;
+        return view("cliente.busqueda.index", compact("request", "rooms"));
     }
 }
