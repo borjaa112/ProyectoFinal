@@ -212,6 +212,10 @@ class RoomController extends Controller
                     // return $client_room->pivot->fecha_entrada." - - -".$request->fecha_entrada."---".$fecha_salida;
                     $valida -= 1;
                 }
+                if(Carbon::createFromFormat("Y-m-d", $client_room->pivot->fecha_salida)->between(Carbon::createFromFormat("Y-m-d",$request->fecha_entrada), $fecha_salida)){
+                    // return $client_room->pivot->fecha_entrada." - - -".$request->fecha_entrada."---".$fecha_salida;
+                    $valida -= 1;
+                }
 
                 // if($valida == count($habitacion->clients)){
 
