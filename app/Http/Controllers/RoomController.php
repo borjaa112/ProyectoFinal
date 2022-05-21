@@ -187,7 +187,6 @@ class RoomController extends Controller
 
     public function buscar(searchRequest $request)
     {
-        // return $request;
         $noches = $request->fecha_salida;
 
         $mi_fecha_salida = Carbon::createFromFormat('Y-m-d', $request->fecha_entrada);
@@ -195,43 +194,39 @@ class RoomController extends Controller
 
         $mi_fecha_entrada = Carbon::createFromFormat("Y-m-d", $request->fecha_entrada);
 
-        // return $fecha_salida;
-        $habitaciones = Room::get();
+        // $habitaciones = Room::get();
+        $hoteles = Hotel::with("rooms")->whereRelation("hotel_directions", "ciudad", $request->get("input_ciudad"))->get();
+
         $rooms = array();
-        foreach ($habitaciones as $habitacion) {
-            $valida = count($habitacion->clients);
 
-            // return $habitacion->clients;
-            if($habitacion->clients->isEmpty()){
-                $rooms[] = $habitacion;
-                continue;
-            }
-            foreach($habitacion->clients as $client_room){
-                $res_fecha_entrada = Carbon::createFromFormat('Y-m-d', $client_room->pivot->fecha_entrada);
-                $res_fecha_salida = Carbon::createFromFormat('Y-m-d', $client_room->pivot->fecha_salida);
-
-                /*inicio de validaciones*/
-
-                // if($mi_fecha_entrada->betweenExcluded($res_fecha_entrada, $res_fecha_salida) || ($mi_fecha_entrada->eq($res_fecha_entrada))){
-                //     $valida -=1;
-                // }
-                // if($mi_fecha_salida->betweenExcluded($res_fecha_entrada, $res_fecha_salida)){
-                //     $valida -=1;
-                // }
-
-                if($res_fecha_entrada->betweenExcluded($mi_fecha_entrada, $mi_fecha_salida) || $res_fecha_entrada->eq($mi_fecha_entrada)){
-                    $valida -=1;
+        foreach ($hoteles as $hotel){
+            foreach ($hotel->rooms as $habitacion) {
+                $valida = count($habitacion->clients);
+                // return $habitacion->hotel->hotel_directions;
+                if($habitacion->clients->isEmpty()){
+                    $rooms[] = $habitacion;
+                    continue;
                 }
-                if($res_fecha_salida->betweenExcluded($mi_fecha_entrada, $mi_fecha_salida) || $res_fecha_salida->eq($mi_fecha_salida)){
-                    $valida -=1;
-                }
-            }
-            // return $rooms;
-            if($valida == count($habitacion->clients)){
+                foreach($habitacion->clients as $client_room){
+                    $res_fecha_entrada = Carbon::createFromFormat('Y-m-d', $client_room->pivot->fecha_entrada);
+                    $res_fecha_salida = Carbon::createFromFormat('Y-m-d', $client_room->pivot->fecha_salida);
 
-                $rooms[] = $habitacion;
+                    /*inicio de validaciones*/
+
+                    if($res_fecha_entrada->betweenExcluded($mi_fecha_entrada, $mi_fecha_salida) || $res_fecha_entrada->eq($mi_fecha_entrada)){
+                        $valida -=1;
+                    }
+                    if($res_fecha_salida->betweenExcluded($mi_fecha_entrada, $mi_fecha_salida) || $res_fecha_salida->eq($mi_fecha_salida)){
+                        $valida -=1;
+                    }
+                }
+                if($valida == count($habitacion->clients)){
+
+                    $rooms[] = $habitacion;
+                }
             }
         }
+
 
         // ------------------------------
         // $hoteles = Hotel::whereRelation("hotel_directions", "ciudad", $request->get("input_ciudad"))->get();
