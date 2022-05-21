@@ -189,8 +189,12 @@ class RoomController extends Controller
     {
         // return $request;
         $noches = $request->fecha_salida;
-        $fecha_salida = Carbon::createFromFormat('Y-m-d', $request->fecha_entrada);
-        $fecha_salida = $fecha_salida->addDays($noches);
+
+        $mi_fecha_salida = Carbon::createFromFormat('Y-m-d', $request->fecha_entrada);
+        $mi_fecha_salida = $mi_fecha_salida->addDays($noches);
+
+        $mi_fecha_entrada = Carbon::createFromFormat("Y-m-d", $request->fecha_entrada);
+
         // return $fecha_salida;
         $habitaciones = Room::get();
         $rooms = array();
@@ -203,25 +207,24 @@ class RoomController extends Controller
                 continue;
             }
             foreach($habitacion->clients as $client_room){
-                // return $habitacion->clients;
-                //$client_room->pivot->fecha_entrada
-                if($request->fecha_entrada >= $client_room->pivot->fecha_entrada && $fecha_salida < $client_room->pivot->fecha_salida){
-                    $valida -= 1;
-                }
-                if(Carbon::createFromFormat("Y-m-d", $client_room->pivot->fecha_entrada)->between(Carbon::createFromFormat("Y-m-d",$request->fecha_entrada), $fecha_salida)){
-                    // return $client_room->pivot->fecha_entrada." - - -".$request->fecha_entrada."---".$fecha_salida;
-                    $valida -= 1;
-                }
-                if(Carbon::createFromFormat("Y-m-d", $client_room->pivot->fecha_salida)->between(Carbon::createFromFormat("Y-m-d",$request->fecha_entrada), $fecha_salida)){
-                    // return $client_room->pivot->fecha_entrada." - - -".$request->fecha_entrada."---".$fecha_salida;
-                    $valida -= 1;
-                }
+                $res_fecha_entrada = Carbon::createFromFormat('Y-m-d', $client_room->pivot->fecha_entrada);
+                $res_fecha_salida = Carbon::createFromFormat('Y-m-d', $client_room->pivot->fecha_salida);
 
-                // if($valida == count($habitacion->clients)){
+                /*inicio de validaciones*/
 
-                //     $rooms[] = $habitacion;
+                // if($mi_fecha_entrada->betweenExcluded($res_fecha_entrada, $res_fecha_salida) || ($mi_fecha_entrada->eq($res_fecha_entrada))){
+                //     $valida -=1;
                 // }
-                // return $client_room->pivot;
+                // if($mi_fecha_salida->betweenExcluded($res_fecha_entrada, $res_fecha_salida)){
+                //     $valida -=1;
+                // }
+
+                if($res_fecha_entrada->betweenExcluded($mi_fecha_entrada, $mi_fecha_salida) || $res_fecha_entrada->eq($mi_fecha_entrada)){
+                    $valida -=1;
+                }
+                if($res_fecha_salida->betweenExcluded($mi_fecha_entrada, $mi_fecha_salida) || $res_fecha_salida->eq($mi_fecha_salida)){
+                    $valida -=1;
+                }
             }
             // return $rooms;
             if($valida == count($habitacion->clients)){
