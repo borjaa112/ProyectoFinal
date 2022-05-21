@@ -98,7 +98,7 @@
                 </div>
             </div>
             <div class="row d-flex justify-content-evenly">
-                <div class="col-auto"><button type="submit" class="btn btn-primary">Publicar</button></div>
+                <div class="col-auto"><button type="submit" class="btn btn-primary">Guardar Cambios</button></div>
             </div>
         </form>
         <div class="row">

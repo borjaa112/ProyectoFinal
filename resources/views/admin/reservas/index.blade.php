@@ -19,11 +19,20 @@
             </thead>
             <tbody>
                 @foreach ($clientes as $cliente)
-                    @foreach($cliente->rooms() as $habitacion)
-                        {{$cliente->nombre." ".$cliente->apellidos}}<br>
-                        {{$cliente->pivot}} 
+                    @foreach ($cliente->rooms as $habitacion)
+                        <tr>
+                            <td>
+                                {{ $cliente->nombre . ' ' . $cliente->apellidos }}<br>
+                            </td>
+                            <td>{{$habitacion->hotel->nombre}}</td>
+                            <td>{{$habitacion->pivot->precio}}€</td>
+                            <td>{{$habitacion->pivot->tipo_pension}}</td>
+                            <td>{{$habitacion->pivot->fecha_entrada}}</td>
+                            <td>{{$habitacion->pivot->fecha_salida}}</td>
+                        </tr>
                     @endforeach
                 @endforeach
+
             </tbody>
         </table>
     </div>

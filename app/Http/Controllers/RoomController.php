@@ -188,13 +188,10 @@ class RoomController extends Controller
     public function buscar(searchRequest $request)
     {
         $noches = $request->fecha_salida;
-
         $mi_fecha_salida = Carbon::createFromFormat('Y-m-d', $request->fecha_entrada);
         $mi_fecha_salida = $mi_fecha_salida->addDays($noches);
 
         $mi_fecha_entrada = Carbon::createFromFormat("Y-m-d", $request->fecha_entrada);
-
-        // $habitaciones = Room::get();
         $hoteles = Hotel::with("rooms")->whereRelation("hotel_directions", "ciudad", $request->get("input_ciudad"))->get();
 
         $rooms = array();
@@ -202,7 +199,6 @@ class RoomController extends Controller
         foreach ($hoteles as $hotel){
             foreach ($hotel->rooms as $habitacion) {
                 $valida = count($habitacion->clients);
-                // return $habitacion->hotel->hotel_directions;
                 if($habitacion->clients->isEmpty()){
                     $rooms[] = $habitacion;
                     continue;
@@ -226,11 +222,6 @@ class RoomController extends Controller
                 }
             }
         }
-
-
-        // ------------------------------
-        // $hoteles = Hotel::whereRelation("hotel_directions", "ciudad", $request->get("input_ciudad"))->get();
-        // return $hoteles;
         return view("cliente.busqueda.index", compact("request", "rooms"));
     }
 }

@@ -32,7 +32,7 @@
                         @method('delete')
                         <div class="d-block mb-4 h-100">
                             <div class="d-flex justify-content-end">
-                                <input class="btn btn-danger eliminar" type="submit" title="Eliminar"><i
+                                <button class="btn btn-danger eliminar" type="submit" title="Eliminar"><i
                                         class="bi bi-trash"></i></button>
                             </div>
                             <img class="img-fluid img-thumbnail" src="/imgs/{{ $image->img_path }}">
@@ -42,5 +42,6 @@
             @endforeach
 
         </div>
+        *Las imágenes añadidas son visibles por los clientes, puede ver su perfil de hotel clicando  <a href="{{route("hotel.show", Auth::guard("hotel")->user())}}">aquí</a>
     </div>
 @endsection
