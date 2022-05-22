@@ -13,7 +13,7 @@
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Administrar reservas</a>
+                        <a class="nav-link" aria-current="page" href="{{route("reservas")}}">Administrar reservas</a>
                       </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{route('habitacion.create')}}">Añadir habitación</a>

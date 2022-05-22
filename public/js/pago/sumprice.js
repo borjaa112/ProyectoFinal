@@ -13,8 +13,8 @@ pensiones.onchange = changePrice;
 
 async function changePrice(event){
     let precioExtra = await requestPrice(event.target.value);
-    precio.textContent = parseInt(precioOriginal) + parseInt(precioExtra);
-    precio_form.value = parseInt(precioOriginal) + parseInt(precioExtra);
+    precio.textContent = parseFloat(precioOriginal) + parseFloat(precioExtra);
+    precio_form.value = parseFloat(precioOriginal) + parseFloat(precioExtra);
     precioExtras.textContent = precioExtra;
 
     pension_form.value = event.target.value;

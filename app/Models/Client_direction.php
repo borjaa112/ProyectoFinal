@@ -9,6 +9,6 @@ class Client_direction extends Model
 {
     use HasFactory;
     public function client(){
-        return $this->hasOne(Client::class);
+        return $this->hasMany(Client::class);
     }
 }

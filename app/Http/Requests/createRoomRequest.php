@@ -25,7 +25,7 @@ class createRoomRequest extends FormRequest
     {
         return [
             //
-            'precio-noche' => 'required|numeric',
+            'precio-noche' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             // 'imagenes' => ['imageFile' => 'image'],
             'imagenes' => 'required',
             'imagenes.*' => 'image',

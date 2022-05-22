@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Hotel;
 use App\Models\Client;
+use App\Models\User;
 use App\Models\Hotel_direction;
 use App\Models\Service;
 use App\Models\Images_room;
@@ -32,6 +33,9 @@ class AccountController extends Controller
         }
         if (Auth::guard("client")->check()) {
             return view("cliente.cuenta.perfil");
+        }
+        if(Auth::user()){
+            return view("admin.cuenta.perfil");
         }
     }
 
@@ -135,6 +139,12 @@ class AccountController extends Controller
 
             $client->save();
         }
+        if(Auth::user()){
+            $admin = User::findOrFail($id);
+            $admin -> nombre = $request->nombre;
+            $admin -> email = $request->email;
+            $admin->save();
+        }
         toast('Datos actualizados correctamente', 'success');
         return redirect(route("cuenta.index"));
     }
@@ -176,6 +186,11 @@ class AccountController extends Controller
             $hotel = Hotel::find($id);
             $hotel->delete();
             toast("Cuenta eliminada con exito", "success");
+            return view("inicio");
+        }
+        if(Auth::user()){
+            $admin = User::findOrFail($id);
+            $admin->delete();
             return view("inicio");
         }
     }
