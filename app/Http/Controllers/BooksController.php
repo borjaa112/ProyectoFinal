@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use App\Models\Hotel;
+use Illuminate\Support\Facades\DB;
 
 class BooksController extends Controller
 {
@@ -17,6 +19,8 @@ class BooksController extends Controller
     public function index()
     {
         //
+        $hotel = Hotel::where("id", Auth::guard("hotel")->user()->id)->first();
+        return view("hotel.reservas.index", compact("hotel"));
     }
 
     /**
@@ -63,7 +67,6 @@ class BooksController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -96,5 +99,7 @@ class BooksController extends Controller
     public function destroy($id)
     {
         //
+        DB::table("client_room")->where("id", $id)->delete();
+
     }
 }

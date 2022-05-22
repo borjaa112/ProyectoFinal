@@ -84,7 +84,8 @@ Route::get("/test", function(){
 
 Route::resource("/roomimage", ImagesRoomController::class)->parameters(["roomimage" => "images_room"]);
 
-Route::resource("/reservar", BooksController::class)->middleware("auth:client");
+Route::resource("/reservar", BooksController::class)->except("index")->middleware("auth:client,web");
+Route::get("/reservas", [BooksController::class, "index"])->middleware("auth:hotel,web")->name("reservas");
 
 
 Route::resource("/fill", ServiceController::class);

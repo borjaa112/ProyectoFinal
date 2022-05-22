@@ -19,14 +19,14 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td>{{$direccion->calle}}</td>
-                        <td>{{$direccion->patio}}</td>
-                        <td>{{$direccion->puerta}}</td>
-                        <td>{{$direccion->cod_postal}}</td>
-                        <td>{{$direccion->provincia}}</td>
-                        <td>{{$direccion->ciudad}}</td>
-                        <td>{{$direccion->pais}}</td>
-                        <td><a href="{{route("direccion-cliente.edit", $direccion)}}"><i class="bi bi-pencil-square"></i></a></td>
+                        <td>{{$client->client_direction->calle}}</td>
+                        <td>{{$client->client_direction->patio}}</td>
+                        <td>{{$client->client_direction->puerta}}</td>
+                        <td>{{$client->client_direction->cod_postal}}</td>
+                        <td>{{$client->client_direction->provincia}}</td>
+                        <td>{{$client->client_direction->ciudad}}</td>
+                        <td>{{$client->client_direction->pais}}</td>
+                        <td><a href="{{route("direccion-cliente.edit", $client->client_direction)}}"><i class="bi bi-pencil-square"></i></a></td>
                       </tr>
                     </tbody>
                   </table>

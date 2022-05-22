@@ -46,8 +46,8 @@ class Client extends Authenticatable
     {
         return $this->belongsToMany(Room::class)->withPivot("id", "precio", "tipo_pension", "fecha_entrada", "fecha_salida", "num_noches");
     }
-    public function client_direcion()
+    public function client_direction()
     {
-        return $this->belongsTo("client_direction");
+        return $this->hasOne(Client_direction::class);
     }
 }

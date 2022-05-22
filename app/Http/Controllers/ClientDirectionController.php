@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client_direction;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class ClientDirectionController extends Controller
@@ -16,13 +17,13 @@ class ClientDirectionController extends Controller
     public function index()
     {
         //
-        $direccion = Client_direction::where("client_id", Auth::guard("client")->user()->id)->first();
-
-        if(is_null($direccion)){
+        // $direccion = Client_direction::where("client_id", Auth::guard("client")->user()->id)->first();
+        $client = Client::where("id", Auth::guard("client")->user()->id)->first();
+        if(is_null($client)){
             return redirect(route("direccion-cliente.create"));
         }
 
-        return view("cliente.direccion.index", compact("direccion"));
+        return view("cliente.direccion.index", compact("client"));
     }
 
     /**

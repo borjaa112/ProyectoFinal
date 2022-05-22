@@ -60,8 +60,8 @@ class AdminController extends Controller
     }
 
     public function ver_reservas(){
-        $reservas = Client::first();
+        $clientes = Client::get();
         // return $reservas;
-        return view("admin.reservas.index", compact("reservas"));
+        return view("admin.reservas.index", compact("clientes"));
     }
 }

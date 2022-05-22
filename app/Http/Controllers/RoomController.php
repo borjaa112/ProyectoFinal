@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Room_service;
 use App\Models\Room_services;
 use App\Models\Service;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\isNull;
@@ -186,13 +187,41 @@ class RoomController extends Controller
 
     public function buscar(searchRequest $request)
     {
-        $hoteles = Hotel::whereRelation("hotel_directions", "ciudad", $request->get("input_ciudad"))->get();
-        // $habitaciones = Room::get();
-        // foreach ($habitaciones as $habitacion) {
-        //     foreach($habitacion->clients as $pvot){
-        //         return $pvot->pivot;
-        //     }
-        // }
-        return view("cliente.busqueda.index", compact("hoteles", "request"));
+        $noches = $request->fecha_salida;
+        $mi_fecha_salida = Carbon::createFromFormat('Y-m-d', $request->fecha_entrada);
+        $mi_fecha_salida = $mi_fecha_salida->addDays($noches);
+
+        $mi_fecha_entrada = Carbon::createFromFormat("Y-m-d", $request->fecha_entrada);
+        $hoteles = Hotel::with("rooms")->whereRelation("hotel_directions", "ciudad", $request->get("input_ciudad"))->get();
+
+        $rooms = array();
+
+        foreach ($hoteles as $hotel){
+            foreach ($hotel->rooms as $habitacion) {
+                $valida = count($habitacion->clients);
+                if($habitacion->clients->isEmpty()){
+                    $rooms[] = $habitacion;
+                    continue;
+                }
+                foreach($habitacion->clients as $client_room){
+                    $res_fecha_entrada = Carbon::createFromFormat('Y-m-d', $client_room->pivot->fecha_entrada);
+                    $res_fecha_salida = Carbon::createFromFormat('Y-m-d', $client_room->pivot->fecha_salida);
+
+                    /*inicio de validaciones*/
+
+                    if($res_fecha_entrada->betweenExcluded($mi_fecha_entrada, $mi_fecha_salida) || $res_fecha_entrada->eq($mi_fecha_entrada)){
+                        $valida -=1;
+                    }
+                    if($res_fecha_salida->betweenExcluded($mi_fecha_entrada, $mi_fecha_salida) || $res_fecha_salida->eq($mi_fecha_salida)){
+                        $valida -=1;
+                    }
+                }
+                if($valida == count($habitacion->clients)){
+
+                    $rooms[] = $habitacion;
+                }
+            }
+        }
+        return view("cliente.busqueda.index", compact("request", "rooms"));
     }
 }

@@ -72,7 +72,7 @@
                                         <div>{{ $servicio->servicio }} </div>
                                     @endforeach
                                     <p class="card-text"><small
-                                            class="text-muted">{{ $habitacion->created_at }}</small>
+                                            class="text-muted">publicada {{ $habitacion->created_at->diffForHumans() }}</small>
                                     </p>
                                     <div class="col">
                                         <a href="{{ route('habitacion.show', $habitacion) }}"><button
