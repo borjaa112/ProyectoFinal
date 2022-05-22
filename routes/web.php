@@ -84,7 +84,7 @@ Route::get("/test", function(){
 
 Route::resource("/roomimage", ImagesRoomController::class)->parameters(["roomimage" => "images_room"]);
 
-Route::resource("/reservar", BooksController::class)->middleware("auth:client");
+Route::resource("/reservar", BooksController::class)->middleware("auth:client,web");
 
 
 Route::resource("/fill", ServiceController::class);

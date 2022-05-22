@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BooksController extends Controller
 {
@@ -96,5 +97,7 @@ class BooksController extends Controller
     public function destroy($id)
     {
         //
+        DB::table("client_room")->where("id", $id)->delete();
+
     }
 }
