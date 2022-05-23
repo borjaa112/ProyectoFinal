@@ -15,10 +15,12 @@ class ServiceController extends Controller
     public function index()
     {
         //
-        $service = new Service();
-        $service -> servicio = "Wifi";
-        $service -> save();
-        return 200;
+        // $service = new Service();
+        // $service -> servicio = "Wifi";
+        // $service -> save();
+        // return 200;
+        $servicios = Service::get();
+        return view("admin.servicios.index", compact("servicios"));
     }
 
     /**
@@ -40,6 +42,10 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         //
+        $servicio = new Service();
+        $servicio -> servicio = $request->servicio;
+        $servicio->save();
+        return back();
     }
 
     /**
@@ -85,5 +91,8 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
         //
+        $service->delete();
+        toast("Servicio eliminado", "success");
+        return back();
     }
 }

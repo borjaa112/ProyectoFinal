@@ -20,6 +20,12 @@
             </div>
 
         </div>
+        <div class="row gap-3 pt-5 text-center justify-content-center">
+            <div class="col-3 border border-secondary rounded-2 p-5">
+                <a href="{{route("servicios.index")}}">Añadir Servicios</a>
+            </div>
+            <div class="col-3"></div>
+        </div>
 
     </div>
 @endsection

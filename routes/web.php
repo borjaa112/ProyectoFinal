@@ -88,7 +88,7 @@ Route::resource("/reservar", BooksController::class)->except("index")->middlewar
 Route::get("/reservas", [BooksController::class, "index"])->middleware("auth:hotel,web")->name("reservas");
 
 
-Route::resource("/fill", ServiceController::class);
+Route::resource("/servicios", ServiceController::class)->parameters(["servicios" => "service"])->only(["index", "store", "destroy"])->middleware("auth:web");
 
 // Route::group(["middleware" => ["auth:client"]], function(){
 //     Route::get("/middle", function(){
