@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\updateAccountRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -90,7 +91,7 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(updateAccountRequest $request, $id)
     {
         //
         if (Auth::guard("hotel")->check()) {
@@ -137,6 +138,9 @@ class AccountController extends Controller
             $client->nif = $request->get("dni");
             $client->apellidos = $request->get("apellidos");
 
+            if(isset($request->password) && isset($request->confirm_password)){
+                $client-> password = Hash::make($request->password);
+            }
             $client->save();
         }
         if(Auth::user()){

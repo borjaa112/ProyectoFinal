@@ -1,6 +1,16 @@
-@extends("cliente.plantilla")
+@extends('cliente.plantilla')
 @section('contenido')
     <div class="container">
+        @if ($errors->any())
+            <div class="alert alert-warning">
+                Para continuar debe de solucionar los siguientes problemas:
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <h2 class="text-center">Modifique sus datos</h2>
         <div class="d-flex justify-content-center">
             <form method="post" action="{{ route('cuenta.update', Auth::guard('client')->user()) }}">
@@ -70,7 +80,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <form method="POST" action="{{route("cuenta.destroy", Auth::guard('client')->user()->id)}}">
+                            <form method="POST" action="{{ route('cuenta.destroy', Auth::guard('client')->user()->id) }}">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger">Sí, eliminar cuenta</button>
