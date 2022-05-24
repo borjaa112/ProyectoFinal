@@ -55,7 +55,9 @@ class BooksController extends Controller
         //
         $client = Client::findOrFail(Auth::guard("client")->user()->id);
         $client->rooms()->attach($request->get("room_id"), ["precio" => $request->get("precio_form"), "tipo_pension" => $request->get("pension_form"), "fecha_entrada" => $request->get("fecha_entrada_form"),"fecha_salida" => Carbon::parse($request->get("fecha_salida_form"))->format("Y/m/d"), "num_noches" => $request->get("noches_form")]);
+
     }
+
 
     /**
      * Display the specified resource.
@@ -101,5 +103,11 @@ class BooksController extends Controller
         //
         DB::table("client_room")->where("id", $id)->delete();
 
+    }
+    public function client_books(){
+        $client = Client::findOrFail(Auth::guard("client")->user()->id);
+        // $reservas = DB::table("client_room")->where("client_id", Auth::guard("client")->user()->id)->orderBy("created_at", "desc")->get();
+
+        return view("cliente.reservas.index", compact("client"));
     }
 }

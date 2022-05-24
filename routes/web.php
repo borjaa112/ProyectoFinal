@@ -86,7 +86,7 @@ Route::resource("/roomimage", ImagesRoomController::class)->parameters(["roomima
 
 Route::resource("/reservar", BooksController::class)->except("index")->middleware("auth:client,web");
 Route::get("/reservas", [BooksController::class, "index"])->middleware("auth:hotel,web")->name("reservas");
-
+Route::get("/cliente/reservas", [BooksController::class, "client_books"])->middleware("auth:client")->name("reservas_cliente");
 
 Route::resource("/servicios", ServiceController::class)->parameters(["servicios" => "service"])->only(["index", "store", "destroy"])->middleware("auth:web");
 

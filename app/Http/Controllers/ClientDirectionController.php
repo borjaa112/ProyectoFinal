@@ -19,7 +19,7 @@ class ClientDirectionController extends Controller
         //
         // $direccion = Client_direction::where("client_id", Auth::guard("client")->user()->id)->first();
         $client = Client::where("id", Auth::guard("client")->user()->id)->first();
-        if(is_null($client)){
+        if(is_null($client->client_direction)){
             return redirect(route("direccion-cliente.create"));
         }
 

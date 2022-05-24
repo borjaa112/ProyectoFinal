@@ -21,6 +21,6 @@ class Room extends Model
     }
 
     public function clients(){
-        return $this->belongsToMany(Client::class)->withPivot("id", "precio", "tipo_pension", "fecha_entrada", "fecha_salida", "num_noches");
+        return $this->belongsToMany(Client::class)->withPivot("id", "precio", "tipo_pension", "fecha_entrada", "fecha_salida", "num_noches")->withTimestamps();
     }
 }

@@ -37,7 +37,7 @@
                     <input id="email" name="email" class="form-control"
                         value="{{ Auth::guard('client')->user()->email }}">
                 </div>
-
+                <hr>
                 <div class="mb-3">
                     <label for="password">contraseña</label>
                     <input id="password" name="password" class="form-control" type="password"

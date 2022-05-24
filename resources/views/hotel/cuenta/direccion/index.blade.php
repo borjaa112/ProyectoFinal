@@ -1,4 +1,4 @@
-@extends("hotel.plantilla");
+@extends("hotel.plantilla")
 @section('contenido')
     <div class="container">
         <div class="card text-dark bg-light mb-3"">

@@ -165,37 +165,19 @@ class AccountController extends Controller
         if (Auth::guard("client")->check()) {
             $client = Client::find($id);
             $client->delete();
+            return redirect("/");
         }
         if (Auth::guard("hotel")->check()) {
-            //borrar todas las hab
-            $habitaciones = Room::where("hotel_id", $id)->get();
 
-            foreach ($habitaciones as $habitacion) {
-                $imagenes = Images_room::where("room_id", $habitacion->id)->get();
-
-                //borrar las imgs
-                foreach ($imagenes as $imagen) {
-                    $imagen->delete();
-                }
-                //borrar los servicios de las habitaciones
-                $habitacion->services()->detach();
-                $habitacion->delete();
-            }
-            //borrar todas las direcciones
-            $direcciones = Hotel_direction::where("hotel_id", $id)->get();
-            foreach ($direcciones as $direccion) {
-                $direccion->delete();
-            }
-
-            $hotel = Hotel::find($id);
+            $hotel = Hotel::findOrFail($id);
             $hotel->delete();
             toast("Cuenta eliminada con exito", "success");
-            return view("inicio");
+            return redirect("/");
         }
         if(Auth::user()){
             $admin = User::findOrFail($id);
             $admin->delete();
-            return view("inicio");
+            return redirect("/");
         }
     }
 }

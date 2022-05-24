@@ -16,13 +16,14 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false"> Mi cuenta </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('cuenta.index') }}">Mi perfil</a></li>
-                            <li><a class="dropdown-item" href="{{ route("direccion-cliente.index") }}">Dirección</a></li>
+                            <li><a class="dropdown-item" href="{{ route('cuenta.index') }}"><i class="bi bi-person-circle"></i> Mi perfil</a></li>
+                            <li><a class="dropdown-item" href="{{route("reservas_cliente")}}"><i class="bi bi-house"></i> Mis reservas</a></li>
+                            <li><a class="dropdown-item" href="{{ route("direccion-cliente.index") }}"><i class="bi bi-signpost"></i> Dirección</a></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <a href="{{ route('logout') }}" class="dropdown-item"
-                                        onclick="event.preventDefault();this.closest('form').submit();">Salir</a>
+                                        onclick="event.preventDefault();this.closest('form').submit();"><i class="bi bi-door-open"></i> Cerrar sesión</a>
                                 </form>
                             </li>
                         </ul>

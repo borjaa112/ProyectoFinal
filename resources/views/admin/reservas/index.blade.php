@@ -30,11 +30,13 @@
                             <td>{{ $habitacion->pivot->fecha_entrada }}</td>
                             <td>{{ $habitacion->pivot->fecha_salida }}</td>
                             <td>
-                                <form action="{{ route('reservar.destroy', $habitacion->pivot->id) }}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
-                                </form>
+                                @if ($habitacion->pivot->fecha_entrada > \Carbon\Carbon::now())
+                                    <form action="{{ route('reservar.destroy', $habitacion->pivot->id) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
