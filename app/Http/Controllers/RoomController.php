@@ -88,9 +88,12 @@ class RoomController extends Controller
             $imagen->save();
         }
 
-        foreach ($request->input('servicios') as $servicio) {
-            $room->services()->attach($servicio);
+        if($request->input("servicios")){
+            foreach ($request->input('servicios') as $servicio) {
+                $room->services()->attach($servicio);
+            }
         }
+
 
         toast("Habitación creada con éxito", "success");
         return redirect(route("habitacion.show", $room));
