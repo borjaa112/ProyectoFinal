@@ -25,7 +25,7 @@ class LoginController extends Controller
                 'nombre' => $request->nombre,
                 'email' => $request->email,
                 'descripcion' => $request->descripcion,
-                'cif' => "222",
+                'cif' => $request->dni,
                 'password' => Hash::make($request->password),
                 'img_path' => "imgs/profile_imgs/hotel-default.png"
             ]);
@@ -38,7 +38,7 @@ class LoginController extends Controller
             $user = Client::create([
                 'nombre' => $request->nombre,
                 'apellidos' => $request->apellidos,
-                'nif' => "222",
+                'nif' => $request->dni,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);

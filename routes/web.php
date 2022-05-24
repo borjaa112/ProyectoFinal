@@ -77,10 +77,6 @@ Route::resource("/habitacion", RoomController::class)->parameters(['habitacion' 
 Route::resource("/hotel", HotelController::class);
 
 Route::resource("/instalaciones", HotelImageController::class)->parameters(["instalaciones" => "hotel_image"])->middleware("auth:hotel");
-Route::get("/test", function(){
-    return Auth::user();
-
-});
 
 Route::resource("/roomimage", ImagesRoomController::class)->parameters(["roomimage" => "images_room"]);
 
@@ -108,4 +104,11 @@ Route::group(["middleware" => ["auth:web"]], function(){
     Route::get("/admin/hoteles", [AdminController::class, "administrar_hoteles"])->name("administrar_hoteles");
     Route::get("/admin/habitaciones", [AdminController::class, "administrar_habitaciones"])->name("administrar_habitaciones");
     Route::get("/admin/reservas", [AdminController::class, "ver_reservas"])->name("ver_reservas");
+});
+Route::get("/admin", function(){
+    if(Auth::user()){
+        return redirect(route("dashboard"));
+    }else{
+        return redirect("/admin/login");
+    }
 });

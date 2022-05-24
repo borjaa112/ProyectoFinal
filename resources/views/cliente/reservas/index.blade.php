@@ -20,7 +20,7 @@
                                     <u>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $reserva->pivot->fecha_salida)->format('d-m-Y') }}</u>
                                 </div>
                                 <div>Precio pagado <strong>{{ $reserva->pivot->precio }}€</strong></div>
-                                <div>{{$reserva->pivot->created_at->diffForHumans()}}</div>
+                                <div class="text-muted">Reserva realizada {{$reserva->pivot->created_at->diffForHumans()}}</div>
                                 @if ($reserva->pivot->fecha_entrada > \Carbon\Carbon::now())
                                     <div class="d-flex align-items-end justify-content-end">
                                         <form action="{{ route('reservar.destroy', $reserva->pivot) }}" method="POST">

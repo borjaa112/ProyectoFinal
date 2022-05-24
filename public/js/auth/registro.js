@@ -2,10 +2,12 @@
 let nombreAll = document.querySelectorAll(".nombre");
 let apellidosAll = document.querySelectorAll(".apellidos");
 let descripcionAll = document.querySelectorAll(".descripcion");
+let dni = document.querySelector("#dniLabel");
 
 let clienteCheck = document.body.querySelector("#cliente");
 let hotelCheck = document.body.querySelector("#hotel");
 
+clienteCheck.checked = true;
 
 clienteCheck.addEventListener('click', clienteFields);
 hotelCheck.addEventListener('click', hotelFields);
@@ -26,7 +28,7 @@ function clienteFields(event) {
             if(apellidos.hidden){
                 apellidos.hidden = false;
                 apellidos.required = true;
-
+                dni.textContent = "DNI";
             }
         }
     }
@@ -45,7 +47,7 @@ function hotelFields(event) {
             if (!apellidos.hidden) {
                 apellidos.hidden = true;
                 apellidos.required = false;
-
+                dni.textContent = "CIF";
             }
         }
 

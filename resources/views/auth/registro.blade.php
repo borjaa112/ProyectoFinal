@@ -48,6 +48,11 @@
                             <input type="email" id="email" name="email" class="form-control">
                         </div>
 
+                        <label for="dni" id="dniLabel">DNI</label>
+                        <div class="input-group">
+                            <input type="text" id="dni" name="dni" class="form-control">
+                        </div>
+
                         <label for="password">Contraseña</label>
                         <div class="input-group">
                             <input type="password" id="password" name="password" class="form-control">
