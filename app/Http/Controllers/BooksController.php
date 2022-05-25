@@ -33,11 +33,9 @@ class BooksController extends Controller
         //
         $habitacion = Room::findOrFail($request->habitacion);
         $fecha_entrada = $request->fecha_entrada;
-        $noches = $request->fecha_salida;
+        $fecha_salida = $request->fecha_salida;
+        $noches = Carbon::createFromFormat('Y-m-d', $fecha_entrada)->diffInDays(Carbon::createFromFormat('Y-m-d', $fecha_salida));
 
-        $fecha_salida = Carbon::createFromFormat('Y-m-d', $fecha_entrada);
-        $fecha_salida = $fecha_salida->addDays($noches);
-        $fecha_salida = $fecha_salida->format("d-m-Y");
 
         // $noches = $noches-1;
 

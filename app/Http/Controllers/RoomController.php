@@ -183,9 +183,10 @@ class RoomController extends Controller
 
     public function buscar(searchRequest $request)
     {
-        $noches = $request->fecha_salida;
-        $mi_fecha_salida = Carbon::createFromFormat('Y-m-d', $request->fecha_entrada);
-        $mi_fecha_salida = $mi_fecha_salida->addDays($noches);
+        // $noches = $request->fecha_salida;
+        // $mi_fecha_salida = Carbon::createFromFormat('Y-m-d', $request->fecha_entrada);
+        // $mi_fecha_salida = $mi_fecha_salida->addDays($noches);
+        $mi_fecha_salida = $request->fecha_salida;
 
         $mi_fecha_entrada = Carbon::createFromFormat("Y-m-d", $request->fecha_entrada);
         $hoteles = Hotel::with("rooms")->whereRelation("hotel_directions", "ciudad", $request->get("input_ciudad"))->get();

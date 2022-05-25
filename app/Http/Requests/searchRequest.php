@@ -27,7 +27,7 @@ class searchRequest extends FormRequest
             //
             'input_ciudad' => ['required','string'],
             'fecha_entrada' => ['date', "after_or_equal:today"],
-            'fecha_salida' => ['numeric'],
+            'fecha_salida' => ['date'],
         ];
     }
 

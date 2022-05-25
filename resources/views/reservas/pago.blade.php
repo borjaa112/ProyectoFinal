@@ -28,7 +28,9 @@
                                 <h6 class="my-0"><strong>Precio por noche:</strong></h6>
                             </div>
                             <div class="p-3">
-                                <span>{{ $habitacion->precio_noche * $noches }}</span>€
+                                <span>
+                                    {{ $habitacion->precio_noche * $noches }}
+                                </span>€
                             </div>
                         </li>
 
