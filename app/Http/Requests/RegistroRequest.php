@@ -27,7 +27,7 @@ class RegistroRequest extends FormRequest
             //
             'nombre' => ['required', 'string', 'max:255'],
             'password' => ['required', 'confirmed'],
-            'email' => ['required', 'email']
+            'email' => ['unique:clients,email','unique:hotels,email','required', 'email']
         ];
     }
     public function messages(){
@@ -37,7 +37,8 @@ class RegistroRequest extends FormRequest
             'password.required' => 'La contraseña es obligatoria.',
             'password.confirmed' => 'La contraseña no coincide.',
             'email.required' => 'El correo electronico es obligatorio',
-            'email.email' => 'El email introducido no es correcto'
+            'email.email' => 'El email introducido no es correcto',
+            'email.unique' => 'Ya existe un usuario registrado con esa dirección de email'
         ];
     }
 }
