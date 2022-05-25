@@ -37,9 +37,6 @@ Route::get("/", [IndexController::class, 'index'])->name("inicio");
 Route::get('/registro', [LoginController::class, 'registroForm'])->name('registro');
 Route::post('/registro', [LoginController::class, 'registro']);
 
-Route::get("/admin/registro", [AdminController::class, "registroForm"]);
-Route::post("/admin/registro", [AdminController::class, "registro"])->name("admin-registro");
-
 Route::get("/admin/login", [AdminController::class, 'loginForm']);
 Route::post("/admin/login", [AdminController::class, 'login'])->name("admin-login");
 

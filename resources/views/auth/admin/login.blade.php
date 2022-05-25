@@ -26,8 +26,6 @@
 
                             <button type="submit" class="btn btn-primary mt-2">Iniciar sesión</button>
                         </form>
-                        <div class="text-center text-secondary fs-6">¿No tienes cuenta? <a href="{{ route('registro') }}"
-                                class="text-secondary fs-6">Registrate aquí</a></div>
                     </div>
                 </div>
             </div>

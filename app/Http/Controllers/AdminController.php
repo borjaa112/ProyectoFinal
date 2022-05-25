@@ -13,18 +13,6 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     //
-    public function registroForm(){
-        return view("auth.admin.registro");
-    }
-
-    public function registro(Request $request){
-        $admin = User::create([
-            'nombre' => $request->nombre,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
-        Auth::login($admin);
-    }
 
     public function loginForm(){
         return view("auth.admin.login");
