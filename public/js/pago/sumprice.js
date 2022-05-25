@@ -9,13 +9,15 @@ let pension_form = document.body.querySelector("#pension_form");
 let precioExtras = document.querySelector("#extras");
 let pensiones = document.body.querySelector(".pensiones");
 let idHabitacion = document.body.querySelector("#id_habitacion").value;
+let noches = document.body.querySelector("#noches").textContent;
+
 pensiones.onchange = changePrice;
 
 async function changePrice(event){
     let precioExtra = await requestPrice(event.target.value);
-    precio.textContent = parseFloat(precioOriginal) + parseFloat(precioExtra);
+    precio.textContent = parseFloat(precioOriginal) + parseFloat(precioExtra*noches);
     precio_form.value = parseFloat(precioOriginal) + parseFloat(precioExtra);
-    precioExtras.textContent = precioExtra;
+    precioExtras.textContent = (precioExtra*noches);
 
     pension_form.value = event.target.value;
 }
