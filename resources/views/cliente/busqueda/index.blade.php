@@ -19,30 +19,30 @@
             <form method="get" action="{{ route('buscar') }}">
                 @csrf
                 @method('get')
-                <div class="row">
-                    <div class="col">
+                <div class="justify-content-center row g-3">
+                    <div class="col-lg-4 col-sm-5">
                         <label for="input_ciudad" class="col-6">Introduce ciudad</label>
+                        <div class="col autocomplete">
+                            <input type="text" id="input_ciudad" name="input_ciudad" class="m-1 form-control"
+                                autocomplete="off" value="{{ $request->get('input_ciudad') }}">
+                        </div>
                     </div>
-                    <div class="col autocomplete">
-                        <input type="text" id="input_ciudad" name="input_ciudad" class="m-1 form-control" autocomplete="off"
-                            value="{{ $request->get('input_ciudad') }}">
-                    </div>
-                    <div class="col">
+                    <div class="col-lg-4 col-sm-4">
                         <label for="fecha_entrada">Introduce fecha de entrada</label>
+                        <div class="col">
+                            <input type="date" name="fecha_entrada" class="m-1 form-control" id="fecha_entrada"
+                                value="{{ $request->get('fecha_entrada') }}">
+                        </div>
                     </div>
-                    <div class="col">
-                        <input type="date" name="fecha_entrada" class="m-1 form-control" id="fecha_entrada"
-                            value="{{ $request->get('fecha_entrada') }}">
-                    </div>
-                    <div class="col">
+                    <div class="col-lg-3 col-sm-4">
                         <label for="fecha_salida">Introduce fecha de salida</label>
+                        <div class="col">
+                            <input type="number" name="fecha_salida" class="m-1 form-control" id="fecha_salida"
+                                value="{{ $request->get('fecha_salida') }}">
+                        </div>
                     </div>
-                    <div class="col">
-                        <input type="number" name="fecha_salida" class="m-1 form-control" id="fecha_salida"
-                            value="{{ $request->get('fecha_salida') }}">
-                    </div>
-                    <div class="col">
-                        <button type="submit" class="m-1 btn btn-info"><i class="bi bi-search"></i></button>
+                    <div class="col-lg-1 col-sm-12 d-flex justify-content-center align-items-center">
+                        <button type="submit" class="m-1 btn btn-primary"><i class="bi bi-search"></i></button>
                     </div>
                 </div>
             </form>

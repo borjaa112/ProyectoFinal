@@ -66,7 +66,7 @@ class RoomApiController extends Controller
     public function getPensiones(Room $room)
     {
         //
-        return response()->json([$room->precio_mp, $room->precio_pc, $room->precio_hd],200);
+        return response()->json([$room->hotel->pension->precio_mp, $room->hotel->pension->precio_pc, $room->hotel->pension->precio_hd],200);
     }
 
     public function getServices(Room $room){

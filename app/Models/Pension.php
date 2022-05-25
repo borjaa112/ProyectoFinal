@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Pension extends Model
 {
     use HasFactory;
+
+    public function hotel(){
+        return $this->belongsTo(Hotel::class);
+    }
 }

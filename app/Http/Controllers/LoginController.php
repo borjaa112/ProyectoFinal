@@ -6,6 +6,7 @@ use App\Http\Requests\RegistroRequest;
 use App\Models\User;
 use App\Models\Client;
 use App\Models\Hotel;
+use App\Models\Pension;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -29,6 +30,12 @@ class LoginController extends Controller
                 'password' => Hash::make($request->password),
                 'img_path' => "imgs/profile_imgs/hotel-default.png"
             ]);
+            $pension = new Pension();
+            $pension -> hotel_id = $user->id;
+            $pension -> precio_mp = 0;
+            $pension -> precio_hd = 0;
+            $pension -> precio_pc = 0;
+            $pension->save();
             Auth::guard("hotel")->login($user);
             return redirect(route("direccion-hotel.create"));
 

@@ -52,4 +52,8 @@ class Hotel extends Authenticatable
     public function hotel_images(){
         return $this->hasMany(Hotel_image::class);
     }
+
+    public function pension(){
+        return $this->hasOne(Pension::class);
+    }
 }

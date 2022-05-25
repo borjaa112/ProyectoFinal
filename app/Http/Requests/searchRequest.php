@@ -26,7 +26,7 @@ class searchRequest extends FormRequest
         return [
             //
             'input_ciudad' => ['required','string'],
-            'fecha_entrada' => ['date'],
+            'fecha_entrada' => ['date', "after_or_equal:today"],
             'fecha_salida' => ['numeric'],
         ];
     }
@@ -36,6 +36,8 @@ class searchRequest extends FormRequest
         return[
             'input_ciudad.required' => 'El campo de ciudad es obligatorio',
             'fecha_entrada.date' => 'El campo de fecha de entrada debe ser formato fecha',
+            'fecha_entrada.after_or_equal' => 'La fecha de entrada no puede ser inferior al día actual',
+
             'fecha_salida.numeric' => 'La fecha de salida debe de estar en formato numerico'
         ];
     }

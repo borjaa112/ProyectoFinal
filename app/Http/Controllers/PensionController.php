@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Pension;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\Hotel;
 class PensionController extends Controller
 {
     /**
@@ -15,6 +16,8 @@ class PensionController extends Controller
     public function index()
     {
         //
+        $hotel = Hotel::findOrFail(Auth::guard("hotel")->user()->id);
+        return view("hotel.pension.index", compact("hotel"));
     }
 
     /**
@@ -70,6 +73,19 @@ class PensionController extends Controller
     public function update(Request $request, Pension $pension)
     {
         //
+        switch($request->get("pensiones")){
+            case "HD":
+                $pension -> precio_hd = $request->precio;
+                break;
+            case "PC":
+                $pension -> precio_pc = $request->precio;
+                break;
+            case "MP":
+                $pension -> precio_mp = $request->precio;
+                break;
+        }
+        $pension->save();
+        return back();
     }
 
     /**

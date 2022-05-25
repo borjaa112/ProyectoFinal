@@ -67,9 +67,6 @@ class RoomController extends Controller
         $room = new Room();
         $room->hotel_id = Auth::guard('hotel')->user()->id;
         $room->precio_noche = $request->get('precio-noche');
-        $room->precio_mp = $request->get("MP");
-        $room->precio_pc = $request->get("PC");
-        $room->precio_hd = $request->get("HD");
         $room->camas = $request->get('camas');
         $room->save();
 
@@ -149,10 +146,6 @@ class RoomController extends Controller
         foreach ($request->input('servicios') as $servicio) {
             $room->services()->attach($servicio);
         }
-
-        $room->precio_mp = $request->get("MP");
-        $room->precio_pc = $request->get("PC");
-        $room->precio_hd = $request->get("HD");
 
         $room->save();
 
