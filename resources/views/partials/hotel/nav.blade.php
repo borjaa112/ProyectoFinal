@@ -18,6 +18,9 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{route('habitacion.create')}}">Añadir habitación</a>
                       </li>
+                      <li>
+                        <a class="nav-link" aria-current="page" href="{{route('pension.index')}}">Administrar pensión</a>
+                      </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">Mi cuenta </a>
