@@ -29,18 +29,17 @@
                     <div class="col autocomplete">
                         <input type="text" id="input_ciudad" name="input_ciudad" class="m-1 form-control" autocomplete="off">
                     </div>
-                    <div class="col">
-                        <label for="fecha_entrada">Introduce fecha de entrada</label>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <label for="fecha_entrada">Introduce fecha de entrada</label>
+                            <input type="date" name="fecha_entrada" class="m-1 form-control" id="fecha_entrada">
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <label for="fecha_salida">Introduce fecha de salida</label>
+                            <input type="date" name="fecha_salida" class="m-1 form-control" id="fecha_salida">
+                        </div>
                     </div>
-                    <div class="col">
-                        <input type="date" name="fecha_entrada" class="m-1 form-control" id="fecha_entrada">
-                    </div>
-                    <div class="col">
-                        <label for="fecha_salida">Introduce numero de noches</label>
-                    </div>
-                    <div class="col">
-                        <input type="number" name="fecha_salida" class="m-1 form-control" id="fecha_salida">
-                    </div>
+
                     <div class="col">
                         <button type="submit" class="m-1 btn btn-info"><i class="bi bi-search"></i></button>
                     </div>
@@ -57,8 +56,9 @@
                             <div class="col-md-4">
                                 @foreach ($habitacion->images_rooms as $image_room)
                                     @if ($loop->first)
-                                        <a href="{{route("habitacion.show", $habitacion)}}"><img src="/imgs/{{ $image_room->img_path }}" class="img-fluid rounded-start"
-                                            alt="..."></a>
+                                        <a href="{{ route('habitacion.show', $habitacion) }}"><img
+                                                src="/imgs/{{ $image_room->img_path }}" class="img-fluid rounded-start"
+                                                alt="..."></a>
                                     @endif
                                 @endforeach
                             </div>
@@ -71,8 +71,8 @@
                                     @foreach ($habitacion->services as $servicio)
                                         <div>{{ $servicio->servicio }} </div>
                                     @endforeach
-                                    <p class="card-text"><small
-                                            class="text-muted">publicada {{ $habitacion->created_at->diffForHumans() }}</small>
+                                    <p class="card-text"><small class="text-muted">publicada
+                                            {{ $habitacion->created_at->diffForHumans() }}</small>
                                     </p>
                                     <div class="col">
                                         <a href="{{ route('habitacion.show', $habitacion) }}"><button

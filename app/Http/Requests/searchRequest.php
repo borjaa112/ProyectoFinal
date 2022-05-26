@@ -27,7 +27,7 @@ class searchRequest extends FormRequest
             //
             'input_ciudad' => ['required','string'],
             'fecha_entrada' => ['date', "after_or_equal:today"],
-            'fecha_salida' => ['numeric'],
+            'fecha_salida' => ['date','after:fecha_entrada'],
         ];
     }
 
@@ -37,8 +37,8 @@ class searchRequest extends FormRequest
             'input_ciudad.required' => 'El campo de ciudad es obligatorio',
             'fecha_entrada.date' => 'El campo de fecha de entrada debe ser formato fecha',
             'fecha_entrada.after_or_equal' => 'La fecha de entrada no puede ser inferior al día actual',
-
-            'fecha_salida.numeric' => 'La fecha de salida debe de estar en formato numerico'
+            'fecha_salida.numeric' => 'La fecha de salida debe de estar en formato numerico',
+            'fecha_salida.after' => 'La fecha de salida debe de ser mayor a la fecha de entrada'
         ];
     }
 }

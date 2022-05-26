@@ -37,7 +37,7 @@
                     <div class="col-lg-3 col-sm-4">
                         <label for="fecha_salida">Introduce fecha de salida</label>
                         <div class="col">
-                            <input type="number" name="fecha_salida" class="m-1 form-control" id="fecha_salida"
+                            <input type="date" name="fecha_salida" class="m-1 form-control" id="fecha_salida"
                                 value="{{ $request->get('fecha_salida') }}">
                         </div>
                     </div>
@@ -65,10 +65,10 @@
                             <h5 class="card-title">{{ $habitacion->hotel->nombre }}</h5>
                             <div class="h5"><strong>Camas Disponibles:</strong> {{ $habitacion->camas }}
                             </div>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small>
+                            <p class="card-text"><small class="text-muted">Esta habitación ha sido reservada {{count($habitacion->clients)}} veces  </small>
                             </p>
                             <p class="text-end h4">Precio Total:
-                                {{ $habitacion->precio_noche * $request->get('fecha_salida') }}€
+                                {{ $habitacion->precio_noche * (\Carbon\Carbon::createFromFormat("Y-m-d", $request->fecha_entrada)->diffInDays(\Carbon\Carbon::createFromFormat("Y-m-d", $request->fecha_salida))) }}€
                             </p>
                             <div class="d-flex justify-content-end">
                                 <a class="btn btn-info" href="{{ route('habitacion.show', $habitacion) }}">Ver
