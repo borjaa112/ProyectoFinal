@@ -17,6 +17,11 @@ use App\Models\Room_services;
 use App\Models\Service;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+
+use Illuminate\Support\Collection;
+
+use Illuminate\Pagination\LengthAwarePaginator;
 
 use function PHPUnit\Framework\isNull;
 
@@ -85,7 +90,7 @@ class RoomController extends Controller
             $imagen->save();
         }
 
-        if($request->input("servicios")){
+        if ($request->input("servicios")) {
             foreach ($request->input('servicios') as $servicio) {
                 $room->services()->attach($servicio);
             }
@@ -165,7 +170,6 @@ class RoomController extends Controller
             }
         }
         return back();
-
     }
 
     /**
@@ -193,32 +197,42 @@ class RoomController extends Controller
 
         $rooms = array();
 
-        foreach ($hoteles as $hotel){
+        foreach ($hoteles as $hotel) {
             foreach ($hotel->rooms as $habitacion) {
                 $valida = count($habitacion->clients);
-                if($habitacion->clients->isEmpty()){
+                if ($habitacion->clients->isEmpty()) {
                     $rooms[] = $habitacion;
                     continue;
                 }
-                foreach($habitacion->clients as $client_room){
+                foreach ($habitacion->clients as $client_room) {
                     $res_fecha_entrada = Carbon::createFromFormat('Y-m-d', $client_room->pivot->fecha_entrada);
                     $res_fecha_salida = Carbon::createFromFormat('Y-m-d', $client_room->pivot->fecha_salida);
 
                     /*inicio de validaciones*/
 
-                    if($res_fecha_entrada->betweenExcluded($mi_fecha_entrada, $mi_fecha_salida) || $res_fecha_entrada->eq($mi_fecha_entrada)){
-                        $valida -=1;
+                    if ($res_fecha_entrada->betweenExcluded($mi_fecha_entrada, $mi_fecha_salida) || $res_fecha_entrada->eq($mi_fecha_entrada)) {
+                        $valida -= 1;
                     }
-                    if($res_fecha_salida->betweenExcluded($mi_fecha_entrada, $mi_fecha_salida) || $res_fecha_salida->eq($mi_fecha_salida)){
-                        $valida -=1;
+                    if ($res_fecha_salida->betweenExcluded($mi_fecha_entrada, $mi_fecha_salida) || $res_fecha_salida->eq($mi_fecha_salida)) {
+                        $valida -= 1;
                     }
                 }
-                if($valida == count($habitacion->clients)){
+                if ($valida == count($habitacion->clients)) {
 
                     $rooms[] = $habitacion;
                 }
             }
         }
+        $rooms = $this->paginate($rooms);
         return view("cliente.busqueda.index", compact("request", "rooms"));
+    }
+    public function paginate($items, $perPage = 10, $page = null, $options = [])
+    {
+
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, ['path' => Paginator::resolveCurrentPath()]);
     }
 }

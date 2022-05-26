@@ -87,7 +87,6 @@
                 </div>
             </div>
         @endforeach
-
-
+        {{$rooms->appends(request()->input())->links();}}
     </div>
 @endsection
