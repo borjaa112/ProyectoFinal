@@ -1,4 +1,4 @@
-@extends(Auth::guard('hotel')->check() ? 'hotel.plantilla' : (Auth::guard("client")->check() ? 'cliente.plantilla' : 'admin.plantilla'))
+@extends(Auth::guard('hotel')->check() ? 'hotel.plantilla' : (Auth::guard('client')->check() ? 'cliente.plantilla' : 'admin.plantilla'))
 @section('head')
     <link rel="stylesheet" href="{{ asset('css/hotel/habitacion/index.css') }}">
 @endsection
@@ -7,7 +7,7 @@
         <div class="h1 text-center">{{ $room->hotel->nombre }}</div>
 
         <div class="row mt-3">
-            <div id="carouselExampleIndicators" class="carousel slide col-6" data-bs-ride="carousel">
+            <div id="carouselExampleIndicators" class="carousel slide col-md-6" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     @foreach ($room->images_rooms as $imagen)
                         @if ($loop->first)
@@ -33,7 +33,7 @@
                 </div>
 
             </div>
-            <div class="border border-2 border-dark p-2 col-6">
+            <div class="border border-2 border-dark p-2 col-md-6">
                 <div class="descripcion">
                     {{ $room->hotel->descripcion }}
                     <div>
@@ -50,12 +50,12 @@
         @if (Auth::guard('hotel')->check() || Auth::guard('web')->check())
             <div class="row d-flex pt-2">
                 <div class="col d-flex justify-content-center">
-                    <div class="col-2">
+                    <div class="col-md-3 col-lg-2">
                         <a href="{{ route('habitacion.edit', $room) }}">
                             <button type="button" class="btn btn-info">Editar habitacion</button>
                         </a>
                     </div>
-                    <div class="col-auto">
+                    <div class="col-md-3 col-lg-2">
                         <form action="{{ route('habitacion.destroy', $room) }}" method="POST">
                             @csrf
                             @method('delete')
@@ -67,9 +67,11 @@
 
             </div>
         @endif
-        <a href="{{ route('hotel.show', $room->hotel) }}">
-            <div class="d-flex justify-content-center">
-                <button type="button" class="btn btn-info btn-lg col-6 mt-4">Ver información del hotel</button>
-            </div>
-        </a>
+        <div class="mt-4">
+            <a href="{{ route('hotel.show', $room->hotel) }}">
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-info btn-lg col-6">Ver información del hotel</button>
+                </div>
+            </a>
+        </div>
     @endsection
