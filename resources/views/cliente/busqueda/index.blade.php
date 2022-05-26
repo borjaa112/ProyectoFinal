@@ -65,10 +65,11 @@
                             <h5 class="card-title">{{ $habitacion->hotel->nombre }}</h5>
                             <div class="h5"><strong>Camas Disponibles:</strong> {{ $habitacion->camas }}
                             </div>
-                            <p class="card-text"><small class="text-muted">Esta habitación ha sido reservada {{count($habitacion->clients)}} veces  </small>
+                            <p class="card-text"><small class="text-muted">Esta habitación ha sido reservada
+                                    {{ count($habitacion->clients) }} veces </small>
                             </p>
                             <p class="text-end h4">Precio Total:
-                                {{ $habitacion->precio_noche * (\Carbon\Carbon::createFromFormat("Y-m-d", $request->fecha_entrada)->diffInDays(\Carbon\Carbon::createFromFormat("Y-m-d", $request->fecha_salida))) }}€
+                                {{ $habitacion->precio_noche * \Carbon\Carbon::createFromFormat('Y-m-d', $request->fecha_entrada)->diffInDays(\Carbon\Carbon::createFromFormat('Y-m-d', $request->fecha_salida)) }}€
                             </p>
                             <div class="d-flex justify-content-end">
                                 <a class="btn btn-info" href="{{ route('habitacion.show', $habitacion) }}">Ver
@@ -87,6 +88,9 @@
                 </div>
             </div>
         @endforeach
-        {{$rooms->appends(request()->input())->links();}}
+        <div class="d-flex justify-content-center">
+            {{ $rooms->appends(request()->input())->links() }}
+
+        </div>
     </div>
 @endsection
