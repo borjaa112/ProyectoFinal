@@ -31,6 +31,11 @@ class BooksController extends Controller
     public function create(Request $request)
     {
         //
+        $cliente = Client::findOrFail(Auth::guard("client")->user()->id);
+        if(!$cliente->client_direction){
+            toast("Para reservar es imprescindible tener establecida una dirección", "info");
+            return redirect(route("direccion-cliente.create"));
+        }
         $habitacion = Room::findOrFail($request->habitacion);
         $fecha_entrada = $request->fecha_entrada;
         $fecha_salida = $request->fecha_salida;

@@ -13,6 +13,7 @@
 </head>
 <body>
     @include('partials.nav')
+    @include('sweetalert::alert')
     @yield('contenido')
     {{-- @include('partials.footer') --}}
 </body>
