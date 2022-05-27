@@ -73,30 +73,6 @@
                 </div>
             </div>
 
-            <div class="row d-flex justify-content-center">
-                <div class="col-2">
-                    <label for="MP" class="col-form-label">Precio Media pension</label>
-                </div>
-                <div class="col-6">
-                    <input type="number" name="MP" id="MP" class="form-control" value="{{ $room->precio_mp }}">
-                </div>
-            </div>
-            <div class="row d-flex justify-content-center">
-                <div class="col-2">
-                    <label for="PC" class="col-form-label">Precio Pension Completa</label>
-                </div>
-                <div class="col-6">
-                    <input type="number" name="PC" id="PC" class="form-control" value="{{ $room->precio_pc }}">
-                </div>
-            </div>
-            <div class="row d-flex justify-content-center">
-                <div class="col-2">
-                    <label for="HD" class="col-form-label">Precio Alojamiento y Desayuno</label>
-                </div>
-                <div class="col-6">
-                    <input type="number" name="HD" id="HD" class="form-control" value="{{ $room->precio_hd }}">
-                </div>
-            </div>
             <div class="row d-flex justify-content-evenly">
                 <div class="col-auto"><button type="submit" class="btn btn-primary">Guardar Cambios</button></div>
             </div>

@@ -53,7 +53,7 @@ class BooksController extends Controller
         //
         $client = Client::findOrFail(Auth::guard("client")->user()->id);
         $client->rooms()->attach($request->get("room_id"), ["precio" => $request->get("precio_form"), "tipo_pension" => $request->get("pension_form"), "fecha_entrada" => $request->get("fecha_entrada_form"),"fecha_salida" => Carbon::parse($request->get("fecha_salida_form"))->format("Y/m/d"), "num_noches" => $request->get("noches_form")]);
-
+        return redirect(route("reservar.show", $client->rooms[0]->pivot->id));
     }
 
 
@@ -66,6 +66,10 @@ class BooksController extends Controller
     public function show($id)
     {
         //
+        $reservas = DB::table("client_room")->where("id", $id)->get();
+        $cliente = Client::findOrFail($reservas[0]->client_id);
+        $habitacion = Room::findOrFail($reservas[0]->room_id);
+        return view("reservas.resumen", compact("reservas", "cliente", "habitacion"));
     }
     /**
      * Show the form for editing the specified resource.
