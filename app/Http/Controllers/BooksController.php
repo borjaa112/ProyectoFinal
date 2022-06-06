@@ -5,8 +5,10 @@ use App\Models\Room;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Client;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Http\Request;
 use App\Models\Hotel;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Support\Facades\DB;
 
 class BooksController extends Controller
@@ -19,7 +21,8 @@ class BooksController extends Controller
     public function index()
     {
         //
-        $hotel = Hotel::where("id", Auth::guard("hotel")->user()->id)->first();
+        $hotel = Hotel::find(Auth::guard("hotel")->user()->id)->first();
+        // return $hotel;
         return view("hotel.reservas.index", compact("hotel"));
     }
 
@@ -109,10 +112,13 @@ class BooksController extends Controller
     {
         //
         DB::table("client_room")->where("id", $id)->delete();
+        toast("Reserva cancelada con éxito", "success");
+        return back();
 
     }
     public function client_books(){
-        $client = Client::findOrFail(Auth::guard("client")->user()->id);
+        $client = Client::findOrFail(Auth::guard("client")->user()->id)->rooms()->paginate(10);
+        // return $client;
         // $reservas = DB::table("client_room")->where("client_id", Auth::guard("client")->user()->id)->orderBy("created_at", "desc")->get();
 
         return view("cliente.reservas.index", compact("client"));

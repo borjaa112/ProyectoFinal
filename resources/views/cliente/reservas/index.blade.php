@@ -2,9 +2,9 @@
 @section('contenido')
     <div class="container">
 
-        @foreach ($client->rooms as $reserva)
+        @foreach ($client as $reserva)
             <div class="d-flex justify-content-center">
-                <div class="card mt-3 col-8 justify-content-center">
+                <div class="card mt-3 col-10 justify-content-center">
                     <div class="row g-0">
                         <div class="col-md-4">
                             <img src="/imgs/{{ $reserva->images_rooms[0]->img_path }}" class="img-fluid rounded-start"
@@ -12,7 +12,7 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">#{{ $loop->iteration }} {{ $reserva->hotel->nombre }}</h5>
+                                <h5 class="card-title">#{{ $reserva->pivot->id}} {{ $reserva->hotel->nombre }}</h5>
                                 <div>Fecha de entrada <i class="bi bi-arrow-right"></i>
                                     <u>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $reserva->pivot->fecha_entrada)->format('d-m-Y') }}</u>
                                 </div>
@@ -35,9 +35,11 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         @endforeach
+        <div class="d-flex justify-content-center">
+            {{$client->links()}}
+        </div>
 
     </div>
 @endsection

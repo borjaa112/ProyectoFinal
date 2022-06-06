@@ -1,5 +1,6 @@
 #input_ciudadautocomplete-list{
     width: 200px;
+    color: black;
 }
 
 #input_ciudadautocomplete-list > div{
@@ -13,4 +14,9 @@
 
 #input_ciudadautocomplete-list > div:hover{
     background-color: #ececec;
+}
+
+.buscador{
+    background-color: #0077c2;
+    color: white
 }

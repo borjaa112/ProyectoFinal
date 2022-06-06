@@ -19,7 +19,8 @@
             </div>
         @endif
         <div>
-            <div class="form-group pe-3 ps-3 pt-2 pb-2 border rounded-2 element-white">
+            <img src="{{asset("imgs/inicio/buscador.jpg")}}" class="img-fluid rounded-top">
+            <div class="form-group pe-3 ps-3 pt-2 pb-2 rounded-bottom buscador">
                 <form method="get" action="{{ route('buscar') }}">
                     @csrf
                     @method('get')
@@ -40,8 +41,8 @@
                         </div>
                     </div>
 
-                    <div class="col">
-                        <button type="submit" class="m-1 btn btn-info"><i class="bi bi-search"></i></button>
+                    <div class="col d-flex justify-content-center">
+                        <button type="submit" class="m-1 btn btn-info w-25"><i class="bi bi-search"></i></button>
                     </div>
                 </form>
             </div>

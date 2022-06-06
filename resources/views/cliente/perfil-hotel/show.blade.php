@@ -3,9 +3,9 @@
     <div class="container">
         <div class="h1 text-center">{{ $hotel->nombre }}</div>
         <div class="row">
-            <div class="col-auto">Habitaciones del hotel:</div>
+            <div class="col-4 h3 d-flex justify-content-center">Habitaciones publicadas:</div>
         </div>
-        <div class="row">
+        <div class="row d-flex justify-content-center">
             @foreach ($hotel->rooms as $room)
                 <div class="card" style="width: 18rem;">
                     @forelse ($room->images_rooms as $room_img)

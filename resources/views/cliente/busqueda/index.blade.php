@@ -15,7 +15,7 @@
                 </ul>
             </div>
         @endif
-        <div class="form-group row border rounded-2 element-white mt-2 mb-2">
+        <div class="form-group row border rounded-2 buscador element-white mt-2 mb-2">
             <form method="get" action="{{ route('buscar') }}">
                 @csrf
                 @method('get')
@@ -41,8 +41,8 @@
                                 value="{{ $request->get('fecha_salida') }}">
                         </div>
                     </div>
-                    <div class="col-lg-1 col-sm-12 d-flex justify-content-center align-items-center">
-                        <button type="submit" class="m-1 btn btn-primary"><i class="bi bi-search"></i></button>
+                    <div class="col-lg-1 col-sm-12 d-flex justify-content-center align-items-center p-2">
+                        <button type="submit" class="m-1 btn btn-info mt-3"><i class="bi bi-search"></i></button>
                     </div>
                 </div>
             </form>
@@ -54,7 +54,7 @@
                     <div class="col-md-4">
                         @forelse ($habitacion->images_rooms as $image_room)
                             @if ($loop->first)
-                                <img class="img-fluid rounded-start" src="/imgs/{{ $image_room->img_path }}">
+                                <img class="img-fluid rounded-start" src="/imgs/{{ $image_room->img_path }}" title="Click ver detalles de la habitación">
                             @endif
                         @empty
                             <img style="height: 200px; width: 300px" src="{{ asset('imgs/room_images/not-found.png') }}">
@@ -72,17 +72,16 @@
                                 {{ $habitacion->precio_noche * \Carbon\Carbon::createFromFormat('Y-m-d', $request->fecha_entrada)->diffInDays(\Carbon\Carbon::createFromFormat('Y-m-d', $request->fecha_salida)) }}€
                             </p>
                             <div class="d-flex justify-content-end">
-                                <a class="btn btn-info" href="{{ route('habitacion.show', $habitacion) }}">Ver
-                                    detalles</a>
+                                <form action="{{ route('reservar.create') }}" method="GET" class="d-flex justify-content-center">
+                                    @csrf
+                                    <input type="hidden" name="habitacion" value="{{ $habitacion->id }}">
+                                    <input type="hidden" name="fecha_salida" value="{{ $request->fecha_salida }}">
+                                    <input type="hidden" name="fecha_entrada" value="{{ $request->fecha_entrada }}">
+                                    <input type="submit" class="btn btn-info" value="Reservar">
+                                </form>
                             </div>
                             <p class="text-end">*Precio por noche: {{ $habitacion->precio_noche }}€</p>
-                            <form action="{{ route('reservar.create') }}" method="GET">
-                                @csrf
-                                <input type="hidden" name="habitacion" value="{{ $habitacion->id }}">
-                                <input type="hidden" name="fecha_salida" value="{{ $request->fecha_salida }}">
-                                <input type="hidden" name="fecha_entrada" value="{{ $request->fecha_entrada }}">
-                                <input type="submit" class="btn btn-info" value="Reservar">
-                            </form>
+
                         </div>
                     </div>
                 </div>
