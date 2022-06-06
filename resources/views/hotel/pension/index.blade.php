@@ -11,9 +11,9 @@
                         <th>Pension Completa</th>
                     </tr>
                     <tr>
-                        <td>{{$hotel->pension->precio_hd}}€</td>
-                        <td>{{$hotel->pension->precio_mp}}€</td>
-                        <td>{{$hotel->pension->precio_pc}}€</td>
+                        <td>{{$hotel->precio_hd}}€</td>
+                        <td>{{$hotel->precio_mp}}€</td>
+                        <td>{{$hotel->precio_pc}}€</td>
 
 
                     </tr>
@@ -23,7 +23,7 @@
 
         <div class="h1 text-center pt-5">Añadir/Editar precio</div>
         <div class="d-flex justify-content-center col-12">
-            <form action="{{route("pension.update", $hotel->pension)}}" method="POST">
+            <form action="{{route("pension.update", $hotel)}}" method="POST">
                 @csrf
                 @method("PUT")
                 <div class="">

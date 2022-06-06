@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pension;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Hotel;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 class PensionController extends Controller
 {
     /**
@@ -44,10 +44,10 @@ class PensionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Pension  $pension
+     * @param  \App\Models\Hotel  $hotel
      * @return \Illuminate\Http\Response
      */
-    public function show(Pension $pension)
+    public function show(Hotel $hotel)
     {
         //
     }
@@ -55,10 +55,10 @@ class PensionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Pension  $pension
+     * @param  \App\Models\Hotel  $hotel
      * @return \Illuminate\Http\Response
      */
-    public function edit(Pension $pension)
+    public function edit(Hotel $hotel)
     {
         //
     }
@@ -67,34 +67,34 @@ class PensionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Pension  $pension
+     * @param  \App\Models\Hotel  $hotel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pension $pension)
+    public function update(Request $request, Hotel $hotel)
     {
         //
         switch($request->get("pensiones")){
             case "HD":
-                $pension -> precio_hd = $request->precio;
+                $hotel -> precio_hd = $request->precio;
                 break;
             case "PC":
-                $pension -> precio_pc = $request->precio;
+                $hotel -> precio_pc = $request->precio;
                 break;
             case "MP":
-                $pension -> precio_mp = $request->precio;
+                $hotel -> precio_mp = $request->precio;
                 break;
         }
-        $pension->save();
+        $hotel->save();
         return back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Pension  $pension
+     * @param  \App\Models\Hotel  $hotel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pension $pension)
+    public function destroy(Hotel $hotel)
     {
         //
     }

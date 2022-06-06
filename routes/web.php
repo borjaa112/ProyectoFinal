@@ -14,9 +14,6 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\PensionController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ServiceController;
-use App\Models\Hotel_direction;
-use App\Models\Hotel_image;
-use App\Models\Pension;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -76,7 +73,7 @@ Route::resource("/habitacion", RoomController::class)->parameters(['habitacion' 
 Route::resource("/hotel", HotelController::class);
 
 Route::resource("/instalaciones", HotelImageController::class)->parameters(["instalaciones" => "hotel_image"])->middleware("auth:hotel");
-Route::resource("/pension", PensionController::class)->middleware("auth:hotel");
+Route::resource("/pension", PensionController::class)->parameters(["pension" => "hotel"])->middleware("auth:hotel");
 Route::resource("/roomimage", ImagesRoomController::class)->parameters(["roomimage" => "images_room"]);
 
 Route::resource("/reservar", BooksController::class)->except("index")->middleware("auth:client,web");

@@ -15,13 +15,15 @@ use Illuminate\Http\Request;
 class LoginController extends Controller
 {
     //
-    public function registroForm(){
+    public function registroForm()
+    {
         return view("auth.registro");
     }
 
-    public function registro(RegistroRequest $request){
+    public function registro(RegistroRequest $request)
+    {
         //registro para hotel
-        if($request->typeUser === "hotel"){
+        if ($request->typeUser === "hotel") {
             $user = Hotel::create([
                 'nombre' => $request->nombre,
                 'email' => $request->email,
@@ -29,19 +31,13 @@ class LoginController extends Controller
                 'cif' => $request->dni,
                 'password' => Hash::make($request->password),
                 'img_path' => "imgs/profile_imgs/hotel-default.png"
+
             ]);
-            $pension = new Pension();
-            $pension -> hotel_id = $user->id;
-            $pension -> precio_mp = 0;
-            $pension -> precio_hd = 0;
-            $pension -> precio_pc = 0;
-            $pension->save();
             Auth::guard("hotel")->login($user);
             return redirect(route("direccion-hotel.create"));
-
         }
         //registro para cliente
-        if($request->typeUser === "cliente"){
+        if ($request->typeUser === "cliente") {
             $user = Client::create([
                 'nombre' => $request->nombre,
                 'apellidos' => $request->apellidos,
@@ -50,7 +46,6 @@ class LoginController extends Controller
                 'password' => Hash::make($request->password),
             ]);
             Auth::guard("client")->login($user);
-
         }
 
         // if($request->typeUser === "admin"){
@@ -66,11 +61,13 @@ class LoginController extends Controller
         return redirect('/');
     }
 
-    public function loginForm(){
+    public function loginForm()
+    {
         return view("auth.login");
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $credenciales = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -79,20 +76,19 @@ class LoginController extends Controller
 
         //     return redirect(route('inicio'));
         // }
-        if(Auth::guard('hotel')->attempt($credenciales)){
+        if (Auth::guard('hotel')->attempt($credenciales)) {
             // return Auth::user();
             // return dd(Auth::guard('hotel')->user());
             return redirect(route('inicio'));
-        }
-        else if(Auth::guard('client')->attempt($credenciales)){
+        } else if (Auth::guard('client')->attempt($credenciales)) {
             return redirect(route('inicio'));
-        }
-        else{
+        } else {
             return redirect(route("login"))->with("error", "las credenciales introducidas son incorrectas");
         }
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
 
         Auth::guard('hotel')->logout();
         $request->session()->invalidate();

@@ -22,9 +22,9 @@ return new class extends Migration
             $table->longText("descripcion");
             $table->string("cif");
             $table->string("img_path")->nullable();
-            $table->double("precio_mp");
-            $table->double("precio_pc");
-            $table->double("precio_hd");
+            $table->double("precio_mp")->default(0);
+            $table->double("precio_pc")->default(0);
+            $table->double("precio_hd")->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
