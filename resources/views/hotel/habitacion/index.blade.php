@@ -5,9 +5,10 @@
 @section('contenido')
     <div class="container">
         <div class="h1 text-center">{{ $room->hotel->nombre }}</div>
-
+        <div class="text-center"><u><i class="bi bi-geo-alt-fill"></i>{{$room->hotel->hotel_directions->calle." ".$room->hotel->hotel_directions->puerta.",".$room->hotel->hotel_directions->ciudad." (".$room->hotel->hotel_directions->cod_postal.")"}}</u></div>
         <div class="row mt-3">
-            <div id="carouselExampleIndicators" class="carousel slide col-md-6" data-bs-ride="carousel">
+            <div id="carouselExampleIndicators" class="carousel slide col-xs-12 col-lg-6" data-bs-ride="carousel"
+                data-bs-interval="false">
                 <div class="carousel-inner">
                     @foreach ($room->images_rooms as $imagen)
                         @if ($loop->first)
@@ -33,21 +34,24 @@
                 </div>
 
             </div>
-            <div class="border border-2 border-dark p-2 col-md-6">
+            <div class="element-white border border-3 border-info rounded-3 col-xs-12 col-lg-6">
                 <div class="descripcion">
                     {{ $room->hotel->descripcion }}
+                    <hr>
                     <div>
                         Servicios Disponibles:
-                        @foreach ($room->services as $service)
-                            <div class="col">
-                                {{ $service->servicio }}
-                            </div>
-                        @endforeach
+                        <ul>
+                            @foreach ($room->services as $service)
+                                <li>
+                                    {{ $service->servicio }}
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        @if (Auth::guard('hotel')->check() || Auth::guard('web')->check())
+        @if (Auth::guard("hotel")->check() && $room->hotel_id === Auth::guard("hotel")->user()->id || Auth::guard('web')->check())
             <div class="row d-flex pt-2">
                 <div class="col d-flex justify-content-center">
                     <div class="col-md-3 col-lg-2">
@@ -74,4 +78,5 @@
                 </div>
             </a>
         </div>
+    </div>
     @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\HotelDirectionRequest;
 use App\Models\Hotel_direction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +39,7 @@ class HotelDirectionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(HotelDirectionRequest $request)
     {
         //
         $direccion = new Hotel_direction();
@@ -85,7 +86,7 @@ class HotelDirectionController extends Controller
      * @param  \App\Models\Hotel_direction  $hotel_direction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Hotel_direction $hotel_direction)
+    public function update(HotelDirectionRequest $request, Hotel_direction $hotel_direction)
     {
         //
         $hotel_direction -> calle = $request->get("calle");
@@ -95,7 +96,7 @@ class HotelDirectionController extends Controller
         $hotel_direction -> provincia = $request->get("provincia");
         $hotel_direction -> ciudad = $request->get("ciudad");
         $hotel_direction->save();
-
+        return back()->with("info", "Dirección actualizada con éxito");
 
     }
 

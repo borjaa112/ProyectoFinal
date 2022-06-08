@@ -54,7 +54,7 @@
                     <div class="col-md-4">
                         @forelse ($habitacion->images_rooms as $image_room)
                             @if ($loop->first)
-                                <img class="img-fluid rounded-start" src="/imgs/{{ $image_room->img_path }}" title="Click ver detalles de la habitación">
+                                <a href="{{route("habitacion.show", $habitacion)}}"><img class="img-fluid rounded-start" src="/imgs/{{ $image_room->img_path }}" title="Click ver detalles de la habitación"></a>
                             @endif
                         @empty
                             <img style="height: 200px; width: 300px" src="{{ asset('imgs/room_images/not-found.png') }}">

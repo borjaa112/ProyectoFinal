@@ -11,9 +11,10 @@
                 </ul>
             </div>
         @endif
+
         <h2 class="text-center">Modifique sus datos</h2>
-        <div class="d-flex justify-content-center">
-            <form method="post" action="{{ route('cuenta.update', Auth::guard('client')->user()) }}">
+        <div class="d-flex justify-content-center pb-4">
+            <form method="post" action="{{ route('cuenta.update', Auth::guard('client')->user()) }}" class="element-white p-4 rounded-2">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
@@ -57,7 +58,9 @@
                 <div class="d-flex justify-content-end">
                     <button class="btn btn-primary">Guardar</button>
                 </div>
+
             </form>
+
         </div>
         <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -90,4 +93,7 @@
                 </div>
             </div>
         </div>
-    @endsection
+
+    </div>
+
+@endsection

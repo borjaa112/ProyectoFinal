@@ -47,8 +47,8 @@
                                 <h6 class="my-0"><strong>Precio Total:</strong></h6>
                             </div>
                             <div class="p-3">
-                                <span id="precio">{{ $habitacion->precio_noche * $noches
-                                }}</span>€
+                                <span
+                                    id="precio">{{ $habitacion->precio_noche * $noches }}</span>€
                             </div>
                         </li>
                     </ul>
@@ -73,18 +73,21 @@
                             <input id="SP" name="pension" value="SP" type="radio" class="form-check-input" required="">
                             <label class="form-check-label" for="SP">Sin Pensión</label>
                         </div>
-                        <div class="form-check">
-                            <input id="MP" value="MP" name="pension" type="radio" class="form-check-input" required="">
-                            <label class="form-check-label" for="MP">Media Pensión</label>
-                        </div>
-                        <div class="form-check">
-                            <input id="PC" value="PC" name="pension" type="radio" class="form-check-input" required="">
-                            <label class="form-check-label" for="PC">Pensión Completa</label>
-                        </div>
-                        <div class="form-check">
-                            <input id="HD" value="HD" name="pension" type="radio" class="form-check-input" required="">
-                            <label class="form-check-label" for="HD">Alojamiento y Desayuno</label>
-                        </div>
+                        @if ($habitacion->hotel->precio_hd != 0 && $habitacion->hotel->precio_mp != 0 && $habitacion->hotel->precio_pc != 0)
+                            <div class="form-check">
+                                <input id="MP" value="MP" name="pension" type="radio" class="form-check-input" required="">
+                                <label class="form-check-label" for="MP">Media Pensión</label>
+                            </div>
+                            <div class="form-check">
+                                <input id="PC" value="PC" name="pension" type="radio" class="form-check-input" required="">
+                                <label class="form-check-label" for="PC">Pensión Completa</label>
+                            </div>
+                            <div class="form-check">
+                                <input id="HD" value="HD" name="pension" type="radio" class="form-check-input" required="">
+                                <label class="form-check-label" for="HD">Alojamiento y Desayuno</label>
+                            </div>
+                        @endif
+
                     </div>
                     <!-- selectores de pension -->
 

@@ -12,11 +12,11 @@
 
     @yield('head')
 </head>
-<body>
+<body class=" d-flex flex-column min-vh-100">
     @include('sweetalert::alert')
     @include('partials.hotel.nav')
     @yield('contenido')
-    {{-- @include('partials.footer') --}}
+    @include('partials.footer')
 </body>
 </html>
 

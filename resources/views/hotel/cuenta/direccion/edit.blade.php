@@ -1,6 +1,22 @@
 @extends("hotel.plantilla")
 @section('contenido')
     <div class="container">
+        <div class="container">
+            @if (session('info'))
+                <div class="alert alert-success mt-2">
+                    {{ session('info') }}
+                </div>
+            @endif
+        @if ($errors->any())
+            <div class="alert alert-warning">
+                Para continuar debe de solucionar los siguientes problemas:
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <h2 class="text-center">Introduzca su direccion</h2>
         <div class="d-flex justify-content-center">
             <form method="POST" class="col-6" action="{{route("direccion-hotel.update", $hotel_direction)}}">

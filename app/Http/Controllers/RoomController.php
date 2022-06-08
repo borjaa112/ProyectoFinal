@@ -56,6 +56,10 @@ class RoomController extends Controller
             toast("Antes de crear una habitación es necesario que establezca su dirección", "error");
             return redirect(route("direccion-hotel.create"));
         }
+        $hotel = Hotel::findOrFail(Auth::guard("hotel")->user()->id);
+        if($hotel->precio_mp == 0 && $hotel->precio_pc == 0 && $hotel->precio_hd == 0){
+            toast("Tu hotel todavía no tiene configurado el precio de las distintas pensiones", "warning");
+        }
         $servicios = Service::all();
         return view("hotel.habitacion.agregar", compact("servicios"));
     }

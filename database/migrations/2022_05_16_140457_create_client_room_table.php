@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('client_room', function (Blueprint $table) {
             $table->foreignId("room_id")->nullable()->constrained()->nullOnDelete();
-            $table->foreignId("client_id")->constrained();
+            $table->foreignId("client_id")->constrained()->cascadeOnDelete();
             $table->integer("id")->autoIncrement();
             $table->unique(['room_id', 'client_id', "id"], 'claves_ajenas');
             $table->double("precio");

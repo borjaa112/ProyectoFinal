@@ -2,6 +2,7 @@ let sinPension = document.body.querySelector("#SP");
 sinPension.checked = true;
 
 
+
 let precio = document.body.querySelector("#precio");
 let precioOriginal = precio.textContent;
 let precio_form = document.body.querySelector("#precio_form").value = precio.textContent;
@@ -10,6 +11,7 @@ let precioExtras = document.querySelector("#extras");
 let pensiones = document.body.querySelector(".pensiones");
 let idHabitacion = document.body.querySelector("#id_habitacion").value;
 let noches = document.body.querySelector("#noches").textContent;
+
 
 pensiones.onchange = changePrice;
 

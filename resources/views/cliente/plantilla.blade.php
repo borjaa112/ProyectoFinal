@@ -11,11 +11,11 @@
     <link href="{{asset("css/comun/web.css")}}" rel="stylesheet">
     @yield('head')
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     @include('partials.nav')
     @include('sweetalert::alert')
     @yield('contenido')
-    {{-- @include('partials.footer') --}}
+    @include('partials.footer')
 </body>
 </html>
 

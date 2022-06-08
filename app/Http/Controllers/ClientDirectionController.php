@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClientDirectionRequest;
 use App\Models\Client_direction;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Client;
@@ -43,7 +44,7 @@ class ClientDirectionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ClientDirectionRequest $request)
     {
         //
         $direccion = new Client_direction();
@@ -90,7 +91,7 @@ class ClientDirectionController extends Controller
      * @param  \App\Models\Client_direction  $client_direction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client_direction $client_direction)
+    public function update(ClientDirectionRequest $request, Client_direction $client_direction)
     {
         //
         $client_direction -> calle = $request->get("calle");

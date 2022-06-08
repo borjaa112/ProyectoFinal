@@ -21,8 +21,8 @@ class BooksController extends Controller
     public function index()
     {
         //
-        $hotel = Hotel::find(Auth::guard("hotel")->user()->id)->first();
-        // return $hotel;
+        $hotel = Hotel::findOrFail(Auth::guard("hotel")->user()->id);
+        // return $hotel->rooms;
         return view("hotel.reservas.index", compact("hotel"));
     }
 

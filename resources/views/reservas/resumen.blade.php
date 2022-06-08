@@ -3,7 +3,7 @@
     <div class="container">
         <div class="container mt-5 mb-5">
 
-            <div class="row d-flex justify-content-center reserva p-5">
+            <div class="row d-flex justify-content-center reserva p-xs-0 p-sm-2 p-md-5">
                 <div class="col-md-8">
                     <div class="card">
                         <div class="invoice p-5">
