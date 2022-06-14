@@ -1,9 +1,9 @@
 @extends("cliente.plantilla")
 @section('contenido')
     <div class="container">
-        <div class="card text-dark bg-light mb-3"">
+        <div class="card text-dark bg-light mb-3">
             <div class="card-header text-center">Direccion</div>
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table class="table">
                     <thead>
                       <tr>

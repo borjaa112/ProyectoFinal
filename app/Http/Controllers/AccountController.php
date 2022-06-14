@@ -99,22 +99,25 @@ class AccountController extends Controller
             $hotel->nombre = $request->nombre;
             $hotel->descripcion = $request->descripcion;
             $hotel->email = $request->email;
-
-            if ($request->current_password) {
-                if (!(Hash::check($request->current_password, Auth::guard("hotel")->user()->password))) {
-                    toast('La contraseña actual no es correcta', 'error');
-                    return redirect(route("cuenta.index"));
-                }
-                if (strcmp($request->current_password, $request->password) == 0) {
-                    // Current password and new password same
-                    toast('La contraseña nueva es la misma que la actual', 'error');
-                    return redirect(route("cuenta.index"));
-                }
-                if (!strcmp($request->password, $request->password_confirm) == 0) {
-                    toast('Las contraseñas no coinciden', 'error');
-                    return redirect(route("cuenta.index"));
-                }
+            $hotel->cif = $request->cif;
+            if(isset($request->password) && isset($request->confirm_password)){
+                $hotel-> password = Hash::make($request->password);
             }
+            // if ($request->current_password) {
+            //     if (!(Hash::check($request->current_password, Auth::guard("hotel")->user()->password))) {
+            //         toast('La contraseña actual no es correcta', 'error');
+            //         return redirect(route("cuenta.index"));
+            //     }
+            //     if (strcmp($request->current_password, $request->password) == 0) {
+            //         // Current password and new password same
+            //         toast('La contraseña nueva es la misma que la actual', 'error');
+            //         return redirect(route("cuenta.index"));
+            //     }
+            //     if (!strcmp($request->password, $request->password_confirm) == 0) {
+            //         toast('Las contraseñas no coinciden', 'error');
+            //         return redirect(route("cuenta.index"));
+            //     }
+            //}
             if ($request->hasFile("imagen")) {
                 if ($request->file('imagen')->isValid()) {
                     //borrar la imagen anterior
@@ -124,7 +127,7 @@ class AccountController extends Controller
                     //subir la nueva imagen del usuario
                     $path = Storage::putFile("profile_imgs", $request->file("imagen"));
                     //asignar nueva imagen
-                    $hotel->img_path = "/imgs/" . $path;
+                    $hotel->img_path = "imgs/" . $path;
                 }
             }
 
@@ -137,6 +140,15 @@ class AccountController extends Controller
             $client->email = $request->get("email");
             $client->nif = $request->get("dni");
             $client->apellidos = $request->get("apellidos");
+            if ($request->hasFile("imagen")) {
+                if ($request->file('imagen')->isValid()) {
+                    //subir la nueva imagen del usuario
+                    $path = Storage::putFile("profile_imgs", $request->file("imagen"));
+                    //asignar nueva imagen
+                    $client->profile_path = "/imgs/" . $path;
+                }
+            }
+
 
             if(isset($request->password) && isset($request->confirm_password)){
                 $client-> password = Hash::make($request->password);

@@ -1,9 +1,19 @@
 @extends("hotel.plantilla")
 @section('contenido')
     <div class="container">
+        @if ($errors->any())
+        <div class="alert alert-warning">
+            Para continuar debe de solucionar los siguientes problemas:
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
         <h2 class="text-center">Modifique sus datos</h2>
         <div class="d-flex justify-content-center">
-            <form method="POST" action="{{ route('cuenta.update', Auth::guard('hotel')->user()->id) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('cuenta.update', Auth::guard('hotel')->user()->id) }}" class="element-white p-3 rounded-3" enctype="multipart/form-data">
                 @method("put")
                 @csrf
                 <div class="d-flex justify-content-center">
@@ -24,6 +34,12 @@
                     <label for="email">email</label>
                     <input id="email" name="email" class="form-control"
                         value="{{ Auth::guard('hotel')->user()->email }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="cif">CIF</label>
+                    <input id="cif" name="cif" class="form-control"
+                        value="{{ Auth::guard('hotel')->user()->cif }}">
                 </div>
 
                 <div class="mb-3">

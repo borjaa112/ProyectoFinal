@@ -68,10 +68,10 @@
                                     <h5 class="card-title">{{ $habitacion->hotel->nombre }}</h5>
                                     <div class="col">Precio por noche: {{ $habitacion->precio_noche }}€</div>
                                     <div class="col">Camas: {{ $habitacion->camas }}</div>
-                                    <div class="col">Servicios:</div>
+                                    {{-- <div class="col">Servicios:</div>
                                     @foreach ($habitacion->services as $servicio)
                                         <div>{{ $servicio->servicio }} </div>
-                                    @endforeach
+                                    @endforeach --}}
                                     <p class="card-text"><small class="text-muted">publicada
                                             {{ $habitacion->created_at->diffForHumans() }}</small>
                                     </p>

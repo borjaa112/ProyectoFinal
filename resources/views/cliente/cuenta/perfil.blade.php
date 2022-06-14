@@ -14,9 +14,13 @@
 
         <h2 class="text-center">Modifique sus datos</h2>
         <div class="d-flex justify-content-center pb-4">
-            <form method="post" action="{{ route('cuenta.update', Auth::guard('client')->user()) }}" class="element-white p-4 rounded-2">
+            <form method="post" action="{{ route('cuenta.update', Auth::guard('client')->user()) }}"
+                class="element-white p-4 rounded-2" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
+                <div class="d-flex justify-content-center">
+                    <img src="{{ Auth::guard('client')->user()->profile_path }}" class="img-fluid rounded" width="100px">
+                </div>
                 <div class="mb-3">
                     <label for="nombre">Nombre</label>
                     <input id="nombre" name="nombre" class="form-control"
@@ -40,20 +44,25 @@
                 </div>
                 <hr>
                 <div class="mb-3">
-                    <label for="password">contraseña</label>
+                    <label for="current_password">contraseña actual</label>
+                    <input id="current_password" name="current_password" class="form-control" type="password"
+                        placeholder="******************">
+                </div>
+                <div class="mb-3">
+                    <label for="password">nueva contraseña</label>
                     <input id="password" name="password" class="form-control" type="password"
                         placeholder="******************">
                 </div>
 
                 <div class="mb-3">
-                    <label for="confirm_password">Confirme su contraseña</label>
+                    <label for="confirm_password">Confirme su nueva contraseña</label>
                     <input id="confirm_password" name="confirm_password" class="form-control" type="password"
                         placeholder="******************">
                 </div>
 
                 <div class="mb-3">
                     <label for="imagen">Selecciona imagen de perfil</label>
-                    <input type="file" id="imagen" class="form-control">
+                    <input type="file" id="imagen" name="imagen" class="form-control">
                 </div>
                 <div class="d-flex justify-content-end">
                     <button class="btn btn-primary">Guardar</button>

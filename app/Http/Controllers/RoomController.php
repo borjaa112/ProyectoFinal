@@ -58,7 +58,7 @@ class RoomController extends Controller
         }
         $hotel = Hotel::findOrFail(Auth::guard("hotel")->user()->id);
         if($hotel->precio_mp == 0 && $hotel->precio_pc == 0 && $hotel->precio_hd == 0){
-            toast("Tu hotel todavía no tiene configurado el precio de las distintas pensiones", "warning");
+            toast("Tu hotel todavía no tiene configurado el precio de las distintas pensiones, mientras no esté configurado los clientes no podrán reservar con ninguna pensión", "info");
         }
         $servicios = Service::all();
         return view("hotel.habitacion.agregar", compact("servicios"));

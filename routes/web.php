@@ -76,7 +76,7 @@ Route::resource("/instalaciones", HotelImageController::class)->parameters(["ins
 Route::resource("/pension", PensionController::class)->parameters(["pension" => "hotel"])->middleware("auth:hotel");
 Route::resource("/roomimage", ImagesRoomController::class)->parameters(["roomimage" => "images_room"]);
 
-Route::resource("/reservar", BooksController::class)->except("index")->middleware("auth:client,web");
+Route::resource("/reservar", BooksController::class)->except("index")->middleware("auth:client,web,hotel");
 Route::get("/reservas", [BooksController::class, "index"])->middleware("auth:hotel,web")->name("reservas");
 Route::get("/cliente/reservas", [BooksController::class, "client_books"])->middleware("auth:client")->name("reservas_cliente");
 

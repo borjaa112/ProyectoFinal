@@ -44,6 +44,8 @@ class LoginController extends Controller
                 'nif' => $request->dni,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'profile_path' => "imgs/profile_imgs/user-default.png"
+
             ]);
             Auth::guard("client")->login($user);
         }

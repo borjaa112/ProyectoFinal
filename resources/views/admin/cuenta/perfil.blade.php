@@ -1,21 +1,29 @@
-@extends("admin.plantilla")
+@extends('admin.plantilla')
 @section('contenido')
     <div class="container">
+        @if ($errors->any())
+            <div class="alert alert-warning">
+                Para continuar debe de solucionar los siguientes problemas:
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <h2 class="text-center">Modifique sus datos</h2>
         <div class="d-flex justify-content-center">
-            <form method="post" action="{{ route('cuenta.update', Auth::user()) }}">
+            <form method="post" action="{{ route('cuenta.update', Auth::user()) }}" class="element-white p-5 rounded-3">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
                     <label for="nombre">Nombre</label>
-                    <input id="nombre" name="nombre" class="form-control"
-                        value="{{ Auth::user()->nombre }}">
+                    <input id="nombre" name="nombre" class="form-control" value="{{ Auth::user()->nombre }}">
                 </div>
 
                 <div class="mb-3">
                     <label for="email">email</label>
-                    <input id="email" name="email" class="form-control"
-                        value="{{ Auth::user()->email }}">
+                    <input id="email" name="email" class="form-control" value="{{ Auth::user()->email }}">
                 </div>
 
                 <div class="mb-3">
@@ -35,7 +43,7 @@
                 </div>
             </form>
         </div>
-        <div class="d-flex justify-content-center">
+        {{-- <div class="d-flex justify-content-center">
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Eliminar cuenta
             </button>
@@ -56,7 +64,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <form method="POST" action="{{route("cuenta.destroy", Auth::user())}}">
+                            <form method="POST" action="{{ route('cuenta.destroy', Auth::user()) }}">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger">Sí, eliminar cuenta</button>
@@ -65,5 +73,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    @endsection
+        </div> --}}
+    </div>
+@endsection

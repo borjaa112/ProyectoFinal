@@ -20,7 +20,8 @@ class Client extends Authenticatable
         'email',
         'descripcion',
         'nif',
-        'password'
+        'password',
+        'profile_path'
     ];
 
     /**

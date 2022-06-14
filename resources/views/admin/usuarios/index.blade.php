@@ -20,7 +20,7 @@
 
                     <tr>
                         <td>
-                            <img src="{{ asset('imgs/room_images/K05W90pImpCuSlEbxgbtwcoljaYPZDoVtnNrWQsH.jpg') }}"
+                            <img src="{{ $cliente->profile_path }}"
                                 class="userimg pe-2 img-fluid rounded-circle">{{ $cliente->nombre . ' ' . $cliente->apellidos }}
                         </td>
                         <td>{{ $cliente->email }}</td>
